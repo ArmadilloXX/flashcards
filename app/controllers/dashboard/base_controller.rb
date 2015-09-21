@@ -1,4 +1,4 @@
-class Dashboard::BaseController < ApplicationController
+class Dashboard::BaseController < MainController
   before_action :require_login
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 

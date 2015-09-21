@@ -1,2 +1,2 @@
-class Home::BaseController < ApplicationController
+class Home::BaseController < MainController
 end

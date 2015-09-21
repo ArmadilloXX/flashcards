@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   filter :locale
 
-  root 'main#index'
+  root 'main#welcome'
 
   scope module: 'home' do
     resources :user_sessions, only: [:new, :create]
