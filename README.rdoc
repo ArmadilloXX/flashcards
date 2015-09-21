@@ -1,5 +1,7 @@
 == README
 
+{<img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/ArmadilloXX/flashcards">}[https://gitter.im/ArmadilloXX/flashcards?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge]
+
 {<img src="https://travis-ci.org/elavretskiy/flashcards.svg?branch=seventh-task"
 alt="Build Status" />}[https://travis-ci.org/elavretskiy/flashcards]
 
