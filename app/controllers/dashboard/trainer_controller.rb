@@ -1,5 +1,13 @@
 class Dashboard::TrainerController < Dashboard::BaseController
 
+  def index
+    if params[:id]
+      @card = current_user.cards.find(params[:id])
+    else
+      set_card
+    end
+  end
+
   def review_card
     @card = current_user.cards.find(params[:card_id])
 
@@ -25,5 +33,15 @@ class Dashboard::TrainerController < Dashboard::BaseController
 
   def trainer_params
     params.permit(:user_translation)
+  end
+
+  def set_card
+    if current_user.current_block
+      @card = current_user.current_block.cards.pending.first
+      @card ||= current_user.current_block.cards.repeating.first
+    else
+      @card = current_user.cards.pending.first
+      @card ||= current_user.cards.repeating.first
+    end
   end
 end

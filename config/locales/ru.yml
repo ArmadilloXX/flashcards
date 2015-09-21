@@ -4,8 +4,7 @@ ru:
   translated_text_label: 'Перевод'
   current_card_label: 'Текущая карточка'
   check_card_button: 'Проверить'
-  no_review_card_text: 'Вы изучили все доступные карточки.
-      Ожидайте наступления даты пересмотра.'
+  no_review_card_text: 'Вы изучили все доступные карточки. Ожидайте наступления даты пересмотра.'
   registration_label: 'Регистрация'
   email_label: 'E-mail'
   password_label: 'Пароль'
