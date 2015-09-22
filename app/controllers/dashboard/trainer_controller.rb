@@ -37,11 +37,11 @@ class Dashboard::TrainerController < Dashboard::BaseController
 
   def set_card
     if current_user.current_block
-      @card = current_user.current_block.cards.pending.first
-      @card ||= current_user.current_block.cards.repeating.first
+      @card = current_user.current_block.cards.pending.first ||
+              current_user.current_block.cards.repeating.first
     else
-      @card = current_user.cards.pending.first
-      @card ||= current_user.cards.repeating.first
+      @card = current_user.cards.pending.first ||
+              current_user.cards.repeating.first
     end
   end
 end
