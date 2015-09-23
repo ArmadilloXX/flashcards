@@ -87,33 +87,33 @@ describe 'password authentication' do
   end
 
   describe 'change language' do
-    let(:register_user) { register('test@test.com', '12345', '12345', 'Sing up') }
+    # let(:register_user) { register('test@test.com', '12345', '12345', 'Sing up') }
 
     before do
       visit root_path
+      click_link 'en'
     end
 
     it 'home page' do
-      click_link 'en'
       expect(page).to have_content 'Welcome.'
     end
 
     it 'register TRUE' do
-      click_link 'en'
-      register_user
+      # register_user
+      register('test@test.com', '12345', '12345', 'Sing up')
       expect(page).to have_content 'User created successfully.'
     end
 
     it 'default locale' do
-      click_link 'en'
-      register_user
+      # register_user
+      register('test@test.com', '12345', '12345', 'Sing up')
       user = User.find_by_email('test@test.com')
       expect(user.locale).to eq('en')
     end
 
     it 'available locale' do
-      click_link 'en'
-      register_user
+      # register_user
+      register('test@test.com', '12345', '12345', 'Sing up')
       click_link 'User profile'
       fill_in 'user[password]', with: '12345'
       fill_in 'user[password_confirmation]', with: '12345'

@@ -3,27 +3,42 @@ require 'support/helpers/trainer_helper.rb'
 include TrainerHelper
 
 describe Dashboard::TrainerController do
-  let(:user) { create(:user) }
+  let(:user)  { create(:user) }
+  let(:register) { @controller.send(:auto_login, user) }
   let(:block) { create(:block, user: user) }
-
+  let(:card)  { create(:card, user: user,
+                            block: block,
+                            interval: 1, 
+                            repeat: 1, 
+                            efactor: 2.5, 
+                            quality: 5)}
 
   describe "GET index" do
     context 'when user not authorized' do
       before do
         get :index
       end
-      
       it { is_expected.to redirect_to :login }
       it { is_expected.to set_flash[:alert] }
     end
 
     context "when user authorized" do
       before do
-        @controller.send(:auto_login, user)
+        register
         get :index
       end
-
       it { is_expected.to render_template 'index' }
+    end
+
+    context "when params[:id] presented(redirect from review_card)" do
+      before do
+        register
+        get :index, id: card.id
+      end
+      it 'assigns the card' do
+        expect(assigns(:card)).to eq(card)
+      end
+
     end
   end
 
@@ -36,14 +51,8 @@ describe Dashboard::TrainerController do
     end
 
     context 'when user authorized' do
-      let(:card) { create(:card, user: user,
-                               block: block,
-                               interval: 1, 
-                               repeat: 1, 
-                               efactor: 2.5, 
-                               quality: 5)}
       before do
-        @controller.send(:auto_login, user)
+        register
       end
 
       describe "when translation successful" do
@@ -71,13 +80,6 @@ describe Dashboard::TrainerController do
       end
     end
   end
-
-
-
-
-
-
-
 
   # xdescribe 'review_card' do
   #   describe 'correct translation' do

@@ -4,8 +4,7 @@ en:
   translated_text_label: 'Translation'
   current_card_label: 'Current card'
   check_card_button: 'Check'
-  no_review_card_text: 'You have studied all available cards.
-      Expect the date of revision.'
+  no_review_card_text: 'You have studied all available cards. Expect the date of revision.'
   registration_label: 'Registration'
   email_label: 'E-mail'
   password_label: 'Password'
