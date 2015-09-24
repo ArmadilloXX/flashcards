@@ -9,10 +9,8 @@ describe 'password authentication' do
     end
 
     context 'with correct data' do
-      let(:correct_attempt) { register('test@test.com', '12345', '12345', 'Зарегистрироваться')}
-
       before(:each) do
-        correct_attempt
+        register('test@test.com', '12345', '12345', 'Зарегистрироваться')
       end
 
       it 'register TRUE' do
@@ -47,12 +45,10 @@ describe 'password authentication' do
         expect(page).to have_content 'Значения не совпадают.'
       end
     end
-
-  
   end
 
   describe 'authentication' do
-    before do
+    before(:each) do
       create(:user)
       visit root_path
     end
@@ -87,45 +83,51 @@ describe 'password authentication' do
   end
 
   describe 'change language' do
-    # let(:register_user) { register('test@test.com', '12345', '12345', 'Sing up') }
-
-    before do
+    
+    before(:each) do
       visit root_path
       click_link 'en'
     end
 
-    it 'home page' do
-      expect(page).to have_content 'Welcome.'
+    context 'when user not logged in' do
+      it 'home page' do
+        expect(page).to have_content 'Welcome.'
+      end
     end
 
-    it 'register TRUE' do
-      # register_user
-      register('test@test.com', '12345', '12345', 'Sing up')
-      expect(page).to have_content 'User created successfully.'
+    context 'when new user registering' do
+      let(:register_user) { register('test@test.com', '12345', '12345', 'Sing up') }
+      it 'register TRUE' do
+        register_user
+        expect(page).to have_content 'User created successfully.'
+      end
+
+      it 'default locale' do
+        register_user
+        user = User.find_by_email('test@test.com')
+        expect(user.locale).to eq('en')
+      end
+
+      it 'available locale' do
+        register_user
+        click_link 'User profile'
+        fill_in 'user[password]', with: '12345'
+        fill_in 'user[password_confirmation]', with: '12345'
+        click_button 'Save'
+        expect(page).to have_content 'User profile updated successfully'
+      end
     end
 
-    it 'default locale' do
-      # register_user
-      register('test@test.com', '12345', '12345', 'Sing up')
-      user = User.find_by_email('test@test.com')
-      expect(user.locale).to eq('en')
-    end
-
-    it 'available locale' do
-      # register_user
-      register('test@test.com', '12345', '12345', 'Sing up')
-      click_link 'User profile'
-      fill_in 'user[password]', with: '12345'
-      fill_in 'user[password_confirmation]', with: '12345'
-      click_button 'Сохранить'
-      expect(page).to have_content 'Профиль пользователя успешно обновлен.'
-    end
-
-    it 'authentication TRUE' do
-      create(:user)
-      click_link 'en'
-      login('test@test.com', '12345', 'Log in')
-      expect(page).to have_content 'Login is successful.'
+    context "when user logging in" do
+      let!(:eng_user) {create(:user, locale: 'en')}
+      it 'authentication TRUE' do
+        login('test@test.com', '12345', 'Log in')
+        expect(page).to have_content 'Login is successful.'
+        ## NOTICE
+        ## The line below fixes strange bug (seed 41842) when some tests in trainer_spec are failing,
+        ## because this user is staying logged in
+        click_link 'Log out'
+      end
     end
   end
 end

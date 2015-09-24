@@ -6,12 +6,12 @@ describe 'review cards without blocks' do
   describe 'training without cards' do
     before do
       create(:user)
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'no cards' do
-      expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
+      expect(page).to have_content 'Вы пока не добавили ни одной карточки'
     end
   end
 end
@@ -20,12 +20,12 @@ describe 'review cards with one block' do
   describe 'training without cards' do
     before do
       create(:user_with_one_block_without_cards)
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'no cards' do
-      expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
+      expect(page).to have_content 'Вы пока не добавили ни одной карточки'
     end
   end
 
@@ -34,8 +34,8 @@ describe 'review cards with one block' do
       user = create(:user_with_one_block_and_two_cards)
       user.cards.each { |card| card.update_attribute(:review_date,
                                                      Time.now - 3.days) }
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'first visit' do
@@ -74,8 +74,8 @@ describe 'review cards with one block' do
       user = create(:user_with_one_block_and_one_card)
       user.cards.each { |card| card.update_attribute(:review_date,
                                                      Time.now - 3.days) }
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'incorrect translation' do
@@ -132,12 +132,12 @@ describe 'review cards with two blocks' do
   describe 'training without cards' do
     before do
       create(:user_with_two_blocks_without_cards)
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'no cards' do
-      expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
+      expect(page).to have_content 'Вы пока не добавили ни одной карточки'
     end
   end
 
@@ -146,8 +146,8 @@ describe 'review cards with two blocks' do
       user = create(:user_with_two_blocks_and_one_card_in_each)
       user.cards.each { |card| card.update_attribute(:review_date,
                                                      Time.now - 3.days) }
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'first visit' do
@@ -186,8 +186,8 @@ describe 'review cards with two blocks' do
       user = create(:user_with_two_blocks_and_only_one_card)
       user.cards.each { |card| card.update_attribute(:review_date,
                                                      Time.now - 3.days) }
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'incorrect translation' do
@@ -222,12 +222,12 @@ describe 'review cards with current_block' do
   describe 'training without cards' do
     before do
       create(:user_with_two_blocks_without_cards, current_block_id: 1)
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'no cards' do
-      expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
+      expect(page).to have_content 'Вы пока не добавили ни одной карточки'
     end
   end
 
@@ -238,8 +238,8 @@ describe 'review cards with current_block' do
       user.set_current_block(block)
       card = user.cards.find_by(block_id: block.id)
       card.update_attribute(:review_date, Time.now - 3.days)
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'first visit' do
@@ -280,8 +280,8 @@ describe 'review cards with current_block' do
       user.set_current_block(block)
       card = user.cards.find_by(block_id: block.id)
       card.update_attribute(:review_date, Time.now - 3.days)
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'incorrect translation' do

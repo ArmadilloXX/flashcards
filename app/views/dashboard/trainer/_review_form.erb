@@ -29,6 +29,8 @@
 
     <%= submit_tag t(:check_card_button), class: 'btn btn-default' %>
   <% end %>
+<% elsif current_user.cards.blank? %>
+  <p class="lead"><%= t(:no_added_cards) %></p>
 <% else %>
   <p class="lead"><%= t(:no_review_card_text) %></p>
 <% end %>

@@ -4,7 +4,9 @@ ru:
   translated_text_label: 'Перевод'
   current_card_label: 'Текущая карточка'
   check_card_button: 'Проверить'
+  save_button: 'Сохранить'
   no_review_card_text: 'Вы изучили все доступные карточки. Ожидайте наступления даты пересмотра.'
+  no_added_cards: "Вы пока не добавили ни одной карточки"
   registration_label: 'Регистрация'
   email_label: 'E-mail'
   password_label: 'Пароль'
@@ -17,6 +19,7 @@ ru:
   all_cards_label: 'Все карточки'
   add_card_label: 'Добавить карточку'
   user_profile_label: 'Профиль пользователя'
+  user_profile_changed: 'Профиль пользователя успешно обновлен.'
   delete_user_label: 'Удалить пользователя'
   log_out_label: 'Выйти'
   user_created_successfully_notice: 'Пользователь успешно создан.'

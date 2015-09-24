@@ -4,7 +4,9 @@ en:
   translated_text_label: 'Translation'
   current_card_label: 'Current card'
   check_card_button: 'Check'
+  save_button: 'Save'
   no_review_card_text: 'You have studied all available cards. Expect the date of revision.'
+  no_added_cards: "You haven't added any cards yet"
   registration_label: 'Registration'
   email_label: 'E-mail'
   password_label: 'Password'
@@ -17,6 +19,7 @@ en:
   all_cards_label: 'All cards'
   add_card_label: 'Add card'
   user_profile_label: 'User profile'
+  user_profile_changed: 'User profile updated successfully'
   delete_user_label: 'Delete user'
   log_out_label: 'Log out'
   user_created_successfully_notice: 'User created successfully.'

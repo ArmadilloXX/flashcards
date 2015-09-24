@@ -38,7 +38,6 @@ describe Dashboard::TrainerController do
       it 'assigns the card' do
         expect(assigns(:card)).to eq(card)
       end
-
     end
   end
 

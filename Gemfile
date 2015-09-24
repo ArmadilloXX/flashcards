@@ -38,6 +38,7 @@ gem 'rollbar'
 gem 'newrelic_rpm'
 
 group :development, :test do
+  gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
