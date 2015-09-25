@@ -1,6 +1,8 @@
 require 'rails_helper'
 require 'support/helpers/login_helper.rb'
+require 'support/helpers/trainer_helper.rb'
 include LoginHelper
+include TrainerHelper
 
 describe "review cards" do
   let!(:user)  { create(:user) }
@@ -37,39 +39,39 @@ describe "review cards" do
 
   describe "when user has card for review" do
     let!(:block) { create(:block, user: user) }
-    let!(:card)  { create(:card, user: user, block: block) }
-    
+    let!(:first_card)  { create(:card, user: user, block: block) }
+
     before do
       visit trainer_path
       login('test@test.com', '12345', 'Войти')
     end
 
-    context 'without current_block' do
-      it 'shows card for review' do
-        expect(page).to have_content 'Оригинал'
-      end
+    it 'shows card for review' do
+      expect(page).to have_content 'Оригинал'
+    end
 
-      it 'shows success_message for correct translation' do
+    context 'with correct translation' do
+      it 'shows success_message' do
         fill_in 'user_translation', with: 'house'
         click_button 'Проверить'
         expect(page).to have_content success_message
       end
+    end
 
-      it 'shows typo_message for translation with typo' do
-        fill_in 'user_translation', with: 'hous'
-        click_button 'Проверить'
-        expect(page).to have_content typo_message
-      end
-
-      it 'shows failure_message for correct translation' do
+    context 'with incorrect translation' do
+      it 'shows failure message' do
         fill_in 'user_translation', with: 'RoR'
         click_button 'Проверить'
         expect(page).to have_content failure_message
       end
     end
 
-    context 'with current_block' do
-        
+    context 'with translation with typo' do
+      it 'shows typo message' do
+        fill_in 'user_translation', with: 'hous'
+        click_button 'Проверить'
+        expect(page).to have_content typo_message
+      end
     end
   end
 end
