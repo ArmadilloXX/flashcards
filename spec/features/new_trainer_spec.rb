@@ -13,8 +13,8 @@ describe "review cards" do
 
   describe "when user has no cards" do
     before do
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'show the no cards message' do
@@ -28,8 +28,8 @@ describe "review cards" do
 
     before do
       card.update_attribute(:review_date, Time.now + 3.days)
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'shows revision_message when has no cards for review' do
@@ -42,8 +42,8 @@ describe "review cards" do
     let!(:first_card)  { create(:card, user: user, block: block) }
 
     before do
-      visit trainer_path
       login('test@test.com', '12345', 'Войти')
+      visit trainer_path
     end
 
     it 'shows card for review' do
