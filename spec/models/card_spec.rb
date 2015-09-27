@@ -187,6 +187,7 @@ describe Card do
         check_result = card.check_translation('RoR')
         expect(check_result[:distance]).to be > 1
       end
+    end
 
       # it 'check_translation Eng NOT' do
       #   card = Card.create(original_text: 'дом', translated_text: 'house',
@@ -229,7 +230,6 @@ describe Card do
       #   check_result = card.check_translation('RoR')
       #   expect(check_result[:state]).to be false
       # end
-    end
   end
 
   describe "#check translation sets correct card attributes" do

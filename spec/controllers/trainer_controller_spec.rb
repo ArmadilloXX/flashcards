@@ -84,6 +84,8 @@ describe Dashboard::TrainerController do
     end
   end
 
+  # The tests below were moved to card_spec.rb
+
   # describe 'review_card' do
   #   describe 'correct translation' do
   #     before do
