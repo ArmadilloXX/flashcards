@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 ruby '2.1.4'
 
 # Bundle edge Rails instead: 
-# gem 'rails', github: 'rails/rails'
-# gem 'rack', git: 'git://github.com/rack/rack.git'
-# gem 'arel', github: 'rails/arel'
 gem 'rails', '4.2.1'
 gem 'responders', '~> 2.0'
 # Use postgresql as the database for Active Record
