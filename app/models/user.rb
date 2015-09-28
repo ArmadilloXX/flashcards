@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :cards, dependent: :destroy
   has_many :blocks, dependent: :destroy
   has_many :authentications, dependent: :destroy
-  belongs_to :current_block, class_name: 'Block'
+  belongs_to :current_block, class_name: "Block"
   before_create :set_default_locale
   before_validation :set_default_locale, on: :create
 
@@ -19,10 +19,10 @@ class User < ActiveRecord::Base
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
   validates :locale, presence: true,
             inclusion: { in: I18n.available_locales.map(&:to_s),
-                         message: 'Выберите локаль из выпадающего списка.' }
+                         message: "Выберите локаль из выпадающего списка." }
 
   def has_linked_github?
-    authentications.where(provider: 'github').present?
+    authentications.where(provider: "github").present?
   end
 
   def set_current_block(block)

@@ -3,7 +3,7 @@ class Dashboard::BlocksController < Dashboard::BaseController
                                    :reset_as_current]
 
   def index
-    @blocks = current_user.blocks.all.order('title')
+    @blocks = current_user.blocks.all.order("title")
   end
 
   def new

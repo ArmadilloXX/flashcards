@@ -48,7 +48,7 @@ class Dashboard::TrainerController < Dashboard::BaseController
     if distance == 0
       flash[:notice] = t(:correct_translation_notice)
     else
-      flash[:alert] = t 'translation_from_misprint_alert',
+      flash[:alert] = t "translation_from_misprint_alert",
                         user_translation: trainer_params[:user_translation],
                         original_text: @card.original_text,
                         translated_text: @card.translated_text
