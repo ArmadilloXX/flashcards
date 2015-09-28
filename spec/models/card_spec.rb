@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Card do
-  let(:card) do 
+  let(:card) do
     Card.new(original_text: "дом", translated_text: "house",
       user_id: 1, block_id: 1)
   end
@@ -138,14 +138,14 @@ describe Card do
       card.save
     end
 
-    def check_translation(translation, attempt=1)
+    def check_translation(translation, attempt = 1)
       attempt.times do
         card.check_translation(translation)
         card.reload
       end
     end
 
-    def expect_parameters(parameters={})
+    def expect_parameters(parameters = {})
       parameters.each_pair do |key, value|
         expect(card[key]).to eq(value)
       end
@@ -155,8 +155,8 @@ describe Card do
       
       describe "when interval: 1, repeat: 1, efactor: 2.5, quality: 5" do
         before(:each) do
-          card.update_attributes(interval: 1, repeat: 1, efactor: 2.5,
-            quality: 5)
+          card.update_attributes
+            interval: 1, repeat: 1, efactor: 2.5, quality: 5
         end
 
         it "set correct review date, interval, repeat and attempt " do
@@ -193,15 +193,15 @@ describe Card do
           check_translation("house", 3)
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
             to eq((Time.zone.now + 16.days).strftime("%Y-%m-%d %H:%M"))
-          expect_parameters interval: 45, repeat: 4, attempt: 1, efactor: 2.8,
-            quality: 5
+          expect_parameters
+            interval: 45, repeat: 4, attempt: 1, efactor: 2.8, quality: 5
         end
       end
 
       describe "when interval: 6, repeat: 2, efactor: 2.6, quality: 5" do
         before(:each) do
-          card.update_attributes(interval: 6, repeat: 2, efactor: 2.6,
-            quality: 5)
+          card.update_attributes
+            interval: 6, repeat: 2, efactor: 2.6, quality: 5
         end
         it "set correct review date, interval, repeat and attempt for" do
           check_translation("house")
@@ -236,8 +236,8 @@ describe Card do
 
       describe "when interval: 16, repeat: 3, efactor: 2.7, quality: 5" do
         before(:each) do
-          card.update_attributes(interval: 16, repeat: 3, efactor: 2.7,
-            quality: 5)
+          card.update_attributes
+            interval: 16, repeat: 3, efactor: 2.7, quality: 5
         end
 
         it "set correct review date, interval, repeat and attempt" do
@@ -275,8 +275,8 @@ describe Card do
     context "when translation has a typo" do
       describe "when interval: 1, repeat: 1, efactor: 2.5, quality: 4" do
         before do
-          card.update_attributes(interval: 1, repeat: 1, efactor: 2.5,
-            quality: 4)
+          card.update_attributes
+            interval: 1, repeat: 1, efactor: 2.5, quality: 4
         end
 
         it "repeat=1-3 quality=4" do
@@ -285,8 +285,8 @@ describe Card do
           check_translation("house")
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
             to eq((Time.zone.now + 1.days).strftime("%Y-%m-%d %H:%M"))
-          expect_parameters interval: 6, repeat: 2, attempt: 1, efactor: 2.38,
-            quality: 4
+          expect_parameters
+            interval: 6, repeat: 2, attempt: 1, efactor: 2.38, quality: 4
         end
 
         it "repeat=1-3 quality=5" do
@@ -295,8 +295,8 @@ describe Card do
           check_translation("house", 2)
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
             to eq((Time.zone.now + 6.days).strftime("%Y-%m-%d %H:%M"))
-          expect_parameters interval: 14, repeat: 3, attempt: 1, efactor: 2.38,
-            quality: 5
+          expect_parameters
+            interval: 14, repeat: 3, attempt: 1, efactor: 2.38, quality: 5
         end
 
         it "repeat=3 attempt=4" do
@@ -304,8 +304,8 @@ describe Card do
           check_translation("house")
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
             to eq((Time.zone.now + 1.days).strftime("%Y-%m-%d %H:%M"))
-          expect_parameters interval: 6, repeat: 2, attempt: 1, efactor: 1.3,
-            quality: 3
+          expect_parameters
+            interval: 6, repeat: 2, attempt: 1, efactor: 1.3, quality: 3
         end
       end
     end
@@ -313,26 +313,26 @@ describe Card do
     context "with incorrect translation" do
       describe "when interval: 1, repeat: 1, efactor: 2.5, quality: 4" do
         before do
-          card.update_attributes(interval: 1, repeat: 1, efactor: 2.5,
-            quality: 4)
+          card.update_attributes
+            interval: 1, repeat: 1, efactor: 2.5, quality: 4
         end
 
         it "repeat=1 attempt=1" do
           check_translation("RoR")
-          expect_parameters interval: 1, repeat: 1, attempt: 2, efactor: 2.18,
-            quality: 2
+          expect_parameters
+            interval: 1, repeat: 1, attempt: 2, efactor: 2.18, quality: 2
         end
 
         it "repeat=1 attempt=2" do
           check_translation("RoR", 2)
-          expect_parameters interval: 1, repeat: 1, attempt: 3, efactor: 1.64,
-            quality: 1
+          expect_parameters
+            interval: 1, repeat: 1, attempt: 3, efactor: 1.64, quality: 1
         end
 
         it "repeat=1 attempt=3" do
           check_translation("RoR", 3)
-          expect_parameters interval: 1, repeat: 1, attempt: 4, efactor: 1.3,
-            quality: 0
+          expect_parameters
+            interval: 1, repeat: 1, attempt: 4, efactor: 1.3, quality: 0
         end
       end
     end
