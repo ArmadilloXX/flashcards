@@ -54,5 +54,4 @@ class User < ActiveRecord::Base
   def card_from_any_block
     cards.pending.first || cards.repeating.first
   end
-
 end
