@@ -4,9 +4,16 @@ class Card < ActiveRecord::Base
   belongs_to :user
   belongs_to :block
   before_validation :set_review_date_as_now, on: :create
-  validates :user_id, :interval, :repeat, :efactor, :quality, :attempt,
-    presence: true
-  validates :original_text, :translated_text, :review_date,
+  validates :user_id,
+            :interval,
+            :repeat,
+            :efactor,
+            :quality,
+            :attempt,
+            presence: true
+  validates :original_text,
+            :translated_text,
+            :review_date,
             presence: { message: "Необходимо заполнить поле." }
   validates :user_id, presence: { message: "Ошибка ассоциации." }
   validates :block_id,

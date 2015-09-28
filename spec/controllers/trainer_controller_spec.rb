@@ -7,8 +7,8 @@ describe Dashboard::TrainerController do
   let(:register) { @controller.send(:auto_login, user) }
   let(:block) { create(:block, user: user) }
   let(:card) do
-    create(
-      :card, user: user, block: block, interval: 1,
+    create(:card,
+      user: user, block: block, interval: 1,
         repeat: 1, efactor: 2.5, quality: 5)
   end
 

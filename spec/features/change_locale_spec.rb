@@ -43,8 +43,8 @@ describe "change locale" do
 
   context "when user logging in" do
     let!(:eng_user) do
-      create(
-        :user, email: "eng_user@test.com", password: "123456",
+      create(:user,
+        email: "eng_user@test.com", password: "123456",
           password_confirmation: "123456", locale: "en")
     end
     it "shows proper confimation message" do

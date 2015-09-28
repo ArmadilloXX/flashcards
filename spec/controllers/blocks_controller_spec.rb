@@ -6,7 +6,7 @@ describe Dashboard::BlocksController do
   let!(:block) { create(:block, user: user) }
 
   describe "PUT #set_as_current" do
-    before { put :set_as_current,  id: block.id }
+    before { put :set_as_current, id: block.id }
     it { is_expected.to redirect_to :blocks }
     it "sets block as current block for user" do
       expect(user.current_block).to eq(block)
