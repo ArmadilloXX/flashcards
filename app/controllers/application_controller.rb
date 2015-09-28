@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
                session[:locale]
              else
                http_accept_language.compatible_language_from(
-                I18n.available_locales)
+                 I18n.available_locales)
              end
     set_session_locale(locale)
   end

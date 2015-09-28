@@ -35,15 +35,13 @@ class Dashboard::TrainerController < Dashboard::BaseController
   end
 
   def set_card_from_current_block
-    @card =
-      current_user.current_block.cards.pending.first ||
-        current_user.current_block.cards.repeating.first
+    @card = current_user.current_block.cards.pending.first ||
+            current_user.current_block.cards.repeating.first
   end
 
   def set_card
-    @card =
-      current_user.cards.pending.first ||
-        current_user.cards.repeating.first
+    @card = current_user.cards.pending.first ||
+            current_user.cards.repeating.first
   end
 
   def prepare_flash_message(distance)
