@@ -1,8 +1,10 @@
 require "rails_helper"
 
 describe Card do
-  let(:card) { Card.new(original_text: "дом", translated_text: "house",
-    user_id: 1, block_id: 1) }
+  let(:card) do 
+    Card.new(original_text: "дом", translated_text: "house",
+      user_id: 1, block_id: 1)
+  end
 
   describe "create card" do
     context "has validation errors" do
@@ -11,55 +13,55 @@ describe Card do
       it "with empty original text" do
         card.update(original_text: "")
         expect(card.errors[:original_text]).
-            to include("Необходимо заполнить поле.")
+          to include("Необходимо заполнить поле.")
       end
 
       it "with empty translated text" do
         card.update(translated_text: "")
         expect(card.errors[:translated_text]).
-            to include("Необходимо заполнить поле.")
+          to include("Необходимо заполнить поле.")
       end
 
       it "with both empty texts" do
         card.update(original_text: "", translated_text: "")
         expect(card.errors[:original_text]).
-            to include diff_message
+          to include diff_message
       end
 
       it "with equal_texts Eng" do
         card.update(original_text: "house")
         expect(card.errors[:original_text]).
-            to include diff_message
+          to include diff_message
       end
 
       it "with equal_texts Rus" do
         card.update(original_text: "дом", translated_text: "дом")
         expect(card.errors[:original_text]).
-            to include diff_message
+          to include diff_message
       end
 
       it "provides full_downcase Eng" do
         card.update(original_text: "hOuse", translated_text: "houSe")
         expect(card.errors[:original_text]).
-            to include diff_message
+          to include diff_message
       end
 
       it "provides full_downcase Rus" do
         card.update(original_text: "Дом", translated_text: "доМ")
         expect(card.errors[:original_text]).
-            to include diff_message
+          to include diff_message
       end
 
       it "without user_id" do
         card.update(user_id: nil)
         expect(card.errors[:user_id]).
-            to include("Ошибка ассоциации.")
+          to include("Ошибка ассоциации.")
       end
 
       it "without block_id" do
         card.update(block_id: nil)
         expect(card.errors[:block_id]).
-            to include("Выберите колоду из выпадающего списка.")
+          to include("Выберите колоду из выпадающего списка.")
       end
     end
 
@@ -82,7 +84,7 @@ describe Card do
 
       it "set_review_date OK" do
         expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
-            to eq(Time.zone.now.strftime("%Y-%m-%d %H:%M"))
+          to eq(Time.zone.now.strftime("%Y-%m-%d %H:%M"))
       end
     end
   end
@@ -160,7 +162,7 @@ describe Card do
         it "set correct review date, interval, repeat and attempt " do
           check_translation("house")
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
-              to eq((Time.zone.now + 1.days).strftime("%Y-%m-%d %H:%M"))
+            to eq((Time.zone.now + 1.days).strftime("%Y-%m-%d %H:%M"))
           expect_parameters interval: 6, repeat: 2, attempt: 1
         end
 
@@ -190,7 +192,7 @@ describe Card do
         it "repeat=1-3 quality=5" do
           check_translation("house", 3)
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
-              to eq((Time.zone.now + 16.days).strftime("%Y-%m-%d %H:%M"))
+            to eq((Time.zone.now + 16.days).strftime("%Y-%m-%d %H:%M"))
           expect_parameters interval: 45, repeat: 4, attempt: 1, efactor: 2.8,
             quality: 5
         end
@@ -204,7 +206,7 @@ describe Card do
         it "set correct review date, interval, repeat and attempt for" do
           check_translation("house")
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
-              to eq((Time.zone.now + 6.days).strftime("%Y-%m-%d %H:%M"))
+            to eq((Time.zone.now + 6.days).strftime("%Y-%m-%d %H:%M"))
           expect_parameters interval: 16, repeat: 3, attempt: 1
         end
 
@@ -241,7 +243,7 @@ describe Card do
         it "set correct review date, interval, repeat and attempt" do
           check_translation("house")
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
-              to eq((Time.zone.now + 16.days).strftime("%Y-%m-%d %H:%M"))
+            to eq((Time.zone.now + 16.days).strftime("%Y-%m-%d %H:%M"))
           expect_parameters interval: 45, repeat: 4, attempt: 1
         end
 
@@ -282,9 +284,9 @@ describe Card do
           check_translation("RoR")
           check_translation("house")
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
-              to eq((Time.zone.now + 1.days).strftime("%Y-%m-%d %H:%M"))
+            to eq((Time.zone.now + 1.days).strftime("%Y-%m-%d %H:%M"))
           expect_parameters interval: 6, repeat: 2, attempt: 1, efactor: 2.38,
-          quality: 4
+            quality: 4
         end
 
         it "repeat=1-3 quality=5" do
@@ -292,18 +294,18 @@ describe Card do
           check_translation("RoR")
           check_translation("house", 2)
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
-              to eq((Time.zone.now + 6.days).strftime("%Y-%m-%d %H:%M"))
+            to eq((Time.zone.now + 6.days).strftime("%Y-%m-%d %H:%M"))
           expect_parameters interval: 14, repeat: 3, attempt: 1, efactor: 2.38,
-          quality: 5
+            quality: 5
         end
 
         it "repeat=3 attempt=4" do
           check_translation("RoR", 3)
           check_translation("house")
           expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
-              to eq((Time.zone.now + 1.days).strftime("%Y-%m-%d %H:%M"))
+            to eq((Time.zone.now + 1.days).strftime("%Y-%m-%d %H:%M"))
           expect_parameters interval: 6, repeat: 2, attempt: 1, efactor: 1.3,
-          quality: 3
+            quality: 3
         end
       end
     end
@@ -318,19 +320,19 @@ describe Card do
         it "repeat=1 attempt=1" do
           check_translation("RoR")
           expect_parameters interval: 1, repeat: 1, attempt: 2, efactor: 2.18,
-          quality: 2
+            quality: 2
         end
 
         it "repeat=1 attempt=2" do
           check_translation("RoR", 2)
           expect_parameters interval: 1, repeat: 1, attempt: 3, efactor: 1.64,
-          quality: 1
+            quality: 1
         end
 
         it "repeat=1 attempt=3" do
           check_translation("RoR", 3)
           expect_parameters interval: 1, repeat: 1, attempt: 4, efactor: 1.3,
-          quality: 0
+            quality: 0
         end
       end
     end
