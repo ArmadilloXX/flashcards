@@ -33,9 +33,26 @@ class User < ActiveRecord::Base
     update_attribute(:current_block_id, nil)
   end
 
+  def card_for_review
+    if current_block.nil?
+      card_from_any_block
+    else
+      card_from_current_block
+    end
+  end
+
   private
 
   def set_default_locale
     self.locale = I18n.locale.to_s
   end
+
+  def card_from_current_block
+    current_block.cards.pending.first || current_block.cards.repeating.first
+  end
+
+  def card_from_any_block
+    cards.pending.first || cards.repeating.first
+  end
+
 end

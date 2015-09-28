@@ -4,7 +4,7 @@ class Dashboard::TrainerController < Dashboard::BaseController
     if params[:id]
       @card = current_user.cards.find(params[:id])
     else
-      set_card_for_review
+      @card = current_user.card_for_review
     end
   end
 
@@ -24,24 +24,6 @@ class Dashboard::TrainerController < Dashboard::BaseController
 
   def trainer_params
     params.permit(:user_translation)
-  end
-
-  def set_card_for_review
-    if current_user.current_block
-      set_card_from_current_block
-    else
-      set_card
-    end
-  end
-
-  def set_card_from_current_block
-    @card = current_user.current_block.cards.pending.first ||
-            current_user.current_block.cards.repeating.first
-  end
-
-  def set_card
-    @card = current_user.cards.pending.first ||
-            current_user.cards.repeating.first
   end
 
   def prepare_flash_message(distance)
