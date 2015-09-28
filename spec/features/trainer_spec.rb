@@ -6,7 +6,7 @@ include LoginHelper
 describe "review cards" do
   let!(:user) { create(:user) }
   let(:update_cards) do
-    user.cards.each do |card| 
+    user.cards.each do |card|
       card.update_attribute(:review_date, Time.now - 3.days)
     end
   end
@@ -176,4 +176,3 @@ describe "review cards" do
     end
   end
 end
-  

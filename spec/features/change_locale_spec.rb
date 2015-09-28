@@ -15,7 +15,9 @@ describe "change locale" do
   end
 
   context "when new user registering" do
-    let!(:register_user) { register("eng_user@test.com", "123456", "123456", "Sing up") }
+    let!(:register_user) do
+      register("eng_user@test.com", "123456", "123456", "Sing up")
+    end
 
     after(:each) do
       click_link "Log out"
@@ -40,7 +42,10 @@ describe "change locale" do
   end
 
   context "when user logging in" do
-    let!(:eng_user) {create(:user, email: "eng_user@test.com", password: "123456", password_confirmation: "123456", locale: "en")}
+    let!(:eng_user) do
+      create(:user, email: "eng_user@test.com", password: "123456",
+        password_confirmation: "123456", locale: "en")
+    end
     it "shows proper confimation message" do
       login("eng_user@test.com", "123456", "Log in")
       expect(page).to have_content "Login is successful."

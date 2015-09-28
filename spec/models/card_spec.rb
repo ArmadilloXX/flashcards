@@ -152,7 +152,6 @@ describe Card do
     end
 
     context "with correct translation" do
-      
       describe "when interval: 1, repeat: 1, efactor: 2.5, quality: 5" do
         before(:each) do
           card.update_attributes(

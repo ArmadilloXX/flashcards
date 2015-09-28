@@ -6,12 +6,10 @@ describe Dashboard::TrainerController do
   let(:user)  { create(:user) }
   let(:register) { @controller.send(:auto_login, user) }
   let(:block) { create(:block, user: user) }
-  let(:card)  { create(:card, user: user,
-                              block: block,
-                              interval: 1, 
-                              repeat: 1, 
-                              efactor: 2.5, 
-                              quality: 5)}
+  let(:card) do
+    create(:card, user: user, block: block, interval: 1,
+      repeat: 1, efactor: 2.5, quality: 5)
+  end
 
   shared_examples "login denied" do
     it { is_expected.to redirect_to :login }
@@ -79,7 +77,7 @@ describe Dashboard::TrainerController do
           check_review_card(card, "RoR", 1)
         end
         it { is_expected.to set_flash[:alert] }
-        it { is_expected.to redirect_to trainer_path(id: card.id)}
+        it { is_expected.to redirect_to trainer_path(id: card.id) }
       end
     end
   end
