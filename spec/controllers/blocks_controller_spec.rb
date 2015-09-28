@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Dashboard::BlocksController do
-  let!(:user)  { create(:user) }
+  let!(:user) { create(:user) }
   let!(:register) { @controller.send(:auto_login, user) }
   let!(:block) { create(:block, user: user) }
 
@@ -14,7 +14,7 @@ describe Dashboard::BlocksController do
   end
 
   describe "PUT #reset_as_current" do
-    before { put :reset_as_current, id: block.id}
+    before { put :reset_as_current, id: block.id }
     it { is_expected.to redirect_to :blocks }
     it "reset current block for user" do
       expect(user.current_block).to be_nil

@@ -3,12 +3,13 @@ require "support/helpers/trainer_helper.rb"
 include TrainerHelper
 
 describe Dashboard::TrainerController do
-  let(:user)  { create(:user) }
+  let(:user) { create(:user) }
   let(:register) { @controller.send(:auto_login, user) }
   let(:block) { create(:block, user: user) }
   let(:card) do
-    create(:card, user: user, block: block, interval: 1,
-      repeat: 1, efactor: 2.5, quality: 5)
+    create(
+      :card, user: user, block: block, interval: 1,
+        repeat: 1, efactor: 2.5, quality: 5)
   end
 
   shared_examples "login denied" do
@@ -45,7 +46,7 @@ describe Dashboard::TrainerController do
 
   describe "PUT review_card" do
     context "when user not authorized" do
-      before do 
+      before do
         put :review_card
       end
       it_behaves_like "login denied"
