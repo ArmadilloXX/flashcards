@@ -33,11 +33,11 @@ class User < ActiveRecord::Base
     update_attribute(:current_block_id, nil)
   end
 
-  def card_for_review
+  def cards_for_review
     if current_block.nil?
-      card_from_any_block
+      cards_from_any_block
     else
-      card_from_current_block
+      cards_from_current_block
     end
   end
 
@@ -47,11 +47,11 @@ class User < ActiveRecord::Base
     self.locale = I18n.locale.to_s
   end
 
-  def card_from_current_block
-    current_block.cards.pending.first || current_block.cards.repeating.first
+  def cards_from_current_block
+    current_block.cards.pending || current_block.cards.repeating
   end
 
-  def card_from_any_block
-    cards.pending.first || cards.repeating.first
+  def cards_from_any_block
+    cards.pending || cards.repeating
   end
 end

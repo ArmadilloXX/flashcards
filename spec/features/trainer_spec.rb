@@ -2,9 +2,9 @@ require "rails_helper"
 require "support/helpers/login_helper.rb"
 include LoginHelper
 
-
 describe "review cards" do
-  let!(:user) { create(:user) }
+  # let!(:user) { create(:user, locale: 'ru') }
+  let!(:user) { User.create(email: 'test@test.com', password: '12345', password_confirmation: '12345', locale: 'ru') }
   let(:update_cards) do
     user.cards.each do |card|
       card.update_attribute(:review_date, Time.now - 3.days)
@@ -90,7 +90,8 @@ describe "review cards" do
           click_button "Проверить"
           fill_in "user_translation", with: "House"
           click_button "Проверить"
-          expect(page).to have_content "Текущая карточка"
+          # expect(page).to have_content "Текущая карточка"
+          expect(page).to have_content "Ожидайте наступления даты пересмотра."
         end
 
         it "correct translation quality=4" do
@@ -98,7 +99,7 @@ describe "review cards" do
           click_button "Проверить"
           fill_in "user_translation", with: "RoR"
           click_button "Проверить"
-          fill_in "user_translation", with: "House"
+          fill_in "user_translation", with: "RoR"
           click_button "Проверить"
           fill_in "user_translation", with: "House"
           click_button "Проверить"

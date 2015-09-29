@@ -4,7 +4,7 @@ class Dashboard::TrainerController < Dashboard::BaseController
     if params[:id]
       @card = current_user.cards.find(params[:id])
     else
-      @card = current_user.card_for_review
+      @card = current_user.cards_for_review.first
     end
   end
 

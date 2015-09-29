@@ -1,4 +1,8 @@
-<% if card %>
+<% if current_user.cards.empty? %>
+  <p class="lead"><%= t(:no_added_cards) %></p>
+<% elsif current_user.cards_for_review.empty? %>
+  <p class="lead"><%= t(:no_review_card_text) %></p>
+<% elsif card %>
   <h2><%= t(:current_card_label) %></h2>
 
   <%= simple_form_for card, url: review_card_path(card_id: card.id),
@@ -29,11 +33,6 @@
 
     <%= f.button :submit, t(:check_card_button), class: 'btn btn-default' %>
   <% end %>
-
-<% elsif current_user.cards.empty? %>
-  <p class="lead"><%= t(:no_added_cards) %></p>
-<% else %>
-  <p class="lead"><%= t(:no_review_card_text) %></p>
 <% end %>
 
 
