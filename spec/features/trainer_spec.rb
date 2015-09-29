@@ -3,8 +3,13 @@ require "support/helpers/login_helper.rb"
 include LoginHelper
 
 describe "review cards" do
-  # let!(:user) { create(:user, locale: 'ru') }
-  let!(:user) { User.create(email: 'test@test.com', password: '12345', password_confirmation: '12345', locale: 'ru') }
+  # let!(:user) { create(:user, locale: "ru") }
+  let!(:user) do
+    User.create(email: "test@test.com", 
+                password: "12345",
+                password_confirmation: "12345",
+                locale: "ru")
+  end
   let(:update_cards) do
     user.cards.each do |card|
       card.update_attribute(:review_date, Time.now - 3.days)

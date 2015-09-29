@@ -8,7 +8,7 @@ describe User do
     let!(:card1) { create(:card, user: user, block: block1) }
     let!(:card2) { create(:card, user: user, block: block2) }
 
-    it 'returns collection of cards' do
+    it "returns collection of cards" do
       expect(user.cards_for_review).to be_a_kind_of ActiveRecord::AssociationRelation
     end
 
