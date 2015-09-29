@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.1.4'
+ruby '2.2.3'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
-# Use postgresql as the database for Active Record
+gem 'rails', '4.2.4'
+gem 'responders', '~> 2.0'
 gem 'pg'
+
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -33,7 +33,9 @@ gem 'rollbar'
 gem 'newrelic_rpm'
 
 group :development, :test do
+  gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', require: false
 end

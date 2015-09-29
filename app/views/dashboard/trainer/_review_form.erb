@@ -1,8 +1,12 @@
-<% if card %>
+<% if current_user.cards.empty? %>
+  <p class="lead"><%= t(:no_added_cards) %></p>
+<% elsif current_user.cards_for_review.empty? %>
+  <p class="lead"><%= t(:no_review_card_text) %></p>
+<% elsif card %>
   <h2><%= t(:current_card_label) %></h2>
 
-  <%= form_tag review_card_path(card_id: card.id), method: :put, remote: true do %>
-
+  <%= simple_form_for card, url: review_card_path(card_id: card.id),
+                      method: :put do |f| %>
     <% if card.image? %>
       <div class="form-group">
         <div class="row">
@@ -16,19 +20,19 @@
     <% end %>
 
     <div class="form-group">
-      <%= label_tag '', t(:original_text_label) %>
-      <%= text_area_tag '', card.original_text, class: 'form-control',
-                        disabled: true %>
+      <%= f.input :original_text,
+                  label: t(:original_text_label),
+                  input_html: { class: 'form-control', disabled: true } %>
     </div>
-
     <div class="form-group">
-      <%= label_tag '', t(:translated_text_label) %>
-      <%= text_area_tag :user_translation, nil, class: 'form-control',
-                        required: true, autofocus: true %>
+      <%= f.input :user_translation, as: :translation,
+                  label: t(:translated_text_label),
+                  input_html: { class: 'form-control', required: true,
+                                autofocus: true } %>
     </div>
 
-    <%= submit_tag t(:check_card_button), class: 'btn btn-default' %>
+    <%= f.button :submit, t(:check_card_button), class: 'btn btn-default' %>
   <% end %>
-<% else %>
-  <p class="lead"><%= t(:no_review_card_text) %></p>
 <% end %>
+
+

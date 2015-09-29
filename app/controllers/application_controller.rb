@@ -1,4 +1,9 @@
+require "application_responder"
+
 class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
+  respond_to :html
+
   protect_from_forgery with: :exception
   before_action :set_locale
 
@@ -12,9 +17,13 @@ class ApplicationController < ActionController::Base
              elsif session[:locale]
                session[:locale]
              else
-               http_accept_language.compatible_language_from(I18n.available_locales)
+               http_accept_language.compatible_language_from(
+                 I18n.available_locales)
              end
+    set_session_locale(locale)
+  end
 
+  def set_session_locale(locale)
     if locale && I18n.available_locales.include?(locale.to_sym)
       session[:locale] = I18n.locale = locale
     else
