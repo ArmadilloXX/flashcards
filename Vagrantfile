@@ -36,6 +36,7 @@ Vagrant.configure(2) do |config|
     sudo -u postgres createuser --superuser vagrant
     sudo -u postgres createdb -O vagrant flashcards_development
     DATABASE_URL='postgresql://localhost/flashcards_development'
+    cat config/database.yml
     sudo -H -u vagrant bash -i -c 'rake db:create'
     sudo -H -u vagrant bash -i -c 'rake db:migrate'
     sudo -H -u vagrant bash -i -c 'unicorn --listen 3000'
