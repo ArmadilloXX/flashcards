@@ -3,7 +3,6 @@ require "support/helpers/login_helper.rb"
 include LoginHelper
 
 describe "User enters admin area" do
-
   let(:login_and_enter) do
     login_with("test@test.com", "12345", "Войти")
     visit admin_root_path
@@ -27,7 +26,8 @@ describe "User enters admin area" do
     end
 
     it "shows proper alert message" do
-      expect(page).to have_content("Вы не авторизованы для выполнения данного действия.")
+      expect(page).to have_content(
+        "Вы не авторизованы для выполнения данного действия.")
     end
     it "redirect to root path" do
       expect(page).to have_content("Добро пожаловать.")

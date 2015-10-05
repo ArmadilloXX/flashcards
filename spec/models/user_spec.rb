@@ -3,7 +3,7 @@ require "rails_helper"
 describe User do
   let(:user) { create(:user) }
 
-  it 'is not an admin when created' do
+  it "is not an admin when created" do
     expect(user.is_admin?).to be_falsy
   end
 
