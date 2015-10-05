@@ -16,7 +16,7 @@ describe "review cards" do
     end
   end
   let(:visit_trainer) do
-    login("test@test.com", "12345", "Войти")
+    login_with("test@test.com", "12345", "Войти")
     visit trainer_path
   end
 

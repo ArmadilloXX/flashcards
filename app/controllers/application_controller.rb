@@ -1,11 +1,20 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  include Pundit
   self.responder = ApplicationResponder
   respond_to :html
 
   protect_from_forgery with: :exception
   before_action :set_locale
+
+  def authenticate_admin_user!
+   redirect_to login_path unless current_user
+ end
+
+  def access_denied(exception)
+    redirect_back_or_to root_path, alert: exception.message
+  end
 
   private
 

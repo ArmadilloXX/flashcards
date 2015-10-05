@@ -51,7 +51,7 @@ describe "change locale" do
         locale: "en")
     end
     it "shows proper confimation message" do
-      login("eng_user@test.com", "123456", "Log in")
+      login_with("eng_user@test.com", "123456", "Log in")
       expect(page).to have_content "Login is successful."
       click_link "Log out"
     end

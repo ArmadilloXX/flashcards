@@ -1,5 +1,5 @@
 module LoginHelper
-  def login(email, password, action)
+  def login_with(email, password, action)
     visit login_path
     fill_in "email", with: email
     fill_in "password", with: password

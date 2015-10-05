@@ -9,6 +9,7 @@ gem 'unicorn'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
+gem 'pundit'
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'

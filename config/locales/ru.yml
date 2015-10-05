@@ -1,5 +1,6 @@
 ru:
   welcome: 'Добро пожаловать.'
+  not_authorized: "Вы не авторизованы"
   original_text_label: 'Оригинал'
   translated_text_label: 'Перевод'
   current_card_label: 'Текущая карточка'

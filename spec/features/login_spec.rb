@@ -13,7 +13,7 @@ describe "user login" do
   end
 
   it "authentication TRUE" do
-    login("test@test.com", "12345", "Войти")
+    login_with("test@test.com", "12345", "Войти")
     expect(page).to have_content "Вход выполнен успешно."
   end
 
@@ -23,17 +23,17 @@ describe "user login" do
     end
 
     it "incorrect e-mail" do
-      login("1@1.com", "12345", "Войти")
+      login_with("1@1.com", "12345", "Войти")
       expect(page).to have_content error_message
     end
 
     it "incorrect password" do
-      login("test@test.com", "56789", "Войти")
+      login_with("test@test.com", "56789", "Войти")
       expect(page).to have_content error_message
     end
 
     it "incorrect e-mail and password" do
-      login("1@1.com", "56789", "Войти")
+      login_with("1@1.com", "56789", "Войти")
       expect(page).to have_content error_message
     end
   end
