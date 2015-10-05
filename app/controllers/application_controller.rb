@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
   def authenticate_admin_user!
-   redirect_to login_path unless current_user
- end
+    redirect_to login_path unless current_user
+  end
 
   def access_denied(exception)
     redirect_back_or_to root_path, alert: exception.message
