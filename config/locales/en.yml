@@ -1,6 +1,5 @@
 en:
   welcome: 'Welcome.'
-  not_authorized: "Not authorized"
   original_text_label: 'Original'
   translated_text_label: 'Translation'
   current_card_label: 'Current card'
