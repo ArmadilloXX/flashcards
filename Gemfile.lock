@@ -218,6 +218,7 @@ GEM
     rdoc (4.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rolify (4.1.1)
     rollbar (2.3.0)
       oj (~> 2.12.14)
     routing-filter (0.5.1)
@@ -310,6 +311,7 @@ DEPENDENCIES
   rails_12factor
   rake
   responders (~> 2.0)
+  rolify
   rollbar
   routing-filter
   rspec-rails
