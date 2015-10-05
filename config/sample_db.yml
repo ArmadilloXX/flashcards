@@ -1,0 +1,6 @@
+development:
+  adapter: postgresql
+  database: flashcards_development
+  hostname: 127.0.0.1
+  encoding: utf8
+  pool: 5
