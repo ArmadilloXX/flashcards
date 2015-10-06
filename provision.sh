@@ -55,5 +55,8 @@ echo 'Creating and migrating database'
 rake db:create
 rake db:migrate
 
+echo 'Seeding the database'
+rake db:seed
+
 echo 'Starting application server'
 unicorn --listen 3000

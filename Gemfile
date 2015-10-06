@@ -7,6 +7,10 @@ gem 'responders', '~> 2.0'
 gem 'pg'
 gem 'unicorn'
 
+gem 'activeadmin', github: 'activeadmin'
+gem 'rolify'
+gem 'pundit'
+
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'

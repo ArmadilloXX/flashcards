@@ -5,5 +5,11 @@ FactoryGirl.define do
     password_confirmation "12345"
     locale "ru"
     current_block_id ""
+
+    trait :admin do
+      after(:create) do |user|
+        user.add_role :admin
+      end
+    end
   end
 end

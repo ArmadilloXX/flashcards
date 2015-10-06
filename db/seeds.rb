@@ -5,16 +5,26 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#   cities = City.create([{ name: "Chicago" }, { name: "Copenhagen" }])
+#   Mayor.create(name: "Emanuel", city: cities.first)
 
-require 'nokogiri'
-require 'open-uri'
+require "nokogiri"
+require "open-uri"
 
-doc = Nokogiri::HTML(open('http://www.learnathome.ru/blog/100-beautiful-words'))
+default_admin = User.create(email: "test_admin@test.com",
+                            password: "password",
+                            password_confirmation: "password",
+                            locale: "ru")
+default_admin.add_role :admin
 
-doc.search('//table/tbody/tr').each do |row|
-  original = row.search('td[2]/p')[0].content.downcase
-  translated = row.search('td[1]/p')[0].content.downcase
-  Card.create(original_text: original, translated_text: translated, user_id: 17)
+doc = Nokogiri::HTML(open(
+                      "http://www.learnathome.ru/blog/100-beautiful-words"))
+
+doc.search("//table/tbody/tr").each do |row|
+  original = row.search("td[2]/p")[0].content.downcase
+  translated = row.search("td[1]/p")[0].content.downcase
+  Card.create(original_text: original,
+              translated_text: translated,
+              user_id: default_admin.id)
 end
+
