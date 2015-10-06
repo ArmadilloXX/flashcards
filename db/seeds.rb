@@ -18,7 +18,7 @@ default_admin = User.create(email: "test_admin@test.com",
 default_admin.add_role :admin
 
 doc = Nokogiri::HTML(open(
-  "http://www.learnathome.ru/blog/100-beautiful-words"))
+                      "http://www.learnathome.ru/blog/100-beautiful-words"))
 
 doc.search("//table/tbody/tr").each do |row|
   original = row.search("td[2]/p")[0].content.downcase

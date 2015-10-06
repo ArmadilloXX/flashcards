@@ -1,6 +1,13 @@
-development:
+default: &default
   adapter: postgresql
-  database: flashcards_development
-  hostname: 127.0.0.1
   encoding: utf8
   pool: 5
+  hostname: 127.0.0.1
+
+development:
+  <<: *default
+  database: flashcards_development
+
+test:
+  <<: *default
+  database: flashcards_test
