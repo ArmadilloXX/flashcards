@@ -34,6 +34,12 @@ class Dashboard::CardsController < Dashboard::BaseController
     respond_with @card
   end
 
+  def show_flickr_search
+  end
+
+  def search_flickr_photos
+  end
+
   private
 
   def set_card

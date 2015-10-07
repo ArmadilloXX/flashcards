@@ -18,8 +18,11 @@ Rails.application.routes.draw do
     resources :user_sessions, only: :destroy
     resources :users, only: :destroy
     post "logout" => "user_sessions#destroy", :as => :logout
-
+    
+    get '/cards/search_flickr_photos', to: 'cards#search_flickr_photos', as: :search_flickr_photos
+    get '/cards/show_flickr_search', to: 'cards#show_flickr_search', as: :show_flickr_search 
     resources :cards
+           
 
     resources :blocks do
       member do
