@@ -11,20 +11,33 @@
   </div>
 
   <div class="form-group">
-    <%= f.input :image, as: :file, label: "Изображение" %>
-    <%= f.input :image_cache, as: :hidden %>
-  </div>
-
-  <div class="form-group">
-    <%= link_to "Search Flickr", show_search_path, id: "flickr_button", class: "btn btn-primary flickr_search", remote: true %>
-  </div>
-  
-  <div class="form-group">
     <%= f.input :block_id, collection: current_user.blocks.all.order("title"),
                       prompt: "Выберите колоду", label: "Колоды",
                       input_html: { class: "form-control", required: true } %>
   </div>
 
+  <div class="form-group">
+    <%= f.input :image, as: :file, label: "Изображение" %>
+    <%= f.input :image_cache, as: :hidden %>
+  </div>
+
+  <div class="form-group">
+    <div id='flickr_button' class="btn btn-primary">Search Flickr</div>
+  </div>
+
+  <div class="flickr_search">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+        <%= text_field_tag "search", nil, placeholder: "Enter something", class: "form-control" %>
+          <span class="input-group-btn">
+            <%= link_to "GO", search_photos_path, id: 'search_button', class: 'btn btn-primary', remote: true %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <% if card.image? %>
     <div class="form-group">
       <%= f.input :remove_image, as: :boolean, label: "Удалить изображение" %>
