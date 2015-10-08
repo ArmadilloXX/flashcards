@@ -1,6 +1,6 @@
 class Dashboard::CardsController < Dashboard::BaseController
   before_action :set_card, only: [:destroy, :edit, :update]
-  respond_to :js, only: [:show_flickr_search, :search_photos]
+  # respond_to :js, only: [:show_flickr_search, :search_photos]
 
   def index
     @cards = current_user.cards.all.order("review_date")
@@ -35,13 +35,11 @@ class Dashboard::CardsController < Dashboard::BaseController
     respond_with @card
   end
 
-  def show_flickr_search
-  end
+  # def show_flickr_search
+  # end
 
-  def search_photos
-    # search_term = params[:photo][:search_term]
-    # list = flickr.photos.search text: search_term, per_page: 10
-  end
+  # def search_photos
+  # end
 
   private
 
