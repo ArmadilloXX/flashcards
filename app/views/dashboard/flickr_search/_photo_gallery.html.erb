@@ -1,8 +1,16 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">We found some photos for you</h3>
+    <h3 class="panel-title">We found some photos for "<%= "#{@search_term}" %>" </h3>
   </div>
   <div class="panel-body">
-    Gallery will be here
+    <div class="row">
+      <% @photos.each do |photo| %>
+        <div col-sm-2>
+          <div class="image">
+            <%= image_tag photo %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
