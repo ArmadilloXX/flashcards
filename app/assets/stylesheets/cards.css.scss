@@ -14,7 +14,7 @@ $loader-transform: $loader-size + $loader-gutter * 2;
   border-radius: $loader-size/2;
   border: $loader-size * .75 solid transparent;
   background: white;
-  margin: 0 auto;
+  margin: 0 auto 30px;
 }
 
 %loader-dot {
@@ -56,6 +56,6 @@ $loader-transform: $loader-size + $loader-gutter * 2;
     }
 }
 
-.image_preview {
-  display: inline-block;
+.photo_grid {
+  margin-top: 15px;
 }
