@@ -13,7 +13,7 @@ class Dashboard::FlickrSearchController < Dashboard::BaseController
     photos = []
     list.each do |photo|
       info = flickr.photos.getInfo(photo_id: photo["id"], secret: photo["secret"])
-      photos << FlickRaw.url(info)
+      photos << FlickRaw.url_q(info)
     end
     photos
   end

@@ -14,7 +14,7 @@ class CardImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
-  def filename
-    "#{model.id}.#{file.extension.downcase}" if original_filename
-  end
+  # def filename
+  #   "#{model.id}.#{file.extension.downcase}"
+  # end
 end

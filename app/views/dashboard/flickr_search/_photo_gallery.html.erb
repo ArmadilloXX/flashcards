@@ -5,10 +5,10 @@
   <div class="panel-body">
     <div class="row">
       <% @photos.each do |photo| %>
-        <div col-sm-2>
-          <div class="image">
+        <div class="col-xs-6 col-md-3">
+          <a href="#" class="thumbnail">
             <%= image_tag photo %>
-          </div>
+          </a>
         </div>
       <% end %>
     </div>

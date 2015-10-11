@@ -22,6 +22,13 @@
   </div>
 
   <div class="form-group">
+    <p>
+      <label>Card image URL:</label>
+      <%= f.text_field :remote_image_url %>
+    </p>
+  </div>
+
+  <div class="form-group">
     <div id='flickr_button' class="btn btn-primary">Search Flickr</div>
   </div>
 
@@ -37,7 +44,12 @@
       </div>
     </div>
   </div>
-  
+
+  <div class="loader">
+    <i class="dot-pink"></i>
+    <i class="dot-blue"></i>
+  </div>  
+
   <% if card.image? %>
     <div class="form-group">
       <%= f.input :remove_image, as: :boolean, label: "Удалить изображение" %>

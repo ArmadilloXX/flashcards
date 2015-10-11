@@ -1,0 +1,61 @@
+
+$FLICKR_PINK: #ff2e92;
+$FLICKR_BLUE: #007bdc;
+
+$loader-size: 30px; 
+
+$loader-gutter: $loader-size/10;
+$loader-transform: $loader-size + $loader-gutter * 2;
+
+.loader {
+  position: relative;
+  width: $loader-size * 2;
+  height: $loader-size;
+  border-radius: $loader-size/2;
+  border: $loader-size * .75 solid transparent;
+  background: white;
+  margin: 0 auto;
+}
+
+%loader-dot {
+  position: absolute;
+  top: 0;
+  width: $loader-size;
+  height: $loader-size;
+  border-radius: 100%;
+  animation: pink 1.05s ease-in-out infinite;
+}
+
+.dot-pink {
+  @extend %loader-dot;
+  background: $FLICKR_PINK;
+  left: -$loader-gutter;
+}
+
+
+.dot-blue {
+  @extend %loader-dot;
+  animation-name: blue;
+  background: $FLICKR_BLUE;
+  right: -$loader-gutter;
+}
+
+
+@keyframes pink {
+    0% {
+      z-index: 1;
+    }
+    50% {
+      transform: translateX($loader-transform);
+    }
+}
+
+@keyframes blue {
+    50% {
+      transform: translateX(-$loader-transform);
+    }
+}
+
+.image_preview {
+  display: inline-block;
+}
