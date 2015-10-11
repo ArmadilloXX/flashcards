@@ -1,17 +1,17 @@
 $(function() {
-  $(".flickr_search").hide();
+  $(".panel").hide();
   $(".loader").hide();
 
   $('#flickr_button').click(function() {
     $(this).hide();
-    $(".flickr_search").fadeIn();
+    $(".panel").fadeIn();
     $('input[name=search]').focus();
 
   });
 
   $('#search_button').click(function() {
     $(".loader").show();
-    $(".panel").remove();
+    $(".gallery").remove();
     var value = $('input[name=search]').val();
     $.ajax({
       url: "/flickr_search/search_photos",
