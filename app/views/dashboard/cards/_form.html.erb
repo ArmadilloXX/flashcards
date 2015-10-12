@@ -21,11 +21,8 @@
     <%= f.input :image_cache, as: :hidden %>
   </div>
 
-  <div class="form-group hidden">
-    <p>
-      <label>Card image URL:</label>
-      <%= f.text_field :remote_image_url %>
-    </p>
+  <div class="form-group remote_url hidden">
+    <%= f.text_field :remote_image_url %>
   </div>
 
   <div class="form-group">
@@ -44,7 +41,7 @@
             <div class="input-group">
               <%= text_field_tag "search", nil, placeholder: "What do you want to find?", class: "form-control" %>
               <span class="input-group-btn">
-                <div id='search_button' class="btn btn-default">GO</div>
+                <input type="button" name="поле" value="GO" id='search_button' class="btn btn-default" />
               </span>
             </div>
           </div>

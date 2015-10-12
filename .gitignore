@@ -16,6 +16,7 @@
 /tmp
 .idea/*
 .env
+.env.test
 config/database.yml
 config/secrets.yml
 config/application.yml

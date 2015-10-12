@@ -11,7 +11,7 @@
   <div class="row photo_grid">
     <% @photos.each do |photo| %>
       <div class="col-xs-5 col-md-2 <%= "col-xs-offset-1" if @photos.index(photo) == 0 || @photos.index(photo) == 5 %>">
-        <a href="#" class="thumbnail">
+        <a href="#" class="thumbnail thumbnail_photo" id="thumbnail_<%= @photos.index(photo) %>">
           <%= image_tag photo, id: "photo_#{@photos.index(photo)}" %>
         </a>
       </div>

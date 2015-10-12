@@ -7,9 +7,8 @@ class Dashboard::FlickrSearchController < Dashboard::BaseController
       list = flickr.photos.search text: @search_term, per_page: 10
     end
     @photos = url_for_photos(list)
+    # url_for_photos(list)
   end
-
-  private
 
   def url_for_photos(list)
     photos = []
@@ -18,5 +17,6 @@ class Dashboard::FlickrSearchController < Dashboard::BaseController
       photos << FlickRaw.url_q(info)
     end
     photos
+    # @photos = photos
   end
 end

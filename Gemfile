@@ -48,4 +48,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers', require: false
+  gem 'selenium-webdriver'
+  gem 'webmock'
+  # gem 'poltergeist'
 end
