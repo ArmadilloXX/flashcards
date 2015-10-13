@@ -15,9 +15,7 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
-gem 'flickraw'
-
-
+gem 'flickrie', '~> 1.6.1'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
@@ -48,7 +46,11 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers', require: false
-  gem 'selenium-webdriver'
-  # gem 'webmock'
+  
   # gem 'poltergeist'
+end
+
+group :test do
+  gem 'selenium-webdriver'
+  gem 'webmock'
 end

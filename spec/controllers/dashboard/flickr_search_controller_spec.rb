@@ -1,5 +1,4 @@
 require "rails_helper"
-require "flickraw"
 
 describe Dashboard::FlickrSearchController do
 
@@ -8,11 +7,15 @@ describe Dashboard::FlickrSearchController do
   end
 
   context "when user does not provide search term" do
-    it "calls the #getRecent"
+
+    it "calls the #getRecent" do
+      get :search_photos
+      # expect(Flickrie).to receive(:get_recent_photos)
+    end
   end
 
   it "responds with js"
   it "returns an array of photos url"
-  it "returns SOMETHING when no connection" #fix gallery template
+  it "returns SOMETHING when no connection" #need to fix gallery template
 
 end

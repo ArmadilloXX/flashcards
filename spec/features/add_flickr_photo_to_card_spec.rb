@@ -10,7 +10,7 @@ describe "Add Flickr photo to card" do
   let(:photo) { page.find("#thumbnail_0") }
   let(:start_search) do
     page.find("#flickr_button").click
-    click_button 'GO'
+    click_button "GO"
   end
 
   before do
@@ -18,10 +18,10 @@ describe "Add Flickr photo to card" do
     visit new_card_path
   end
 
-  describe 'when user visits new card page', js: true do
+  describe "when user visits new card page", js: true do
 
     it "shows Search Flickr button" do
-      expect(page).to have_content('Search Flickr')
+      expect(page).to have_content("Search Flickr")
     end
 
     it "remote_image_url textfield is hidden and blank" do
@@ -32,12 +32,12 @@ describe "Add Flickr photo to card" do
       expect(page.find(".loader").visible?).to eq(false)
     end
 
-    it 'search form is hidden' do
+    it "search form is hidden" do
       expect(page.find(".flickr_search").visible?).to eq(false)
     end
   end
 
-  describe 'when user clicks Try Flickr button', js: true do
+  describe "when user clicks Try Flickr button", js: true do
     before do
       page.find("#flickr_button").click
     end
@@ -47,7 +47,7 @@ describe "Add Flickr photo to card" do
     end
   end
 
-  describe 'when user clicks GO button for searching photos', js: true do
+  describe "when user clicks GO button for searching photos", js: true do
     before do
       start_search
     end
@@ -57,7 +57,7 @@ describe "Add Flickr photo to card" do
     end
   end
 
-  describe 'when search request is completed', js: true do
+  describe "when search request is completed", js: true do
     # let!(:photos) do
     #   [
     #     "https://farm6.staticflickr.com/5742/21488769794_9fd96e7eb6_q.jpg",
@@ -86,7 +86,7 @@ describe "Add Flickr photo to card" do
     end
   end
 
-  describe 'when user selects the photo to attach to the card', js: true do
+  describe "when user selects the photo to attach to the card", js: true do
     before do
       start_search
       wait_for_ajax
@@ -98,13 +98,13 @@ describe "Add Flickr photo to card" do
     end
 
     it "fill the hidden remote_image_url field with proper url" do
-      img_url = page.find('#photo_0')['src']
+      img_url = page.find("#photo_0")["src"]
       remote_url = page.find("#card_remote_image_url").value
       expect(remote_url).to eq(img_url)
     end
   end
 
-  describe 'when user clicks button for saving new card with photo', js: true do
+  describe "when user clicks button for saving new card with photo", js: true do
     before do
       start_search
       wait_for_ajax
