@@ -6,7 +6,7 @@ include FlickrHelper
 include LoginHelper
 include WaitForAjax
 
-describe "Add Flickr photo to card" do
+describe "Add Flickr photo to card", js: true do
   let!(:user) { create(:user) }
   let!(:block) { create(:block, user: user) }
   let(:photo) { page.find("#thumbnail_0") }
@@ -60,13 +60,6 @@ describe "Add Flickr photo to card" do
       start_search
       # wait_for_ajax
     end
-
-    # context "when search is started" do
-    #   it "shows loading indicator" do
-    #     start_search
-    #     expect(page.find(".loader").visible?).to eq(true)
-    #   end
-    # end
 
     context "when search is finished" do
       it "it hides loading indicator when request is finished" do

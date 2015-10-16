@@ -45,12 +45,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
-  gem 'shoulda-matchers', require: false
-  
-  # gem 'poltergeist'
+  gem 'poltergeist', '~> 1.7.0'
 end
 
 group :test do
-  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
+  # gem 'selenium-webdriver'
   gem 'webmock'
 end

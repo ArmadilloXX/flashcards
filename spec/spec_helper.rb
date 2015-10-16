@@ -3,16 +3,17 @@ require "capybara/rspec"
 require "factory_girl_rails"
 
 WebMock.disable_net_connect!(allow_localhost: true)
-# require 'capybara/poltergeist'
 
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 Capybara.ignore_hidden_elements = false
-# Capybara.javascript_driver = :poltergeist
-Capybara.javascript_driver = :selenium
-Capybara.default_max_wait_time = 40
+Capybara.javascript_driver = :poltergeist
+Capybara.register_driver(:poltergeist) do |app|
+  Capybara::Poltergeist::Driver.new(app, debug: true)
+end
+Capybara.default_max_wait_time = 30
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
