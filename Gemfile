@@ -52,5 +52,5 @@ end
 
 group :test do
   gem 'selenium-webdriver'
-  # gem 'webmock'
+  gem 'webmock'
 end

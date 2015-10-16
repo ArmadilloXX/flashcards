@@ -1,8 +1,8 @@
-# require 'webmock/rspec'
+require 'webmock/rspec'
 require "capybara/rspec"
 require "factory_girl_rails"
 
-# WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(allow_localhost: true)
 # require 'capybara/poltergeist'
 
 # The `.rspec` file also contains a few flags that are not defaults but that
