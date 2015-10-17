@@ -1,8 +1,9 @@
 language: ruby
 rvm: 2.2.3
-env: RAILS_ENV=test
-env: FLICKR_API_KEY=b6371db92a0a0332eccddbf0897cb935
-env: FLICKR_SHARED_SECRET=d554b9a5afdfa7dc
+env: 
+  - RAILS_ENV=test
+  - secure: FLICKR_API_KEY=b6371db92a0a0332eccddbf0897cb935
+  - secure: FLICKR_SHARED_SECRET=d554b9a5afdfa7dc
 script:
   - bundle exec rspec
 addons:
