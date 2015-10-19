@@ -5,24 +5,21 @@ class Dashboard::FlickrSearchController < Dashboard::BaseController
     @search_term = params[:search]
 
     list = if @search_term.blank?
-      Rails.logger.warn("Search term is blank")
-      recent_photos
-    else
-      Rails.logger.warn("Search term provided")
-      search_with(@search_term)
-    end
-
-    Rails.logger.warn '++++++++++++++++++++++++++++++++'
-    Rails.logger.warn "list should be assigned"
-    Rails.logger.warn list.inspect
-
+             # Rails.logger.warn("Search term is blank")
+             recent_photos
+           else
+             # Rails.logger.warn("Search term provided")
+             search_with(@search_term)
+           end
+    # Rails.logger.warn "++++++++++++++++++++++++++++++++"
+    # Rails.logger.warn "list should be assigned"
+    # Rails.logger.warn list.inspect
     @photos = url_for_photos(list)
-    Rails.logger.warn '++++++++++++++++++++++++++++++++'
-    Rails.logger.warn "@photos should be assigned"
-    Rails.logger.warn @photos.inspect
-
-    Rails.logger.warn '=================================='
-    Rails.logger.warn "Template should be rendered"
+    # Rails.logger.warn "++++++++++++++++++++++++++++++++"
+    # Rails.logger.warn "@photos should be assigned"
+    # Rails.logger.warn @photos.inspect
+    # Rails.logger.warn "=================================="
+    # Rails.logger.warn "Template should be rendered"
   end
 
   private
