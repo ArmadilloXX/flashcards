@@ -8,7 +8,7 @@ $loader-transform: $loader-size + $loader-gutter * 2;
 
 .loader {
   background: white;
-  border: $loader-size * .75 solid transparent;
+  border: $loader-size * 0.75 solid transparent;
   border-radius: $loader-size/2;
   height: $loader-size;
   margin: 0 auto 30px;
@@ -42,6 +42,7 @@ $loader-transform: $loader-size + $loader-gutter * 2;
   0% {
     z-index: 1;
   }
+
   50% {
     transform: translateX($loader-transform);
   }

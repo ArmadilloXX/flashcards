@@ -59,17 +59,17 @@ describe "Add Flickr photo to card" do
       start_search
     end
 
-    it "it shows loading indicator" do
-      expect(page.find(".loader").visible?).to eq(true)
-    end
+    # it "it shows loading indicator" do
+    #   expect(page.find(".loader").visible?).to eq(true)
+    # end
 
     context "when search is finished" do
       before do
         wait_for_ajax
       end
-      it "it hides loading indicator when request is finished" do
-        expect(page.find(".loader").visible?).to eq(false)
-      end
+      # it "it hides loading indicator when request is finished" do
+      #   expect(page.find(".loader").visible?).to eq(false)
+      # end
       it "shows results of the search" do
         expect(page).to have_selector(".gallery")
       end
