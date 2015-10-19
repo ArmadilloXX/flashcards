@@ -4,7 +4,6 @@ include FlickrHelper
 
 describe Dashboard::FlickrSearchController do
   let(:user) { create(:user) }
-  
   before do
     stub_flickr_requests
     @controller.send(:auto_login, user)
@@ -12,14 +11,13 @@ describe Dashboard::FlickrSearchController do
 
   describe "#search_photos" do
     it "returns recent_photos when no search params" do
-      xhr :get, :search_flickr, {search: "", format: "js"}
+      xhr :get, :search_flickr, search: "", format: "js"
       expect(assigns(:photos)).to eq(@recent)
     end
 
     it "returns proper photos when user provides search params" do
-      xhr :get, :search_flickr, {search: "coffee", format: "js"}
+      xhr :get, :search_flickr, search: "coffee", format: "js"
       expect(assigns(:photos)).to eq(@search_result)
     end
   end
-
 end

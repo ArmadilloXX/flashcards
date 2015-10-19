@@ -57,10 +57,16 @@ describe "Add Flickr photo to card" do
   describe "user clicks GO button", js: true do
     before do
       start_search
-      # wait_for_ajax
+    end
+
+    it "it shows loading indicator" do
+      expect(page.find(".loader").visible?).to eq(true)
     end
 
     context "when search is finished" do
+      before do
+        wait_for_ajax
+      end
       it "it hides loading indicator when request is finished" do
         expect(page.find(".loader").visible?).to eq(false)
       end
@@ -73,7 +79,7 @@ describe "Add Flickr photo to card" do
   describe "when user selects the photo to attach to the card", js: true do
     before do
       start_search
-      # wait_for_ajax
+      wait_for_ajax
       photo.click
     end
 
@@ -91,7 +97,7 @@ describe "Add Flickr photo to card" do
   describe "when user clicks button for saving new card with photo", js: true do
     before do
       start_search
-      # wait_for_ajax
+      wait_for_ajax
       fill_in "Оригинал", with: "Original"
       fill_in "Перевод", with: "Translation"
       select "Block 1"

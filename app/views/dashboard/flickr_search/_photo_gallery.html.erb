@@ -10,7 +10,7 @@
       <% end %>
     </div> 
   </div>
-  <div class="row photo_grid">
+  <div class="row photo-grid">
     <% @photos.each do |photo| %>
       <div class="col-xs-5 col-md-2 <%= "col-xs-offset-1" if @photos.index(photo) == 0 || @photos.index(photo) == 5 %>">
         <a href="#" class="thumbnail thumbnail_photo" id="thumbnail_<%= @photos.index(photo) %>">
