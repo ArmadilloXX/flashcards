@@ -2,7 +2,7 @@ $(function() {
   $(".panel").hide();
   $(".loader").hide();
 
-  $("#flickr-button").click(function() {
+  $(".flickr-button").click(function() {
     $(this).hide();
     $(".panel").fadeIn();
     $("input[name=search]").focus();

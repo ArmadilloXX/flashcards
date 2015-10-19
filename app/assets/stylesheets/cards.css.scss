@@ -59,16 +59,13 @@ $loader-transform: $loader-size + $loader-gutter * 2;
 }
 
 .thumbnail-photo {
-  -webkit-transform: scale(1);
   transform: scale(1);
-  -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
 }
 
 .thumbnail-photo:hover,
 .thumbnail-photo.selected {
   border: 2px solid $flickr-pink;
-  -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }
 

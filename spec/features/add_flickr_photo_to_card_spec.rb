@@ -12,7 +12,7 @@ describe "Add Flickr photo to card" do
   let(:photo) { page.find("#thumbnail-0") }
 
   let(:start_search) do
-    page.find("#flickr-button").click
+    page.find(".flickr-button").click
     click_button "GO"
   end
 
@@ -46,7 +46,7 @@ describe "Add Flickr photo to card" do
 
   describe "when user clicks Try Flickr button", js: true do
     before do
-      page.find("#flickr-button").click
+      page.find(".flickr-button").click
     end
 
     it "shows search form" do
