@@ -12,7 +12,7 @@ describe "Add Flickr photo to card" do
   let(:photo) { page.find("#thumbnail-0") }
 
   let(:start_search) do
-    page.find("#flickr_button").click
+    page.find("#flickr-button").click
     click_button "GO"
   end
 
@@ -40,17 +40,17 @@ describe "Add Flickr photo to card" do
     end
 
     it "search form is hidden" do
-      expect(page.find(".flickr_search").visible?).to eq(false)
+      expect(page.find(".flickr-search").visible?).to eq(false)
     end
   end
 
   describe "when user clicks Try Flickr button", js: true do
     before do
-      page.find("#flickr_button").click
+      page.find("#flickr-button").click
     end
 
     it "shows search form" do
-      expect(page.find(".flickr_search").visible?).to eq(true)
+      expect(page.find(".flickr-search").visible?).to eq(true)
     end
   end
 
