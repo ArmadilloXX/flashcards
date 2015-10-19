@@ -3,7 +3,7 @@ module LoginHelper
     visit login_path
     fill_in "email", with: email
     fill_in "password", with: password
-    click_button action
+    page.find("input[name=commit]").click
   end
 
   def register(email, password, password_confirmation, action)

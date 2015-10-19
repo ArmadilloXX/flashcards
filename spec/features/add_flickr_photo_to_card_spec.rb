@@ -6,8 +6,8 @@ include FlickrHelper
 include LoginHelper
 include WaitForAjax
 
-describe "Add Flickr photo to card", js: true do
-  let!(:user) { create(:user) }
+describe "Add Flickr photo to card" do
+  let!(:user) { create(:user, locale: "ru") }
   let!(:block) { create(:block, user: user) }
   let(:photo) { page.find("#thumbnail_0") }
 
@@ -16,15 +16,15 @@ describe "Add Flickr photo to card", js: true do
     click_button "GO"
   end
 
-  before do
+  before(:each) do
     login_with("test@test.com", "12345", "Войти")
-    visit new_card_path
     stub_flickr_requests
+    visit new_card_path
   end
 
   describe "when user visits new card page", js: true do
 
-    it "shows Search Flickr button" do
+    it "shows Try Flickr button" do
       expect(page).to have_content("Search Flickr")
     end
 
