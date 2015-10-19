@@ -7,13 +7,13 @@ $loader-gutter: $loader-size/10;
 $loader-transform: $loader-size + $loader-gutter * 2;
 
 .loader {
-  border-radius: $loader-size/2;
+  background: white;
   border: $loader-size * .75 solid transparent;
+  border-radius: $loader-size/2;
   height: $loader-size;
+  margin: 0 auto 30px;
   position: relative;
   width: $loader-size * 2;
-  background: white;
-  margin: 0 auto 30px;
 }
 
 %loader-dot {
@@ -39,33 +39,33 @@ $loader-transform: $loader-size + $loader-gutter * 2;
 }
 
 @keyframes pink {
-    0% {
-      z-index: 1;
-    }
-    50% {
-      transform: translateX($loader-transform);
-    }
+  0% {
+    z-index: 1;
+  }
+  50% {
+    transform: translateX($loader-transform);
+  }
 }
 
 @keyframes blue {
-    50% {
-      transform: translateX(-$loader-transform);
-    }
+  50% {
+    transform: translateX(-$loader-transform);
+  }
 }
 
 .photo-grid {
   margin-top: 15px;
 }
 
-a.thumbnail_photo {
+.thumbnail-photo {
   -webkit-transform: scale(1);
   transform: scale(1);
-  -webkit-transition: .1s ease-in-out;
-  transition: .1s ease-in-out;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
-a.thumbnail_photo:hover,
-a.thumbnail_photo.selected {
+.thumbnail-photo:hover,
+.thumbnail-photo.selected {
   border: 2px solid $flickr-pink;
   -webkit-transform: scale(1.2);
   transform: scale(1.2);

@@ -9,7 +9,7 @@ include WaitForAjax
 describe "Add Flickr photo to card" do
   let!(:user) { create(:user, locale: "ru") }
   let!(:block) { create(:block, user: user) }
-  let(:photo) { page.find("#thumbnail_0") }
+  let(:photo) { page.find("#thumbnail-0") }
 
   let(:start_search) do
     page.find("#flickr_button").click
@@ -88,7 +88,7 @@ describe "Add Flickr photo to card" do
     end
 
     it "fill the hidden remote_image_url field with proper url" do
-      img_url = page.find("#photo_0")["src"]
+      img_url = page.find("#photo-0")["src"]
       remote_url = page.find("#card_remote_image_url").value
       expect(remote_url).to eq(img_url)
     end

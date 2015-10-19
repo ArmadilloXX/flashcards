@@ -9,7 +9,7 @@ class Dashboard::FlickrSearchController < Dashboard::BaseController
              recent_photos
            else
              # Rails.logger.warn("Search term provided")
-             search_with(@search_term)
+             search_with
            end
     # Rails.logger.warn "++++++++++++++++++++++++++++++++"
     # Rails.logger.warn "list should be assigned"
@@ -29,7 +29,7 @@ class Dashboard::FlickrSearchController < Dashboard::BaseController
     Flickrie.get_recent_photos per_page: 10
   end
 
-  def search_with(search_term)
+  def search_with
     Rails.logger.warn("Flickrie.search_photos called")
     Flickrie.search_photos text: @search_term, per_page: 10
   end
@@ -37,7 +37,8 @@ class Dashboard::FlickrSearchController < Dashboard::BaseController
   def url_for_photos(list)
     photos = []
     list.each do |photo|
-      url = "https://farm#{photo.farm}.static.flickr.com/#{photo.server}/#{photo.id}_#{photo.secret}_q.jpg"
+      url = "https://farm#{photo.farm}.static.flickr.com/"\
+      "#{photo.server}/#{photo.id}_#{photo.secret}_q.jpg"
       photos << url
     end
     photos

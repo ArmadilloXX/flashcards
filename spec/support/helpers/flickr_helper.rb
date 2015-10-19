@@ -66,10 +66,14 @@ module FlickrHelper
       "https://farm6.static.flickr.com/5639/22027077879_4214790554_q.jpg"
     ]
 
-    stub_request(:get, "https://api.flickr.com/services/rest?api_key=#{ENV['FLICKR_API_KEY']}&extras=media&format=json&method=flickr.photos.getRecent&nojsoncallback=1&per_page=10").
+    stub_request(:get, "https://api.flickr.com/services/rest?api_key="\
+      "#{ENV['FLICKR_API_KEY']}&extras=media&format=json&"\
+      "method=flickr.photos.getRecent&nojsoncallback=1&per_page=10").
       to_return(status: 200, body: "#{recent_response}", headers: {})
 
-    stub_request(:get, "https://api.flickr.com/services/rest?api_key=#{ENV['FLICKR_API_KEY']}&extras=media&format=json&media=photos&method=flickr.photos.search&nojsoncallback=1&per_page=10&text=coffee").
+    stub_request(:get, "https://api.flickr.com/services/rest?api_key="\
+      "#{ENV['FLICKR_API_KEY']}&extras=media&format=json&media=photos&"\
+      "method=flickr.photos.search&nojsoncallback=1&per_page=10&text=coffee").
       to_return(status: 200, body: "#{search_response}", headers: {})
   end
 end
