@@ -1,7 +1,9 @@
 <div class="gallery">
   <div class="row">
     <div class="col-lg-9 col-lg-offset-3">
-      <% if @search_term.blank? %>
+      <% if @photos.empty? %>
+        <h5>Sorry, we didn't find anything for <strong>"<%= @search_term %>"</strong>. Please, change your search. </h5>
+      <% elsif @search_term.blank? %>
         <h5>We've found some recent photos because you didn't provide any keywords </h5>
       <% else %>
         <h5>We've found some photos for <strong>"<%= @search_term %>"</strong> </h5> 

@@ -23,7 +23,6 @@ describe "Add Flickr photo to card" do
   end
 
   describe "when user visits new card page", js: true do
-
     it "shows Try Flickr button" do
       expect(page).to have_content("Search Flickr")
     end

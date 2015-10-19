@@ -1,5 +1,5 @@
-$FLICKR_PINK: #ff2e92;
-$FLICKR_BLUE: #007bdc;
+$flickr-pink: #ff2e92;
+$flickr-blue: #007bdc;
 
 $loader-size: 30px; 
 
@@ -7,34 +7,34 @@ $loader-gutter: $loader-size/10;
 $loader-transform: $loader-size + $loader-gutter * 2;
 
 .loader {
-  position: relative;
-  width: $loader-size * 2;
-  height: $loader-size;
   border-radius: $loader-size/2;
   border: $loader-size * .75 solid transparent;
+  height: $loader-size;
+  position: relative;
+  width: $loader-size * 2;
   background: white;
   margin: 0 auto 30px;
 }
 
 %loader-dot {
+  animation: pink 1.05s ease-in-out infinite;
+  border-radius: 100%;
+  height: $loader-size;
   position: absolute;
   top: 0;
   width: $loader-size;
-  height: $loader-size;
-  border-radius: 100%;
-  animation: pink 1.05s ease-in-out infinite;
 }
 
 .dot-pink {
   @extend %loader-dot;
-  background: $FLICKR_PINK;
+  background: $flickr-pink;
   left: -$loader-gutter;
 }
 
 .dot-blue {
   @extend %loader-dot;
   animation-name: blue;
-  background: $FLICKR_BLUE;
+  background: $flickr-blue;
   right: -$loader-gutter;
 }
 
@@ -66,7 +66,7 @@ a.thumbnail_photo {
 
 a.thumbnail_photo:hover,
 a.thumbnail_photo.selected {
-  border: 2px solid $FLICKR_PINK;
+  border: 2px solid $flickr-pink;
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }

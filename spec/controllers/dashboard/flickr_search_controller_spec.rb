@@ -10,17 +10,16 @@ describe Dashboard::FlickrSearchController do
     @controller.send(:auto_login, user)
   end
 
-  it "calls the #recent_photos when no search params" do
-    xhr :get, :search_flickr, {search: "", format: "js"}
-    expect(assigns(:photos)).to eq(@recent)
-  end
+  describe "#search_photos" do
+    it "returns recent_photos when no search params" do
+      xhr :get, :search_flickr, {search: "", format: "js"}
+      expect(assigns(:photos)).to eq(@recent)
+    end
 
-  it "calls the #search_with when user provides search params" do
-    xhr :get, :search_flickr, {search: "coffee", format: "js"}
-    expect(assigns(:photos)).to eq(@search_result)
+    it "returns proper photos when user provides search params" do
+      xhr :get, :search_flickr, {search: "coffee", format: "js"}
+      expect(assigns(:photos)).to eq(@search_result)
+    end
   end
-
-  it "responds with js"
-  
 
 end
