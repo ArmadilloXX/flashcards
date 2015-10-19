@@ -7,7 +7,7 @@ $loader-gutter: $loader-size/10;
 $loader-transform: $loader-size + $loader-gutter * 2;
 
 .loader {
-  background: white;
+  background: #ffffff;
   border: $loader-size * 0.75 solid transparent;
   border-radius: $loader-size/2;
   height: $loader-size;
@@ -17,7 +17,7 @@ $loader-transform: $loader-size + $loader-gutter * 2;
 }
 
 %loader-dot {
-  animation: pink 1.05s ease-in-out infinite;
+  animation: pink-animate 1.05s ease-in-out infinite;
   border-radius: 100%;
   height: $loader-size;
   position: absolute;
@@ -33,12 +33,12 @@ $loader-transform: $loader-size + $loader-gutter * 2;
 
 .dot-blue {
   @extend %loader-dot;
-  animation-name: blue;
+  animation-name: blue-animate;
   background: $flickr-blue;
   right: -$loader-gutter;
 }
 
-@keyframes pink {
+@keyframes pink-animate {
   0% {
     z-index: 1;
   }
@@ -48,7 +48,7 @@ $loader-transform: $loader-size + $loader-gutter * 2;
   }
 }
 
-@keyframes blue {
+@keyframes blue-animate {
   50% {
     transform: translateX(-$loader-transform);
   }

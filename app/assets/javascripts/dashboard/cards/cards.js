@@ -22,8 +22,8 @@ $(function() {
         $(".thumbnail").click(function() {
           $(".selected").removeClass("selected");
           $(this).addClass("selected");
-          var image_url = $(this).find("img").attr("src");
-          $("input#card_remote_image_url").val(image_url);
+          var imageUrl = $(this).find("img").attr("src");
+          $("input#card_remote_image_url").val(imageUrl);
         });
       }
     });

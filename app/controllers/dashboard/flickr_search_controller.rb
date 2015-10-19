@@ -46,4 +46,3 @@ module Dashboard
     end
   end
 end
-
