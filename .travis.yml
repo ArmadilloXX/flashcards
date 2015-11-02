@@ -2,15 +2,15 @@ language: ruby
 rvm: 2.2.3
 env:
   global:
-    - RAILS_ENV=test
-    - secure: FLICKR_API_KEY=b6371db92a0a0332eccddbf0897cb935
-    - secure: FLICKR_SHARED_SECRET=d554b9a5afdfa7dc
+  - RAILS_ENV=test
+  - secure: b2HxaGCHSIm9d3D1H6PapjU2XWNHINLMeDdkHWhUINHutqL9WS2KA77DP6qziQhNuTaeCaGvLW4BcO2U5IeD+zAgBF+LxhVtMc/9PQKdUdDJ8oSNrZ8c9P/5iNREC/FEy/962BHJn8hhyVPi4I8DqUoe/zX6FrJ6byLKuOLWeN8rJY7kOZH/FJjDWmpTCb/hpom/ye1+OK/3beGelPTHfJw9bOfh7rQQWJ1uhVfM+WGERZdIJmVlXPinTQTEFpt/FUaei1nmK7m9HkRyHs4DYqtIGTuTTeZ9VpzctiZ/LDB2d+lOqMBpbdl/l3PXtsTBdQgSVJR2jVhYcgaF2dYVQtNPx50e+6Ub/LhS55LkVFCZ5++9N8XQ7tggGXaqWVwlt7VLeg+zUsb7YDs7qn3/uqy22b3qAlLOfmsMmtV+JuRPfvpOgxvQtAWfJOV0+kSVgkO6SNKQrUHD53aj1vsFn5W2udGVk0optFnN7/B9+xwEV+T3LK2WCF5TafByWAxCNDoTwtIDzsaoe9XHGBKF3pxoLrRw2KIXjVixW2CkVmryZWbGP69kRSiDvUs/pzcDk4LDDTBQ0l4SqWPjcjI+6afZSZCBl3H8a0Zt6+KKVlMBc1Bak+v1PhG64mLIUIp+Pz+yRMMeRbTCPRkKFXpeIJuksjnpTLpBZuWY/3HlSZM=
+  - secure: EAbJdkGrC/rxw9/EiL+NhK9vAYoiJSRTiRhzcnw7Uf+/cwqGmfOxNbTbSZq/210tJJWHvsqx7kt62Us3oIWMcs6e/SiA5ib5GhDd8Z9mx81yOz5Qn68c6ltuxHJ28UBUKaZqQcLtSfe0WNL//QnQpx42rYFLZH9XYfYblHHNvVdkfB9JfBYeb/R9rlnhFp0qZWmNcYJIbwVc5Dojec/IhOfT05AuGsPlZ1oTjTpUbD6C3d8W4i5260XrEDwLgy/3NgNLQMLOW2+JMtGUdhk7egy0zig2TT4XvtSh5KY+KmtXz/91PIL0DgpHwBp7L8PKLnugDkO+qFn3T2XyI7+9ACw4AkK3+CZ64lytTxPGm0Jt6Ho72/f2KyOrl2NcY/xyYHW3UwhNUSnChVstwQHhcphPAHEpEC8RGtYxx6NyuTYpOhkZFKqz02NxyE6M/otFUyQXeNG7Qd9RuNZLoHIIUF3Q/KDOatjPOLijToLtWhWZwr61597854w0p8F92UJNGATr7nE9619pGteWfQoP2rwj+QXE82GXb1Iq58WM9ksnb/+BO63ZuDsi3nu+5f2oSYhDB+FQW03tQ74MBcQ/2j6toQpr9QJ1HDxwyjPHql/0cRfNpfi8EbnILumJs2Blnz1h1yn9q1faNz1oVMJHHms8csZ4MCU8P/DLrSjfq68=
 script:
-  - bundle exec rspec
+- bundle exec rspec
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - bundle exec rake db:migrate
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- bundle exec rake db:migrate
 install: bundle install --jobs=3 --retry=3
