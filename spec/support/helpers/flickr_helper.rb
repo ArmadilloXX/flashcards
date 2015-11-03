@@ -57,22 +57,22 @@ module FlickrHelper
       ] }, "stat": "ok" }.to_json
 
     @recent = [
-      "https://farm1.static.flickr.com/600/22026223630_ed93e74060_q.jpg",
-      "https://farm6.static.flickr.com/5801/22224646391_edf901d271_q.jpg"
+      "https://farm1.staticflickr.com/600/22026223630_ed93e74060_q.jpg",
+      "https://farm6.staticflickr.com/5801/22224646391_edf901d271_q.jpg"
     ]
 
     @search_result = [
-      "https://farm1.static.flickr.com/612/22026530338_2a5a113e0e_q.jpg",
-      "https://farm6.static.flickr.com/5639/22027077879_4214790554_q.jpg"
+      "https://farm1.staticflickr.com/612/22026530338_2a5a113e0e_q.jpg",
+      "https://farm6.staticflickr.com/5639/22027077879_4214790554_q.jpg"
     ]
 
     stub_request(:get, "https://api.flickr.com/services/rest?api_key="\
-      "#{ENV['FLICKR_API_KEY']}&extras=media&format=json&"\
+      "#{ENV['FLICKR_API_KEY']}&extras=&format=json&"\
       "method=flickr.photos.getRecent&nojsoncallback=1&per_page=10").
       to_return(status: 200, body: "#{recent_response}", headers: {})
 
     stub_request(:get, "https://api.flickr.com/services/rest?api_key="\
-      "#{ENV['FLICKR_API_KEY']}&extras=media&format=json&media=photos&"\
+      "#{ENV['FLICKR_API_KEY']}&extras=&format=json&"\
       "method=flickr.photos.search&nojsoncallback=1&per_page=10&text=coffee").
       to_return(status: 200, body: "#{search_response}", headers: {})
   end

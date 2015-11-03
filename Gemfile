@@ -15,7 +15,8 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
-gem 'flickrie', '~> 1.6.1'
+# gem 'flickrie', '~> 1.6.1'
+gem "flickr-objects"
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'

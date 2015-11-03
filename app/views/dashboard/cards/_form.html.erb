@@ -41,7 +41,7 @@
             <div class="input-group">
               <%= text_field_tag "search", nil, placeholder: "What do you want to find?", class: "form-control" %>
               <span class="input-group-btn">
-                <input type="button" name="поле" value="GO" id="search-button" class="btn btn-default" />
+                <input type="button" name="поле" value="GO" id="search-button" class="btn btn-default" data-url="<%= search_path %>" />
               </span>
             </div>
           </div>

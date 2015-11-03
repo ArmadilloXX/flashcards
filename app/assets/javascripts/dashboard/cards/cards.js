@@ -13,7 +13,7 @@ $(function() {
     $(".gallery").remove();
     var value = $("input[name=search]").val();
     $.ajax({
-      url: "/flickr_search/search_flickr",
+      url: $(this).data('url'),
       data: {
         search: value
       },
