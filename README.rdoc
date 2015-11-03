@@ -5,29 +5,7 @@ alt="Build Status" />}[https://travis-ci.org/ArmadilloXX/flashcards]
 
 {<img src="https://codeclimate.com/github/ArmadilloXX/flashcards/badges/gpa.svg" />}[https://codeclimate.com/github/ArmadilloXX/flashcards]
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Please, don't forget to set the following environment variables to get the full functionality for adding photos to cards:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+FLICKR_API_KEY=your_api_key_here
+FLICKR_SHARED_SECRET=your_shared_secret_here

@@ -19,8 +19,10 @@ Rails.application.routes.draw do
     resources :users, only: :destroy
     post "logout" => "user_sessions#destroy", :as => :logout
 
+    get "/flickr_search/search",
+      to: "flickr_search#search",
+      as: :search
     resources :cards
-
     resources :blocks do
       member do
         put "set_as_current"

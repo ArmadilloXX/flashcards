@@ -4,7 +4,10 @@ echo 'Installing packages dependencies'
 sudo apt-get -y update
 sudo apt-get install -y build-essential ruby-dev git zlib1g zlib1g-dev \
                         libyaml-dev libreadline6 libreadline6-dev \
-                        libpq-dev postgresql nodejs  
+                        libpq-dev postgresql nodejs g++ flex bison \
+                        gperf ruby perl libsqlite3-dev libfontconfig1-dev \
+                        libicu-dev libfreetype6 libssl-dev libpng-dev \
+                        libjpeg-dev python libx11-dev libxext-dev
 sudo apt-get clean
 
 if ! [ -d ~/.rbenv ]; then

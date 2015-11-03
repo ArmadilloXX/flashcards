@@ -1,29 +1,62 @@
 <%= simple_form_for card do |f| %>
   <div class="form-group">
-    <%= f.input :original_text,  as: :text, label: 'Оригинал',
-                input_html: { class: 'form-control', required: true,
+    <%= f.input :original_text,  as: :text, label: "Оригинал",
+                input_html: { class: "form-control", required: true,
                               autofocus: true } %>
   </div>
 
   <div class="form-group">
-    <%= f.input :translated_text,  as: :text, label: 'Перевод',
-                input_html: { class: 'form-control', required: true } %>
+    <%= f.input :translated_text,  as: :text, label: "Перевод",
+                input_html: { class: "form-control", required: true } %>
   </div>
 
   <div class="form-group">
-    <%= f.input :image, as: :file, label: 'Изображение' %>
+    <%= f.input :block_id, collection: current_user.blocks.all.order("title"),
+                      prompt: "Выберите колоду", label: "Колоды",
+                      input_html: { class: "form-control", required: true } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :image, as: :file, label: "Изображение" %>
     <%= f.input :image_cache, as: :hidden %>
   </div>
 
+  <div class="form-group remote_url hidden">
+    <%= f.text_field :remote_image_url %>
+  </div>
+
   <div class="form-group">
-    <%= f.input :block_id, collection: current_user.blocks.all.order('title'),
-                      prompt: 'Выберите колоду', label: 'Колоды',
-                      input_html: { class: 'form-control', required: true } %>
+    <span>Nothing to choose from?</span>
+    <span class="flickr-button btn btn-default">Try Flickr</span>
+  </div>
+
+  <div class="panel panel-default", id="panel">
+    <div class="panel-heading">
+      <h3 class="panel-title">Search Flickr photos</h3>
+    </div>
+    <div class="panel-body">
+      <div class="flickr-search">
+        <div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            <div class="input-group">
+              <%= text_field_tag "search", nil, placeholder: "What do you want to find?", class: "form-control" %>
+              <span class="input-group-btn">
+                <input type="button" name="поле" value="GO" id="search-button" class="btn btn-default" data-url="<%= search_path %>" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="loader">
+        <i class="dot-pink"></i>
+        <i class="dot-blue"></i>
+      </div> 
+    </div>
   </div>
 
   <% if card.image? %>
     <div class="form-group">
-      <%= f.input :remove_image, as: :boolean, label: 'Удалить изображение' %>
+      <%= f.input :remove_image, as: :boolean, label: "Удалить изображение" %>
       <div class="row">
         <div class="col-xs-6 col-md-4 card_image">
           <p class="thumbnail">
@@ -34,5 +67,5 @@
     </div>
   <% end %>
 
-  <%= f.button :submit, 'Сохранить', class: 'btn btn-default' %>
+  <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
 <% end %>
