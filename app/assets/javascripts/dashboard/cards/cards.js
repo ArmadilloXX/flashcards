@@ -13,7 +13,7 @@ $(function() {
     $(".gallery").remove();
     var value = $("input[name=search]").val();
     $.ajax({
-      url: $(this).data('url'),
+      url: $(this).data("url"),
       data: {
         search: value
       },
