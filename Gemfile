@@ -6,6 +6,7 @@ gem 'rails', '4.2.4'
 gem 'responders', '~> 2.0'
 gem 'pg'
 gem 'unicorn'
+gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git', branch: 'sixth_task'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
@@ -15,7 +16,6 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
-# gem 'flickrie', '~> 1.6.1'
 gem "flickr-objects"
 
 gem 'jquery-rails'
