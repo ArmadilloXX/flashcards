@@ -21,4 +21,5 @@ config/database.yml
 config/secrets.yml
 config/application.yml
 public/uploads/
+public/api/
 /.vagrant
