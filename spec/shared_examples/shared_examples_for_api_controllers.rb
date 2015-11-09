@@ -4,11 +4,11 @@ include ApiHelper
 module ApiFlashcards
   RSpec.shared_examples "http basic authentification" do |verb, method|
     routes { ApiFlashcards::Engine.routes }
-    let!(:user) do
-      User.create(email: "test@test.com",
-                  password: "123456",
-                  password_confirmation: "123456")
-    end
+    # let!(:user) do
+    #   User.create(email: "test@test.com",
+    #               password: "123456",
+    #               password_confirmation: "123456")
+    # end
     let(:not_authorized) { {message: "Not authorized"}.to_json }
 
     describe "#{verb.upcase}##{method}" do
@@ -38,17 +38,17 @@ module ApiFlashcards
         it_behaves_like "not authorized"
       end
 
-      context "with correct credentials" do
-        before do
-          send(verb,
-               method.to_sym,
-               request.headers["Authorization"] = encode("test@test.com",
-                                                         "123456"))
-        end
-        it "returns 200 status code" do
-          expect(response.status).to eq(200)
-        end
-      end
+      # context "with correct credentials" do
+      #   before do
+      #     send(verb,
+      #          method.to_sym,
+      #          request.headers["Authorization"] = encode("test@test.com",
+      #                                                    "123456"))
+      #   end
+      #   it "returns 200 status code" do
+      #     expect(response.status).to eq(200)
+      #   end
+      # end
     end
   end
 end

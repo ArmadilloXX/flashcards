@@ -6,7 +6,9 @@ gem 'rails', '4.2.4'
 gem 'responders', '~> 2.0'
 gem 'pg'
 gem 'unicorn'
-gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git', branch: 'sixth_task'
+# gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git', branch: 'sixth_task'
+gem 'api_flashcards', path: '/Users/Ilya/Coding/RoR/mkdev/api_flashcards'
+gem 'active_model_serializers'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
@@ -46,12 +48,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
-  
 end
 
 group :test do
   gem 'shoulda-matchers'
   gem 'poltergeist', '~> 1.7.0'
-  # gem 'selenium-webdriver'
   gem 'webmock'
 end
