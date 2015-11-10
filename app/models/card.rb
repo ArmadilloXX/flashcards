@@ -1,6 +1,41 @@
 require "super_memo"
 
 class Card < ActiveRecord::Base
+
+  include Swagger::Blocks
+
+    swagger_schema :Card do
+      key :required, [:id, :original_text, :translated_text, :review_date]
+      property :id do
+        key :type, :integer
+        key :format, :int64
+      end
+      property :original_text do
+        key :type, :string
+      end
+      property :translated_text do
+        key :type, :string
+      end
+      property :review_date do
+        key :type, :datetime
+      end
+    end
+
+    # swagger_schema :PetInput do
+    #   allOf do
+    #     schema do
+    #       key :'$ref', :Pet
+    #     end
+    #     schema do
+    #       key :required, [:name]
+    #       property :id do
+    #         key :type, :integer
+    #         key :format, :int64
+    #       end
+    #     end
+    #   end
+    # end
+
   belongs_to :user
   belongs_to :block
   before_validation :set_review_date_as_now, on: :create
