@@ -20,11 +20,9 @@ PATH
   remote: /Users/Ilya/Coding/RoR/mkdev/api_flashcards
   specs:
     api_flashcards (0.0.1)
+      active_model_serializers
       rails (~> 4.2.4)
       rails-api
-      responders
-      swagger-docs
-      swagger-ui_rails (= 2.1.0.pre.alpha.7.1)
 
 GEM
   remote: https://rubygems.org/

@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   filter :locale
   mount ApiFlashcards::Engine, at: "/api"
-
   root "main#welcome"
 
   scope module: "home" do

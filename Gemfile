@@ -9,9 +9,6 @@ gem 'unicorn'
 # gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git', branch: 'sixth_task'
 gem 'api_flashcards', path: '/Users/Ilya/Coding/RoR/mkdev/api_flashcards'
 gem 'active_model_serializers'
-gem 'swagger-docs'
-gem 'swagger-ui_rails', '2.1.0-alpha.7.1'
-
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
