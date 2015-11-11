@@ -10,11 +10,11 @@ module ApiFlashcards
       end
       tag do
         key :name, 'Cards'
-        key :description, 'Cards operations'
+        # key :description, 'Cards operations'
       end
       tag do
-        key :name, 'Trainer'
-        key :description, 'Training operations'
+        key :name, 'Review'
+        # key :description, 'Reviewing operations'
       end
       key :host, 'localhost:3000'
       key :basePath, '/api/v1'
@@ -23,6 +23,7 @@ module ApiFlashcards
 
     SWAGGERED_CLASSES = [
       Api::V1::CardsController,
+      Api::V1::ReviewController,
       Card,
       ErrorModel,
       self,

@@ -40,6 +40,25 @@ class Card < ActiveRecord::Base
         end
       end
     end
+    
+    swagger_schema :CardReview do
+      key :id, :Card
+      key :required, [:id, :original_text]
+      property :id do
+        key :type, :integer
+        key :format, :int64
+      end
+      property :original_text do
+        key :type, :string
+      end
+    end
+
+    swagger_schema :CardReviewResponse do
+      key :id, :Card
+      property :card do
+        key :'$ref', :CardReview
+      end
+    end
 
   belongs_to :user
   belongs_to :block
