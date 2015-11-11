@@ -40,7 +40,13 @@ class Card < ActiveRecord::Base
         end
       end
     end
-    
+
+    swagger_schema :CardReviewResult do
+      property :result do
+        key :type, :string
+      end
+    end
+
     swagger_schema :CardReview do
       key :id, :Card
       key :required, [:id, :original_text]

@@ -1,4 +1,4 @@
-require "swagger/blocks"
+# require "swagger/blocks"
 module ApiFlashcards
   include Swagger::Blocks
     swagger_root do
