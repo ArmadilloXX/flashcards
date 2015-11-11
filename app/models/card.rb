@@ -1,11 +1,10 @@
 require "super_memo"
 
 class Card < ActiveRecord::Base
-
   include Swagger::Blocks
-
     swagger_schema :Card do
-      key :required, [:id, :original_text, :translated_text, :review_date]
+      key :id, :Card
+      key :required, [:id, :original_text, :translated_text, :review_date, :block_id]
       property :id do
         key :type, :integer
         key :format, :int64
@@ -16,25 +15,31 @@ class Card < ActiveRecord::Base
       property :translated_text do
         key :type, :string
       end
+      property :block_id do
+        key :type, :integer
+      end
       property :review_date do
-        key :type, :datetime
+        key :type, :string
+        key :format, "date-time"
       end
     end
 
-    # swagger_schema :PetInput do
-    #   allOf do
-    #     schema do
-    #       key :'$ref', :Pet
-    #     end
-    #     schema do
-    #       key :required, [:name]
-    #       property :id do
-    #         key :type, :integer
-    #         key :format, :int64
-    #       end
-    #     end
-    #   end
-    # end
+    swagger_schema :CardResponse do
+      key :id, :Card
+      property :card do
+        key :'$ref', :Card
+      end
+    end
+
+    swagger_schema :CardsResponse do
+      key :id, :Card
+      property :cards do
+        key :type, :array
+        items do
+          key :'$ref', :Card
+        end
+      end
+    end
 
   belongs_to :user
   belongs_to :block
