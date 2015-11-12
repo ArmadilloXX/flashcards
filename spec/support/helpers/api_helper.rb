@@ -3,4 +3,8 @@ module ApiHelper
     ActionController::HttpAuthentication::Basic.
       encode_credentials(email, password)
   end
+
+  def json_response
+    JSON.parse(response.body)
+  end
 end
