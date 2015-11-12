@@ -1,4 +1,3 @@
-# require "swagger/blocks"
 module ApiFlashcards
   include Swagger::Blocks
     swagger_root do
@@ -10,11 +9,9 @@ module ApiFlashcards
       end
       tag do
         key :name, 'Cards'
-        # key :description, 'Cards operations'
       end
       tag do
         key :name, 'Review'
-        # key :description, 'Reviewing operations'
       end
       key :host, 'localhost:3000'
       key :basePath, '/api/v1'
