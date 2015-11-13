@@ -97,6 +97,13 @@ module ApiFlashcards
           it "contains 'card' key in response" do
             expect(json_response.has_key?("card")).to be(true)
           end
+
+          %w(id original_text translated_text review_date block_id).
+            each do |field|
+              it "contains \'#{field}\' key inside of the \'card\'" do
+                expect(json_response["card"].has_key?(field)).to eq(true)
+              end
+            end
         end
 
         context "with incorrect card parameters" do
