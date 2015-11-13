@@ -69,6 +69,9 @@ module ApiFlashcards
           it "responds with 200 status code" do
             expect(response.status).to eq(200)
           end
+          it "contains \'result\' key in response" do
+            expect(json_response.has_key?("result")).to eq(true)
+          end
         end
 
         context "when user provides correct translation" do
@@ -79,7 +82,9 @@ module ApiFlashcards
             }
           end
           it_behaves_like "common response"
-          it "responds with successful message"
+          it "responds with successful message" do
+            expect(json_response["result"]).to eq("Your answer is correct")
+          end
         end
 
         context "when user made a typo" do
@@ -90,7 +95,10 @@ module ApiFlashcards
             }
           end
           it_behaves_like "common response"
-          it "responds with typo message"
+          it "responds with typo message" do
+            expect(json_response["result"]).to eq("You\'ve made a typo."\
+                           "Correct answer is #{card.translated_text}")
+          end
         end
 
         context "when user provides incorrect translation" do
@@ -101,7 +109,9 @@ module ApiFlashcards
             }
           end
           it_behaves_like "common response"
-          it "responds with failure message"
+          it "responds with failure message" do
+            expect(json_response["result"]).to eq("Your answer is incorrect")
+          end
         end
 
       end
