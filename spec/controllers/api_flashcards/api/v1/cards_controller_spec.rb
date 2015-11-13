@@ -36,7 +36,7 @@ module ApiFlashcards
         end
 
         it "contains 'cards' key in response" do
-          expect(json_response.has_key?("cards")).to be(true)
+          expect(json_response.key?("cards")).to be(true)
         end
 
         it "returns the array of all user\'s cards" do
@@ -46,7 +46,7 @@ module ApiFlashcards
         %w(id original_text translated_text review_date block_id).
           each do |field|
             it "contains \'#{field}\' key inside each of the card in array" do
-              expect(json_response["cards"].last.has_key?(field)).to eq(true)
+              expect(json_response["cards"].last.key?(field)).to eq(true)
             end
           end
       end
@@ -61,7 +61,7 @@ module ApiFlashcards
       context "with incorrect credentials" do
         before do
           post :create,
-              request.headers["Authorization"] = encode("some@test.com",
+               request.headers["Authorization"] = encode("some@test.com",
                                                         "nopass")
         end
         it_behaves_like "not authorized"
@@ -95,50 +95,46 @@ module ApiFlashcards
             expect(user.cards.count).to eq(2)
           end
           it "contains 'card' key in response" do
-            expect(json_response.has_key?("card")).to be(true)
+            expect(json_response.key?("card")).to be(true)
           end
 
           %w(id original_text translated_text review_date block_id).
             each do |field|
               it "contains \'#{field}\' key inside of the \'card\'" do
-                expect(json_response["card"].has_key?(field)).to eq(true)
+                expect(json_response["card"].key?(field)).to eq(true)
               end
             end
         end
 
         context "with incorrect card parameters" do
           it_behaves_like "unprocessable entity",
-                          { card:
+                          card:
                             {
                               original_text: "Original2",
-                              translated_text:"Original2",
+                              translated_text: "Original2",
                               block_id: 1
                             }
-                          }
           it_behaves_like "unprocessable entity",
-                          { card:
+                          card:
                             {
                               original_text: "",
-                              translated_text:"Original2",
+                              translated_text: "Original2",
                               block_id: 1
                             }
-                          }
           it_behaves_like "unprocessable entity",
-                          { card:
+                          card:
                             {
                               original_text: "Original2",
-                              translated_text:"",
+                              translated_text: "",
                               block_id: 1
                             }
-                          }
           it_behaves_like "unprocessable entity",
-                          { card:
+                          card:
                             {
                               original_text: "Original2",
-                              translated_text:"Translation2",
+                              translated_text: "Translation2",
                               block_id: nil
                             }
-                          }
         end
       end
     end
