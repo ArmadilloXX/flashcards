@@ -40,6 +40,16 @@ module ApiFlashcards
         it "responds with only one card" do
           expect(json_response["card_review"]).not_to be_kind_of Array
         end
+
+        %w(id original_text).each do |field|
+          it "contains \'#{field}\' key inside \'card_review\'" do
+            expect(json_response["card_review"].has_key?(field)).to eq(true)
+          end
+        end
+
+        it "does NOT contain \'translated_text\' key inside \'card_review\'" do
+          expect(json_response["card_review"].has_key?("translated_text")).to eq(false)
+        end
       end
     end
 

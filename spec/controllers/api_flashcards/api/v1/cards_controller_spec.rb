@@ -42,6 +42,13 @@ module ApiFlashcards
         it "returns the array of all user\'s cards" do
           expect(json_response["cards"]).to be_kind_of Array
         end
+
+        %w(id original_text translated_text review_date block_id).
+          each do |field|
+            it "contains \'#{field}\' key inside each of the card in array" do
+              expect(json_response["cards"].last.has_key?(field)).to eq(true)
+            end
+          end
       end
     end
 
