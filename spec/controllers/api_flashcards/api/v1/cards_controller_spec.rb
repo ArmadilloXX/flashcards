@@ -82,7 +82,7 @@ module ApiFlashcards
             { card:
               {
                 original_text: "Original2",
-                translated_text:"Translation2",
+                translated_text: "Translation2",
                 block_id: block.id
               }
             }

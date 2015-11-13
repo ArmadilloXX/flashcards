@@ -338,7 +338,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers
   activeadmin!
   api_flashcards!
   capybara

@@ -35,7 +35,7 @@ module ApiFlashcards
           expect(response.status).to eq(200)
         end
         it "responds with \'card_review\' key in response" do
-          expect(json_response.has_key?("card_review")).to eq(true)
+          expect(json_response.key?("card_review")).to eq(true)
         end
         it "responds with only one card" do
           expect(json_response["card_review"]).not_to be_kind_of Array
