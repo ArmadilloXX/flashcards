@@ -19,7 +19,7 @@ module ApiFlashcards
               request.headers["Authorization"] = encode("some@test.com",
                                                         "nopass")
         end
-        it_behaves_like "not authorized"       
+        it_behaves_like "not authorized"
       end
 
       context "with correct credentials" do
@@ -43,12 +43,13 @@ module ApiFlashcards
 
         %w(id original_text).each do |field|
           it "contains \'#{field}\' key inside \'card_review\'" do
-            expect(json_response["card_review"].has_key?(field)).to eq(true)
+            expect(json_response["card_review"].key?(field)).to eq(true)
           end
         end
 
         it "does NOT contain \'translated_text\' key inside \'card_review\'" do
-          expect(json_response["card_review"].has_key?("translated_text")).to eq(false)
+          expect(json_response["card_review"].
+            key?("translated_text")).to eq(false)
         end
       end
     end
@@ -65,7 +66,7 @@ module ApiFlashcards
               request.headers["Authorization"] = encode("some@test.com",
                                                         "nopass")
         end
-        it_behaves_like "not authorized"      
+        it_behaves_like "not authorized"
       end
 
       context "with correct credentials" do
@@ -80,7 +81,7 @@ module ApiFlashcards
             expect(response.status).to eq(200)
           end
           it "contains \'result\' key in response" do
-            expect(json_response.has_key?("result")).to eq(true)
+            expect(json_response.key?("result")).to eq(true)
           end
         end
 
@@ -123,7 +124,6 @@ module ApiFlashcards
             expect(json_response["result"]).to eq("Your answer is incorrect")
           end
         end
-
       end
     end
   end

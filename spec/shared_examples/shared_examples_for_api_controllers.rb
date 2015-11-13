@@ -29,12 +29,12 @@ module ApiFlashcards
            request.headers["Authorization"] = encode("test@test.com",
                                                      "12345"),
            params
-           )
+          )
     end
   end
 
-  RSpec.shared_examples "not authorized" do 
-    let(:not_authorized) { {message: "Not authorized"}.to_json }
+  RSpec.shared_examples "not authorized" do
+    let(:not_authorized) { { message: "Not authorized" }.to_json }
 
     it "returns 401 status code" do
       expect(response.status).to eq(401)
@@ -50,12 +50,11 @@ module ApiFlashcards
     describe "original_text=\'#{card_params[:card][:original_text]}\', "\
              "translated_text = \'#{card_params[:card][:translated_text]}\', "\
              "block_id = #{card_params[:card][:block_id]}" do
-
       it "returns 422 status code" do
         expect(response.status).to eq(422)
       end
       it "contains 'errors' key in response" do
-        expect(json_response.has_key?("errors")).to eq(true)
+        expect(json_response.key?("errors")).to eq(true)
       end
       it "does not create the card" do
         expect(user.cards.count).to eq(1)
