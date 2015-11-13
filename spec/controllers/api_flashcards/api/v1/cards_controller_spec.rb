@@ -62,7 +62,7 @@ module ApiFlashcards
         before do
           post :create,
                request.headers["Authorization"] = encode("some@test.com",
-                                                        "nopass")
+                                                         "nopass")
         end
         it_behaves_like "not authorized"
       end
