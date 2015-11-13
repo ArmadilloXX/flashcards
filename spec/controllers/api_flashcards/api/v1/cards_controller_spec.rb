@@ -6,30 +6,31 @@ include ApiHelper
 module ApiFlashcards
   RSpec.describe Api::V1::CardsController, type: :controller do
     routes { ApiFlashcards::Engine.routes }
-    it_behaves_like "http basic authentification", "get", "index"
-    it_behaves_like "http basic authentification", "post", "create"
 
-    context "with correct credentials" do
-      let!(:user) do
-        User.create(email: "test@test.com",
-                    password: "12345",
-                    password_confirmation: "12345")
-      end
-      let!(:block) { Block.create(title: "Test Block", user_id: user.id) }
-      let!(:card) do
-        Card.create(original_text: "Original",
-                    translated_text: "Translation",
-                    block_id: block.id,
-                    user_id: user.id)
+    describe "GET#index" do
+      context "without credentials" do
+        before { get :index }
+        it_behaves_like "not authorized"
       end
 
-      describe "GET#index" do
+      context "with incorrect credentials" do
         before do
           get :index,
-              request.headers["Authorization"] = encode("test@test.com",
-                                                         "12345")
+              request.headers["Authorization"] = encode("some@test.com",
+                                                        "nopass")
         end
+        it_behaves_like "not authorized"
+      end
 
+      context "with correct credentials" do
+        include_context "with correct credentials" do
+          let(:endpoint) do
+            {
+              verb: "get",
+              method: "index"
+            }
+          end
+        end
         it "returns 200 status code" do
           expect(response.status).to eq(200)
         end
@@ -42,17 +43,44 @@ module ApiFlashcards
           expect(json_response["cards"]).to be_kind_of Array
         end
       end
+    end
 
-      describe "POST#create" do
-        context "with correct card parameters" do
-          before do
-            post :create,
-                 request.headers["Authorization"] = encode("test@test.com",
-                                                            "12345"),
-                 {card: {original_text: "Original2",
-                         translated_text:"Translation2",
-                         block_id: block.id }}
+    describe "POST#create" do
+      context "without credentials" do
+        before { post :create }
+        it_behaves_like "not authorized"
+      end
+
+      context "with incorrect credentials" do
+        before do
+          post :create,
+              request.headers["Authorization"] = encode("some@test.com",
+                                                        "nopass")
+        end
+        it_behaves_like "not authorized"
+      end
+
+      context "with correct credentials" do
+        include_context "with correct credentials" do
+          let(:endpoint) do
+            {
+              verb: "post",
+              method: "create"
+            }
           end
+        end
+
+        context "with correct card parameters" do
+          let(:params) do
+            { card:
+              {
+                original_text: "Original2",
+                translated_text:"Translation2",
+                block_id: block.id
+              }
+            }
+          end
+
           it "returns 201 status code" do
             expect(response.status).to eq(201)
           end
@@ -65,29 +93,37 @@ module ApiFlashcards
         end
 
         context "with incorrect card parameters" do
-          it_behaves_like "unprocessable entity response",
-                          {
-                            original_text: "Original2",
-                            translated_text: "Original2",
-                            block_id: 1
+          it_behaves_like "unprocessable entity",
+                          { card:
+                            {
+                              original_text: "Original2",
+                              translated_text:"Original2",
+                              block_id: 1
+                            }
                           }
-          it_behaves_like "unprocessable entity response",
-                          {
-                            original_text: "",
-                            translated_text: "Original2",
-                            block_id: 1
+          it_behaves_like "unprocessable entity",
+                          { card:
+                            {
+                              original_text: "",
+                              translated_text:"Original2",
+                              block_id: 1
+                            }
                           }
-          it_behaves_like "unprocessable entity response",
-                          {
-                            original_text: "Original2",
-                            translated_text: "",
-                            block_id: 1
+          it_behaves_like "unprocessable entity",
+                          { card:
+                            {
+                              original_text: "Original2",
+                              translated_text:"",
+                              block_id: 1
+                            }
                           }
-          it_behaves_like "unprocessable entity response",
-                          {
-                            original_text: "Original2",
-                            translated_text: "Translation2",
-                            block_id: nil
+          it_behaves_like "unprocessable entity",
+                          { card:
+                            {
+                              original_text: "Original2",
+                              translated_text:"Translation2",
+                              block_id: nil
+                            }
                           }
         end
       end
