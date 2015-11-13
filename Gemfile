@@ -11,6 +11,7 @@ gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git', br
 gem 'active_model_serializers'
 gem 'swagger-blocks'
 
+
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
 gem 'pundit'
