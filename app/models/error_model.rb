@@ -1,6 +1,5 @@
 class ErrorModel
   include Swagger::Blocks
-
   swagger_schema :Unprocessable do
     key :required, [:message, :errors]
     property :message do

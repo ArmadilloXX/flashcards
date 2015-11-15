@@ -19,12 +19,12 @@ module ApiFlashcards
   end
 
   SWAGGERED_CLASSES = [
-                        Api::V1::CardsController,
-                        Api::V1::ReviewController,
-                        Card,
-                        ErrorModel,
-                        self,
-                      ].freeze
+    Api::V1::CardsController,
+    Api::V1::ReviewController,
+    Card,
+    ErrorModel,
+    self,
+  ].freeze
 
   # Prepares and writes json for Swagger-UI(swagger_engine gem)
   swagger_data = Swagger::Blocks.build_root_json(SWAGGERED_CLASSES)
