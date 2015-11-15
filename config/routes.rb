@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   filter :locale
   mount ApiFlashcards::Engine, at: "/api"
-  get "/apidocs", to: 'api/swagger#index'
-  get '/api/docs' => redirect('/swagger/index.html?url=/api/v1/')
+  mount SwaggerEngine::Engine, at: "/api/v1/docs"
   
   root "main#welcome"
 

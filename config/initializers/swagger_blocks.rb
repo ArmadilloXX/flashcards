@@ -25,4 +25,10 @@ module ApiFlashcards
       ErrorModel,
       self,
     ].freeze
+
+    #Prepares and writes json for Swagger-UI(swagger_engine gem)
+    swagger_data = Swagger::Blocks.build_root_json(SWAGGERED_CLASSES)
+    File.open(Rails.public_path.to_s + "/api/v1/docs.json", 'w') do
+     |file| file.write(swagger_data.to_json)
+    end
 end

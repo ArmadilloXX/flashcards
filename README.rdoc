@@ -12,4 +12,4 @@ Please, don't forget to set the following environment variables to get the full 
 
 API documentation is available at:
 
-* http://your_host_name:your_port/api/docs
+* http://your_host_name:your_port/api/v1/docs
