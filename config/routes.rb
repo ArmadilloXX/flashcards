@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   filter :locale
   mount ApiFlashcards::Engine, at: "/api"
   mount SwaggerEngine::Engine, at: "/api/v1/docs"
-  
   root "main#welcome"
 
   scope module: "home" do
