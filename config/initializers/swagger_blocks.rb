@@ -21,7 +21,7 @@ module ApiFlashcards
   SWAGGERED_CLASSES = [
     Api::V1::CardsController,
     Api::V1::ReviewController,
-    Card,
+    CardModel,
     ErrorModel,
     self,
   ].freeze
