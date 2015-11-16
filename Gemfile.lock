@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/ArmadilloXX/api_flashcards.git
-  revision: 1f1f26a178be2d01b087da3dac74253249035bf5
+  revision: 1d98b48a848857153ec7adbec30197a80c27a42a
   branch: sixth_task
   specs:
     api_flashcards (0.0.1)
