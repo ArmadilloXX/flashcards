@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/ArmadilloXX/api_flashcards.git
-  revision: 1d98b48a848857153ec7adbec30197a80c27a42a
+  revision: 8f5aef455ac35e0914bce2f410d9812ac559b436
   branch: sixth_task
   specs:
     api_flashcards (0.0.1)
@@ -191,7 +191,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (3.0.1)
     newrelic_rpm (3.14.0.305)
-    nokogiri (1.6.6.2)
+    nokogiri (1.6.6.3)
       mini_portile (~> 0.6.0)
     oauth (0.4.7)
     oauth2 (1.0.0)
