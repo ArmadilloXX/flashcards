@@ -35,11 +35,11 @@ class Dashboard::CardsController < Dashboard::BaseController
   end
 
   def new_batch
-
   end
 
   def create_new_batch
-
+    flash[:notice] = "Batch created successfully"
+    redirect_to cards_path
   end
 
   private
