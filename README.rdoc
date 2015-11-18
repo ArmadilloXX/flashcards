@@ -7,5 +7,9 @@ alt="Build Status" />}[https://travis-ci.org/ArmadilloXX/flashcards]
 
 Please, don't forget to set the following environment variables to get the full functionality for adding photos to cards:
 
-FLICKR_API_KEY=your_api_key_here
-FLICKR_SHARED_SECRET=your_shared_secret_here
+* FLICKR_API_KEY=your_api_key_here
+* FLICKR_SHARED_SECRET=your_shared_secret_here
+
+API documentation is available at:
+
+* http://your_host_name:your_port/api/v1/docs

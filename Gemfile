@@ -7,6 +7,8 @@ gem 'responders', '~> 2.0'
 gem 'pg'
 gem 'unicorn'
 gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git', branch: 'sixth_task'
+# gem 'api_flashcards', path: '/Users/Ilya/Coding/RoR/mkdev/api_flashcards'
+gem 'swagger_engine'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
