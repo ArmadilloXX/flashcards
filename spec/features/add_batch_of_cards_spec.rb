@@ -5,10 +5,10 @@ include LoginHelper
 describe "Add batch of cards from provided url" do
   let!(:user) { create(:user, locale: "ru") }
   let!(:block) { create(:block, user: user) }
+  
   before(:each) do
     login_with("test@test.com", "12345", "Войти")
-
-    # TODO: Add visit path to page
+    visit new_batch_cards_path
   end
 
   describe "user enters the page" do
