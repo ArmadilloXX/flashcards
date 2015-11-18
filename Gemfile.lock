@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/ArmadilloXX/api_flashcards.git
-  revision: 8f5aef455ac35e0914bce2f410d9812ac559b436
-  branch: sixth_task
+  revision: 967bd8631b4f342081c8b93796a84ee353716622
   specs:
     api_flashcards (0.0.1)
       active_model_serializers
