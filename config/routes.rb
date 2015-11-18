@@ -23,7 +23,12 @@ Rails.application.routes.draw do
     get "/flickr_search/search",
       to: "flickr_search#search",
       as: :search
-    resources :cards
+    resources :cards do
+      collection do
+        get "new_batch"
+        post "create_new_batch"
+      end
+    end
     resources :blocks do
       member do
         put "set_as_current"

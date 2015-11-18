@@ -1,0 +1,46 @@
+<%= simple_form_for :batch do |f| %>
+
+  <div class="form-group">
+    <%= f.input :url,
+                as: :string,
+                label: "URL",
+                input_html: {
+                  class: "form-control",
+                    required: true,
+                    autofocus: true
+                } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :original_selector,
+                as: :string,
+                label: "Original text CSS selector",
+                input_html: {
+                  class: "form-control",
+                    required: true
+                } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :translated_selector,
+                as: :string,
+                label: "Translated text CSS selector",
+                input_html: {
+                  class: "form-control",
+                    required: true
+                } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :block_id,
+                collection: current_user.blocks.all.order("title"),
+                prompt: "Выберите колоду",
+                label: "Колоды",
+                input_html: {
+                  class: "form-control",
+                    required: true
+                } %>
+  </div>
+
+  <%= f.button :submit, "Start", class: "btn btn-primary" %>
+<% end %>

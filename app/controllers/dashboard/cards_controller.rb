@@ -34,6 +34,14 @@ class Dashboard::CardsController < Dashboard::BaseController
     respond_with @card
   end
 
+  def new_batch
+
+  end
+
+  def create_new_batch
+
+  end
+
   private
 
   def set_card
