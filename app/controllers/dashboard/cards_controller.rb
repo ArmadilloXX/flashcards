@@ -38,7 +38,7 @@ class Dashboard::CardsController < Dashboard::BaseController
   end
 
   def create_new_batch
-    Resque.enqueue(CardsAdder, params[:batch])
+    AddCardsFromUrlJob.perform_later params[:batch]
     flash[:notice] = "Cards adding task from #{params[:batch][:url]} was created successfully"
     redirect_to cards_path
   end
