@@ -3,6 +3,6 @@ class AddCardsFromUrlJob < ActiveJob::Base
 
   def perform(*args)
     Rails.logger.debug "#{self.class.name}: I'm performing my job with arguments: #{args.inspect}"
-    ActiveSupport::Notifications.instrument("perform.active_job", args)
+    # ActiveSupport::Notifications.instrument("perform.active_job", args)
   end
 end
