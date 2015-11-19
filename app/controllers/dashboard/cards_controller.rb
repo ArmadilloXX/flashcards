@@ -38,7 +38,8 @@ class Dashboard::CardsController < Dashboard::BaseController
   end
 
   def create_new_batch
-    flash[:notice] = "Batch created successfully"
+    Resque.enqueue(CardsAdder, params[:batch])
+    flash[:notice] = "Cards adding task from #{params[:batch][:url]} was created successfully"
     redirect_to cards_path
   end
 
