@@ -39,8 +39,8 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def create_new_batch
     AddCardsFromUrlJob.perform_later params[:batch]
-    flash[:notice] = "Cards adding task from #{params[:batch][:url]} was created successfully"
-    redirect_to cards_path
+    redirect_to cards_path,
+      notice: "Cards adding task from #{params[:batch][:url]} was created"
   end
 
   private
