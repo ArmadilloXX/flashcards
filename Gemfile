@@ -10,6 +10,7 @@ gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git'
 # gem 'api_flashcards', path: '/Users/Ilya/Coding/RoR/mkdev/api_flashcards'
 gem 'swagger_engine'
 gem 'sidekiq'
+gem 'pusher'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
