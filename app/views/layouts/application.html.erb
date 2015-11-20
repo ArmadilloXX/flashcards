@@ -5,6 +5,39 @@
 
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      Pusher.log = function(message) {
+        if (window.console && window.console.log) {
+          window.console.log(message);
+        }
+      };
+
+      var pusher = new Pusher("<%= ENV["PUSHER_KEY"] %>");
+      var channel = pusher.subscribe('bg-job-notifier');
+
+      pusher.connection.bind('connecting', function() {
+        $('div#status').text('Connecting to Pusher...');
+      });
+      pusher.connection.bind('connected', function() {
+        $('div#status').text('Connected to Pusher!');
+      });
+      pusher.connection.bind('failed', function() {
+        $('div#status').text('Connection to Pusher failed :(');
+      });
+      channel.bind('subscription_error', function(status) {
+        $('div#status').text('Pusher subscription_error');
+      });
+      channel.bind('job_finished', function(data) {
+        alert(data.message);
+      });
+      channel.bind('job_started', function(data) {
+        alert(data.message);
+      });
+    });
+  </script>
   <%= csrf_meta_tags %>
 </head>
 

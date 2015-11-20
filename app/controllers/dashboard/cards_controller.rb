@@ -1,3 +1,4 @@
+require "pusher"
 class Dashboard::CardsController < Dashboard::BaseController
   before_action :set_card, only: [:destroy, :edit, :update]
 
@@ -40,7 +41,6 @@ class Dashboard::CardsController < Dashboard::BaseController
   def create_new_batch
     params[:batch][:user] = current_user.id
     AddCardsFromUrlJob.perform_later params[:batch]
-    ActiveSupport::Notifications.instrument("finish.active_job")
     redirect_to cards_path,
       notice: "Cards adding task from #{params[:batch][:url]} was created"
   end
