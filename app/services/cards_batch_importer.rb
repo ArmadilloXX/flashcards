@@ -1,4 +1,4 @@
-require "active_support/notifications"
+require "pusher"
 class CardsBatchImporter
   attr_reader :url,
                 :original_selector,
@@ -15,13 +15,16 @@ class CardsBatchImporter
   end
 
   def start
-    # Rails.logger.debug "[IMPORT] Process started"
-    puts "[IMPORT] Process started"
+    puts 'inside start method'
+    sleep 5
+    Pusher.trigger('bg-job-notifier',
+                   'job_started', { message: 'Your job was started' })
   end
 
-  # def finish
-  #   ActiveSupport::Notifications.instrument("finish.active_job") do
-  #     puts "[IMPORT] Process finished"
-  #   end
-  # end
+  def notify
+    puts 'inside notify method'
+    sleep 5
+    Pusher.trigger('bg-job-notifier',
+                   'job_finished', { message: 'Your job was finished' })
+  end
 end
