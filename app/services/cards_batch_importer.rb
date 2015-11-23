@@ -21,10 +21,10 @@ class CardsBatchImporter
 
   def start
     doc = Nokogiri::HTML(open(url))
-    table = doc.search('table tr')
+    table = doc.search("table tr")
     table.each do |row|
-      original = row.css('td[2] p')[0].content.downcase
-      translated = row.css('td[1] p')[0].content.downcase
+      original = row.css("td:nth-child(2) p")[0].content.downcase
+      translated = row.css("td:first-child p")[0].content.downcase
       Card.create(original_text: original,
                   translated_text: translated,
                   block_id: block_id,
