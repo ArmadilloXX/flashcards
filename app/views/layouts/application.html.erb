@@ -2,9 +2,8 @@
 <html>
 <head>
   <title>Флэшкарточкер</title>
-
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <% if logged_in? %>
     <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
@@ -17,44 +16,56 @@
         };
 
         var pusher = new Pusher("<%= ENV["PUSHER_KEY"] %>");
-        var channel = pusher.subscribe('bg-job-notifier-' + <%= current_user.id %>);
+        var channel = pusher.subscribe("bg-job-notifier-" + <%= current_user.id %>);
 
-        pusher.connection.bind('connecting', function() {
-          $('div#status').text('Connecting to Pusher...');
+        var notification = function (message) {
+          var notice_block = $("#notice_block");
+          notice_block.hide();
+          var alert = $('<div class="col-sm-12"><div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="alert">' + message + '</p></div></div>');
+          alert.appendTo(notice_block).hide();
+          notice_block.show();
+          alert.slideDown();
+          setTimeout(function() {
+            $(alert).slideUp().empty();
+          }, 2000);
+        }
+
+        pusher.connection.bind("connecting", function() {
+          // $("div#status").text("Connecting to Pusher...");
+          notification("Connecting to Pusher...");
         });
-        pusher.connection.bind('connected', function() {
-          $('div#status').text('Connected to Pusher!');
+        pusher.connection.bind("connected", function() {
+          // $("div#status").text("Connected to Pusher!");
+          notification("Connected to Pusher!");
         });
-        pusher.connection.bind('failed', function() {
-          $('div#status').text('Connection to Pusher failed :(');
+        pusher.connection.bind("failed", function() {
+          $("div#status").text("Connection to Pusher failed :(");
         });
-        channel.bind('subscription_error', function(status) {
-          $('div#status').text('Pusher subscription_error');
+        channel.bind("subscription_error", function(status) {
+          $("div#status").text("Pusher subscription_error");
         });
-        channel.bind('job_finished', function(data) {
-          alert(data.message);
+        channel.bind("job_finished", function(data) {
+          notification(data.message);
         });
-        channel.bind('job_started', function(data) {
-          alert(data.message);
+        channel.bind("job_started", function(data) {
+          notification(data.message);
         });
       });
     </script>
   <% end %>
-  
 </head>
 
 <body>
 <div class="container" id="wrapper">
-  <%= render 'shared/header' %>
+  <%= render "shared/header" %>
   <div class="row" id="middle">
     <div id="notice_block">
-    <%= render 'shared/alert_notice' %>
+      <%= render "shared/alert_notice" %>
+    </div>
+    <div class="col-sm-12">
+      <%= yield %>
+    </div>
   </div>
-  <div class="col-sm-12">
-    <%= yield %>
-  </div>
-</div>
-
 </div>
 </body>
 </html>

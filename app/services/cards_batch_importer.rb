@@ -1,10 +1,10 @@
 require "pusher"
 class CardsBatchImporter
   attr_reader :url,
-                :original_selector,
-                :translated_selector,
-                :block_id,
-                :user_id
+              :original_selector,
+              :translated_selector,
+              :block_id,
+              :user_id
 
   def initialize(batch_params)
     @url = batch_params[:url]
@@ -15,16 +15,18 @@ class CardsBatchImporter
   end
 
   def start
-    puts 'inside start method'
+    puts "inside start method"
+    puts "Channel: bg-job-notifier-#{user_id}"
     sleep 5
-    Pusher.trigger('bg-job-notifier',
-                   'job_started', { message: 'Your job was started' })
+    Pusher.trigger("bg-job-notifier-#{user_id}",
+                   "job_started", { message: "Your job was started" })
   end
 
   def notify
-    puts 'inside notify method'
+    puts "inside notify method"
     sleep 5
-    Pusher.trigger('bg-job-notifier',
-                   'job_finished', { message: 'Your job was finished' })
+    puts "Channel: bg-job-notifier-#{user_id}"
+    Pusher.trigger("bg-job-notifier-#{user_id}",
+                   "job_finished", { message: "Your job was finished" })
   end
 end
