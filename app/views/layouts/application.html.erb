@@ -27,12 +27,12 @@
           alert.slideDown();
         }
 
-        pusher.connection.bind("connecting", function() {
-          notify("Connecting to Pusher...", "info");
-        });
-        pusher.connection.bind("connected", function() {
-          notify("Connected to Pusher!", "success");
-        });
+        // pusher.connection.bind("connecting", function() {
+        //   notify("Connecting to Pusher...", "info");
+        // });
+        // pusher.connection.bind("connected", function() {
+        //   notify("Connected to Pusher!", "success");
+        // });
         pusher.connection.bind("failed", function() {
           $("div#status").text("Connection to Pusher failed :(");
         });

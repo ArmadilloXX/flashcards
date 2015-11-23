@@ -3,6 +3,7 @@ class AddCardsFromUrlJob < ActiveJob::Base
 
   after_perform do |job|
     puts "[CALLBACK] - after_perform"
+    puts job.inspect
     @importer.notify
   end
 
