@@ -19,7 +19,8 @@ class CardsBatchImporter
     puts "Channel: bg-job-notifier-#{user_id}"
     sleep 5
     Pusher.trigger("bg-job-notifier-#{user_id}",
-                   "job_started", { message: "Your job was started" })
+                   "job_started", { message: "Your job was started",
+                                    type: "info" })
   end
 
   def notify
@@ -27,6 +28,7 @@ class CardsBatchImporter
     sleep 5
     puts "Channel: bg-job-notifier-#{user_id}"
     Pusher.trigger("bg-job-notifier-#{user_id}",
-                   "job_finished", { message: "Your job was finished" })
+                   "job_finished", { message: "Your job was finished",
+                                     type: "success" })
   end
 end

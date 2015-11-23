@@ -18,25 +18,20 @@
         var pusher = new Pusher("<%= ENV["PUSHER_KEY"] %>");
         var channel = pusher.subscribe("bg-job-notifier-" + <%= current_user.id %>);
 
-        var notification = function (message) {
-          var notice_block = $("#notice_block");
+        notify = function (message, type) {
+          notice_block = $("#notice_block");
           notice_block.hide();
-          var alert = $('<div class="col-sm-12"><div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="alert">' + message + '</p></div></div>');
+          alert = $('<div class="col-sm-12"><div class="alert alert-dismissible alert-' + type + '" ' + 'role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="alert">' + message + '</p></div></div>');
           alert.appendTo(notice_block).hide();
           notice_block.show();
           alert.slideDown();
-          setTimeout(function() {
-            $(alert).slideUp().empty();
-          }, 2000);
         }
 
         pusher.connection.bind("connecting", function() {
-          // $("div#status").text("Connecting to Pusher...");
-          notification("Connecting to Pusher...");
+          notify("Connecting to Pusher...", "info");
         });
         pusher.connection.bind("connected", function() {
-          // $("div#status").text("Connected to Pusher!");
-          notification("Connected to Pusher!");
+          notify("Connected to Pusher!", "success");
         });
         pusher.connection.bind("failed", function() {
           $("div#status").text("Connection to Pusher failed :(");
@@ -45,10 +40,10 @@
           $("div#status").text("Pusher subscription_error");
         });
         channel.bind("job_finished", function(data) {
-          notification(data.message);
+          notify(data.message, data.type);
         });
         channel.bind("job_started", function(data) {
-          notification(data.message);
+          notify(data.message, data.type);
         });
       });
     </script>
