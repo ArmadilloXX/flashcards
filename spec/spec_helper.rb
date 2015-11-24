@@ -9,11 +9,12 @@ WebMock.disable_net_connect!(allow_localhost: true)
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 Capybara.ignore_hidden_elements = false
-Capybara.javascript_driver = :poltergeist
 options = { js_errors: false }
 Capybara.register_driver(:poltergeist) do |app|
   Capybara::Poltergeist::Driver.new(app, options)
 end
+Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver.js_errors = false
 Capybara.default_max_wait_time = 15
 
 RSpec.configure do |config|
