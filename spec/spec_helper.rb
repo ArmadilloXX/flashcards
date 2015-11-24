@@ -10,9 +10,9 @@ Capybara.ignore_hidden_elements = false
 Capybara.javascript_driver = :poltergeist
 Capybara.register_driver(:poltergeist) do |app|
   Capybara::Poltergeist::Driver.new(app,
-                                    js_errors: false,
-                                    phantomjs_options: ['--ignore-ssl-errors=yes', '--ssl-protocol=any'],
-                                    extensions: ["https://js.pusher.com/3.0/pusher.min.js"])
+                                    { js_errors: false,
+                                      phantomjs_options: ['--ignore-ssl-errors=yes', '--ssl-protocol=any'],
+                                      timeout: 240 })
 end
 Capybara.default_max_wait_time = 15
 
