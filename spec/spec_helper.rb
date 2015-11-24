@@ -2,8 +2,9 @@ require "webmock/rspec"
 require "capybara/rspec"
 require "factory_girl_rails"
 
-WebMock.disable_net_connect!(allow_localhost: true,
-                             allow: "https://js.pusher.com/3.0/pusher.min.js")
+# WebMock.disable_net_connect!(allow_localhost: true,
+#                              allow: "https://js.pusher.com/3.0/pusher.min.js")
+WebMock.disable_net_connect!(allow: [/pusher/, /localhost/])
 
 Capybara.ignore_hidden_elements = false
 Capybara.javascript_driver = :poltergeist
