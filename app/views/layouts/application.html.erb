@@ -8,7 +8,7 @@
   <% if logged_in? %>
     <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
     <script type="text/javascript" charset="utf-8">
-      $(function() {
+      $(document).ready(function() {
         // Pusher.log = function(message) {
         //   if (window.console && window.console.log) {
         //     window.console.log(message);
@@ -26,7 +26,7 @@
           notice_block.show();
           notification.slideDown();
         }
-        
+
         channel.bind("job_finished", function(data) {
           notify(data.message, data.type);
         });
