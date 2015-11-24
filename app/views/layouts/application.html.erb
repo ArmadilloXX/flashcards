@@ -18,31 +18,16 @@
         var pusher = new Pusher("<%= ENV["PUSHER_KEY"] %>");
         var channel = pusher.subscribe("bg-job-notifier-" + <%= current_user.id %>);
 
-        notify = function (message, type) {
-          notice_block = $("#notice_block");
+        var notify = function (message, type) {
+          var notice_block = $("#notice_block");
           notice_block.hide();
-          alert = $('<div class="col-sm-12"><div class="alert alert-dismissible alert-' + type + '" ' + 'role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="alert">' + message + '</p></div></div>');
-          alert.appendTo(notice_block).hide();
+          var notification = $('<div class="col-sm-12"><div class="alert alert-dismissible alert-' + type + '" ' + 'role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="alert">' + message + '</p></div></div>');
+          notification.appendTo(notice_block).hide();
           notice_block.show();
-          alert.slideDown();
+          notification.slideDown();
         }
-
-        // pusher.connection.bind("connecting", function() {
-        //   notify("Connecting to Pusher...", "info");
-        // });
-        // pusher.connection.bind("connected", function() {
-        //   notify("Connected to Pusher!", "success");
-        // });
-        pusher.connection.bind("failed", function() {
-          $("div#status").text("Connection to Pusher failed :(");
-        });
-        channel.bind("subscription_error", function(status) {
-          $("div#status").text("Pusher subscription_error");
-        });
+        
         channel.bind("job_finished", function(data) {
-          notify(data.message, data.type);
-        });
-        channel.bind("job_started", function(data) {
           notify(data.message, data.type);
         });
       });

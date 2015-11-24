@@ -40,11 +40,9 @@ class CardsBatchImporter
   end
 
   def notify
-    puts "inside notify method"
-    sleep 5
-    puts "Channel: bg-job-notifier-#{user_id}"
     Pusher.trigger("bg-job-notifier-#{user_id}",
-                   "job_finished", { message: "Your job was finished. #{cards_count} cards were added",
+                   "job_finished", { message: "Your job was finished. "\
+                                     "#{cards_count} cards were added",
                                      type: "success" })
   end
 end
