@@ -2,29 +2,15 @@
 <html>
 <head>
   <title>Флэшкарточкер</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= stylesheet_link_tag "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <% if logged_in? %>
     <script src="http://js.pusher.com/3.0/pusher.min.js"></script>
-    <script type="text/javascript" charset="utf-8">
-      $(document).ready(function() {
-        var pusher = new Pusher("<%= ENV["PUSHER_KEY"] %>");
-        var channel = pusher.subscribe("bg-job-notifier-" + <%= current_user.id %>);
-
-        var notify = function (data) {
-          var notice_block = $("#notice_block");
-          var message = "<p><strong>" + data.cards_count + "</strong> cards were added from <i>" + data.url + "</i>. Check them " + "<strong><a href='/blocks/" + data.block_id + "'>here</a></strong>" + "</p>";
-          var notification = $('<div class="col-sm-12"><div class="alert alert-dismissible alert-' + data.type + '" ' + 'role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="alert">' + message + '</p></div></div>');
-          notification.appendTo(notice_block).hide();
-          notification.slideDown();
-        }
-
-        channel.bind("job_finished", function(data) {
-          notify(data);
-        });
-      });
+    <script type="text/javascript">
+      window.userId = <%= current_user.id %>;
     </script>
+    <%= javascript_include_tag "pusher" %>
   <% end %>
 </head>
 
