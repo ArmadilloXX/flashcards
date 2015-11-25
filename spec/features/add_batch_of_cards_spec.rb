@@ -1,8 +1,9 @@
 require "rails_helper"
+require "pusher"
 require "support/helpers/login_helper.rb"
 include LoginHelper
 
-describe "Add batch of cards from provided url" do
+describe "Add batch of cards from provided url", js: true do
   let!(:user) { create(:user, locale: "ru") }
   let!(:block) { create(:block, title: "TestBlock", user: user) }
   let(:fill_and_start) do
@@ -36,7 +37,7 @@ describe "Add batch of cards from provided url" do
     end
   end
 
-  describe "user fills the fields and click Add cards button" do
+  describe "user fills the fields and click Add cards button", js: true do
     before do
       fill_and_start
     end
@@ -51,18 +52,6 @@ describe "Add batch of cards from provided url" do
 
     it "creates the active job" do
       expect(ActiveJob::Base.queue_adapter.enqueued_jobs.count).to eq 1
-    end
-  end
-
-  describe "process is finished" do
-    before do
-      
-    end
-
-    it "shows the result message" do
-      fill_and_start
-      sleep 20
-      expect(page).to have_content(/cards were added/)
     end
   end
 end
