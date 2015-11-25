@@ -26,6 +26,13 @@ class CardsBatchImporter
     create_cards(originals, translations)
   end
 
+  def notify
+    data = prepare_notification_data
+    Pusher.trigger("bg-job-notifier-#{user_id}", "job_finished", data)
+  end
+
+  private
+
   def create_cards(originals, translations)
     originals.each do |original|
       translated = translations[originals.index(original)].content.downcase
@@ -39,10 +46,12 @@ class CardsBatchImporter
     end
   end
 
-  def notify
-    Pusher.trigger("bg-job-notifier-#{user_id}",
-                   "job_finished", { message: "Your job was finished. "\
-                                     "#{cards_count} cards were added",
-                                     type: "success" })
+  def prepare_notification_data
+    {
+      type: "success",
+      url: url,
+      cards_count: cards_count,
+      block_id: block_id
+    }
   end
 end
