@@ -5,6 +5,13 @@ include LoginHelper
 describe "Add batch of cards from provided url" do
   let!(:user) { create(:user, locale: "ru") }
   let!(:block) { create(:block, title: "TestBlock", user: user) }
+  let(:fill_and_start) do
+    fill_in "URL", with: "http://www.learnathome.ru/blog/100-beautiful-words"
+    fill_in "Original text CSS selector", with: "table tr td:nth-child(2) p"
+    fill_in "Translated text CSS selector", with: "table tr td:first-child p"
+    select "TestBlock"
+    click_button "Add cards"
+  end
 
   before(:each) do
     login_with("test@test.com", "12345", "Войти")
@@ -31,11 +38,7 @@ describe "Add batch of cards from provided url" do
 
   describe "user fills the fields and click Add cards button" do
     before do
-      fill_in "URL", with: "http://www.learnathome.ru/blog/100-beautiful-words"
-      fill_in "Original text CSS selector", with: "table tr td:nth-child(2) p"
-      fill_in "Translated text CSS selector", with: "table tr td:nth-child(2) p"
-      select "TestBlock"
-      click_button "Add cards"
+      fill_and_start
     end
 
     it "redirects to all cards page" do
@@ -52,6 +55,13 @@ describe "Add batch of cards from provided url" do
   end
 
   describe "process is finished" do
-    it "provides the result of the process to the user"
+    before do
+      fill_and_start
+      sleep 10
+    end
+
+    it "shows the result message" do
+      expect(page).to have_content(/cards were added/)
+    end
   end
 end
