@@ -42,7 +42,8 @@ class Dashboard::CardsController < Dashboard::BaseController
     params[:batch][:user_id] = current_user.id
     AddCardsFromUrlJob.set(wait: 5.seconds).perform_later params[:batch]
     redirect_to cards_path,
-      notice: "Cards adding task from #{params[:batch][:url]} was created"
+                notice: "Cards adding task from "\
+                "#{params[:batch][:url]} was created"
   end
 
   private
