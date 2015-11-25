@@ -70,7 +70,13 @@ GEM
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
+    autoprefixer-rails (6.1.0.1)
+      execjs
+      json
     bcrypt (3.1.10)
+    bootstrap-sass (3.3.5)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     bourbon (3.2.4)
       sass (~> 3.2)
       thor
@@ -154,6 +160,7 @@ GEM
     hashdiff (0.2.3)
     hike (1.2.3)
     http_accept_language (2.0.5)
+    httpclient (2.7.0.1)
     i18n (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -211,6 +218,11 @@ GEM
       activerecord (>= 3.0)
     pundit (1.0.1)
       activesupport (>= 3.0.0)
+    pusher (0.15.1)
+      httpclient (~> 2.5)
+      multi_json (~> 1.0)
+      pusher-signature (~> 0.1.8)
+    pusher-signature (0.1.8)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -348,6 +360,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   api_flashcards!
+  bootstrap-sass (~> 3.3.5)
   capybara
   carrierwave
   coffee-rails (~> 4.0.0)
@@ -368,6 +381,7 @@ DEPENDENCIES
   pg
   poltergeist (~> 1.7.0)
   pundit
+  pusher
   rails (= 4.2.4)
   rails_12factor
   rake
