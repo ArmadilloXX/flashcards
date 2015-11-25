@@ -1,7 +1,7 @@
 class AddCardsFromUrlJob < ActiveJob::Base
   queue_as :adding_cards
 
-  after_perform do |job|
+  after_perform do
     @importer.notify
   end
 
