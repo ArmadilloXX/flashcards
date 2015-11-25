@@ -56,11 +56,12 @@ describe "Add batch of cards from provided url" do
 
   describe "process is finished" do
     before do
-      fill_and_start
-      sleep 10
+      
     end
 
     it "shows the result message" do
+      fill_and_start
+      sleep 20
       expect(page).to have_content(/cards were added/)
     end
   end
