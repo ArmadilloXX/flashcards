@@ -12,7 +12,7 @@ Capybara.register_driver(:poltergeist) do |app|
                                     phantomjs_options: [
                                       "--ignore-ssl-errors=yes",
                                       "--ssl-protocol=any"
-                                      ])
+                                    ])
 end
 Capybara.default_max_wait_time = 15
 
