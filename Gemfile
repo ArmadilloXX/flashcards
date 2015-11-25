@@ -7,7 +7,6 @@ gem 'responders', '~> 2.0'
 gem 'pg'
 gem 'unicorn'
 gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git'
-# gem 'api_flashcards', path: '/Users/Ilya/Coding/RoR/mkdev/api_flashcards'
 gem 'swagger_engine'
 gem 'sidekiq'
 gem 'pusher'
@@ -25,7 +24,7 @@ gem "flickr-objects"
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rake'
 gem 'simple_form'
