@@ -20,11 +20,9 @@
 
         var notify = function (data) {
           var notice_block = $("#notice_block");
-          var message = "<p><strong>" + data.cards_count + "</strong> cards were added from " + data.url + "." + "</p>"
-          // notice_block.hide();
+          var message = "<p><strong>" + data.cards_count + "</strong> cards were added from <i>" + data.url + "</i>. Check them " + "<strong><a href='/blocks/" + data.block_id + "'>here</a></strong>" + "</p>";
           var notification = $('<div class="col-sm-12"><div class="alert alert-dismissible alert-' + data.type + '" ' + 'role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="alert">' + message + '</p></div></div>');
           notification.appendTo(notice_block).hide();
-          notice_block.show();
           notification.slideDown();
         }
 
