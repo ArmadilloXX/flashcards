@@ -3,43 +3,39 @@ require "nokogiri"
 require "open-uri"
 
 class CardsBatchImporter
-  attr_reader :url,
-              :original_selector,
-              :translated_selector,
-              :block_id,
-              :user_id,
-              :cards_count
+  attr_reader :params, :cards_count, :status, :originals, :translations
 
-  def initialize(batch_params)
-    @url = batch_params[:url]
-    @original_selector = batch_params[:original_selector]
-    @translated_selector = batch_params[:translated_selector]
-    @block_id = batch_params[:block_id]
-    @user_id = batch_params[:user_id]
+  def initialize(params)
+    @params = params
     @cards_count = 0
+    @status = ""
   end
 
   def start
-    doc = Nokogiri::HTML(open(url))
-    originals = doc.search("#{original_selector}")
-    translations = doc.search("#{translated_selector}")
-    create_cards(originals, translations)
+    doc = Nokogiri::HTML(open(params[:url]))
+    @originals = doc.search("#{params[:original_selector]}")
+    @translations = doc.search("#{params[:translated_selector]}")
+    create_cards unless selectors_incorrect?
   end
 
   def notify
     data = prepare_notification_data
-    Pusher.trigger("bg-job-notifier-#{user_id}", "job_finished", data)
+    Pusher.trigger("bg-job-notifier-#{params[:user_id]}", "job_finished", data)
   end
 
   private
 
-  def create_cards(originals, translations)
+  def selectors_incorrect?
+    originals.empty? || translations.empty?
+  end
+
+  def create_cards
     originals.each do |original|
       translated = translations[originals.index(original)].content.downcase
       new_card = Card.new(original_text: original.content.downcase,
                           translated_text: translated,
-                          block_id: block_id,
-                          user_id: user_id)
+                          block_id: params[:block_id],
+                          user_id: params[:user_id])
       if new_card.save
         @cards_count += 1
       end
@@ -49,9 +45,9 @@ class CardsBatchImporter
   def prepare_notification_data
     {
       type: "success",
-      url: url,
+      url: params[:url],
       cards_count: cards_count,
-      block_id: block_id
+      block_id: params[:block_id]
     }
   end
 end
