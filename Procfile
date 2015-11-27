@@ -1,2 +1,2 @@
-web:    bundle exec unicorn -p 3000
+web:    bundle exec unicorn -p $PORT
 worker: bundle exec sidekiq
