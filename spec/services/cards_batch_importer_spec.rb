@@ -5,9 +5,10 @@ describe CardsBatchImporter do
   WebMock.allow_net_connect!
   let!(:user) { create(:user, locale: "ru") }
   let!(:block) { create(:block, title: "TestBlock", user: user) }
+  let(:url) { "http://www.learnathome.ru/blog/100-beautiful-words" }
   let(:correct_params) do
     {
-      url: "http://www.learnathome.ru/blog/100-beautiful-words", # Contains 70 pairs of words
+      url: url, # Contains 70 pairs of words
       original_selector: "table tr td:nth-child(2) p",
       translated_selector: "table tr td:first-child p",
       block_id: block.id,
@@ -16,7 +17,7 @@ describe CardsBatchImporter do
   end
   let(:incorrect_params) do
     {
-      url: "http://www.learnathome.ru/blog/100-beautiful-words", # Contains 70 pairs of words
+      url: url, # Contains 70 pairs of words
       original_selector: "orig",
       translated_selector: "trans",
       block_id: block.id,
@@ -24,40 +25,80 @@ describe CardsBatchImporter do
     }
   end
 
-  describe "start" do
-    let(:start_job) { AddCardsFromUrlJob.perform_now correct_params }
 
-    it "receives #start message when job created" do
-      expect_any_instance_of(CardsBatchImporter).to receive(:start)
-      start_job
+  context "when params are correct" do
+    let(:importer) { CardsBatchImporter.new(correct_params) }
+
+    before do
+      importer.start
     end
 
-    it "receives #notify message when job finished" do
-      expect_any_instance_of(CardsBatchImporter).to receive(:notify)
-      start_job
+    describe "#start method" do
+      it "creates cards" do
+        expect(block.cards.count).to eq(70)
+      end
+
+      it "sets a success result status" do
+        expect(importer.result[:status]).to eq("success")
+      end
+
+      it "sets a successful result message" do
+        expect(importer.result[:message]).to eq("70 cards were imported")
+      end
+    end
+
+    describe "#notify method" do
+      it "creates creates correct notification about success" do
+        expect(Pusher).
+          to receive(:trigger).with("bg-job-notifier-#{user.id}",
+                                    "job_finished",
+                                    {
+                                      type: "success",
+                                      message: "70 cards were imported",
+                                      url: url,
+                                      cards_count: 70,
+                                      block_id: block.id
+                                    })
+          importer.notify
+      end
     end
   end
 
-  context 'when correct params' do
-    let(:start_job) { AddCardsFromUrlJob.perform_now correct_params }
+  context "when params are incorrect" do
+    let(:importer) { CardsBatchImporter.new(incorrect_params) }
 
-    it "creates cards" do
-      start_job
-      expect(block.cards.count).to eq(70)
+    before do
+      importer.start
     end
 
-    it "finishes with success result" do
-      start_job
-      expect(result[:status]).to eq("success")
+    describe "#start method" do
+      it "does not creates cards" do
+        expect(block.cards.count).to eq(0)
+      end
+
+      it "sets an error result status" do
+        expect(importer.result[:status]).to eq("error")
+      end
+
+      it "sets an result message about wrong selectors" do
+        expect(importer.result[:message]).to eq("Wrong selectors")
+      end
     end
-  end
 
-  context 'when incorrect params' do
-    let(:start_job) { AddCardsFromUrlJob.perform_now incorrect_params }
-
-    it "does not creates cards" do
-      start_job
-      expect(block.cards.count).to eq(0)
+    describe "#notify method" do
+      it "creates correct notification about error" do
+        expect(Pusher).
+          to receive(:trigger).with("bg-job-notifier-#{user.id}",
+                                    "job_finished",
+                                    {
+                                      type: "danger",
+                                      message: "Wrong selectors",
+                                      url: url,
+                                      cards_count: 0,
+                                      block_id: block.id
+                                    })
+          importer.notify
+      end
     end
   end
 end
