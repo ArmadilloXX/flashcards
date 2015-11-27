@@ -1,9 +1,4 @@
 $(function() {
-  Pusher.log = function(message) {
-    if (window.console && window.console.log) {
-      window.console.log(message);
-    }
-  };
   var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>");
   var channel = pusher.subscribe("bg-job-notifier-" + <%= current_user.id %>);
 
