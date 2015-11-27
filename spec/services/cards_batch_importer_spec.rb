@@ -24,7 +24,6 @@ describe CardsBatchImporter do
       user_id: user.id
     }
   end
-  
   context "when params are correct" do
     let(:importer) { CardsBatchImporter.new(correct_params) }
 
