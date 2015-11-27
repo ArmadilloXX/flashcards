@@ -1,6 +1,11 @@
 $(function() {
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
   var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>");
-  var channel = pusher.subscribe("bg-job-notifier-" + userId);
+  var channel = pusher.subscribe("bg-job-notifier-" + <%= current_user.id %>);
 
   var notify = function (data) {
     var notice_block = $("#notice_block");
@@ -8,6 +13,15 @@ $(function() {
     var notification = $('<div class="col-sm-12"><div class="alert alert-dismissible alert-' + data.type + '" ' + 'role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p id="alert">' + message + '</p></div></div>');
     notification.appendTo(notice_block).hide();
     notification.slideDown();
+  }
+
+  new_notify = function(data) {
+    var notice_block = $("#notice_block");
+    if (data.type == "success") {
+
+    } else{
+      
+    };
   }
 
   channel.bind("job_finished", function(data) {

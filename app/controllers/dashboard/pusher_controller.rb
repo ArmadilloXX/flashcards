@@ -1,6 +1,8 @@
 module Dashboard
   class PusherController < Dashboard::BaseController
     protect_from_forgery except: :auth
+    respond_to :js, only: :load
+    
     def auth
       if current_user
         response = Pusher[params[:channel_name]].
@@ -9,6 +11,9 @@ module Dashboard
       else
         render text: "Not authorized", status: "403"
       end
+    end
+
+    def load
     end
   end
 end

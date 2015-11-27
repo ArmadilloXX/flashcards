@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   scope module: "dashboard" do
     post "pusher/auth"
+    get "pusher/load"
     resources :user_sessions, only: :destroy
     resources :users, only: :destroy
     post "logout" => "user_sessions#destroy", :as => :logout
