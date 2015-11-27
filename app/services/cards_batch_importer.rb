@@ -58,7 +58,7 @@ class CardsBatchImporter
   end
 
   def prepare_notification_data
-    alert_type = result[:status] == "success" ? "success" : "alert"
+    alert_type = result[:status] == "success" ? "success" : "danger"
     {
       type: alert_type,
       message: result[:message],
