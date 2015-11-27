@@ -6,7 +6,7 @@ describe AddCardsFromUrlJob do
   let!(:block) { create(:block, title: "TestBlock", user: user) }
   let(:correct_params) do
     {
-      url: "http://www.learnathome.ru/blog/100-beautiful-words", # Contains 70 pairs of words
+      url: "http://www.learnathome.ru/blog/100-beautiful-words",
       original_selector: "table tr td:nth-child(2) p",
       translated_selector: "table tr td:first-child p",
       block_id: block.id,

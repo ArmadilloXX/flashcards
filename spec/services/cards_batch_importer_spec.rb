@@ -24,8 +24,7 @@ describe CardsBatchImporter do
       user_id: user.id
     }
   end
-
-
+  
   context "when params are correct" do
     let(:importer) { CardsBatchImporter.new(correct_params) }
 
@@ -48,18 +47,16 @@ describe CardsBatchImporter do
     end
 
     describe "#notify method" do
-      it "creates creates correct notification about success" do
+      it "creates correct notification about success" do
         expect(Pusher).
           to receive(:trigger).with("bg-job-notifier-#{user.id}",
                                     "job_finished",
-                                    {
-                                      type: "success",
-                                      message: "70 cards were imported",
-                                      url: url,
-                                      cards_count: 70,
-                                      block_id: block.id
-                                    })
-          importer.notify
+                                    type: "success",
+                                    message: "70 cards were imported",
+                                    url: url,
+                                    cards_count: 70,
+                                    block_id: block.id)
+        importer.notify
       end
     end
   end
@@ -90,14 +87,12 @@ describe CardsBatchImporter do
         expect(Pusher).
           to receive(:trigger).with("bg-job-notifier-#{user.id}",
                                     "job_finished",
-                                    {
-                                      type: "danger",
-                                      message: "Wrong selectors",
-                                      url: url,
-                                      cards_count: 0,
-                                      block_id: block.id
-                                    })
-          importer.notify
+                                    type: "danger",
+                                    message: "Wrong selectors",
+                                    url: url,
+                                    cards_count: 0,
+                                    block_id: block.id)
+        importer.notify
       end
     end
   end
