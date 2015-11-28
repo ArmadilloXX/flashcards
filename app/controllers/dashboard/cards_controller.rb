@@ -1,4 +1,3 @@
-require "pusher"
 class Dashboard::CardsController < Dashboard::BaseController
   before_action :set_card, only: [:destroy, :edit, :update]
 
@@ -33,17 +32,6 @@ class Dashboard::CardsController < Dashboard::BaseController
   def destroy
     @card.destroy
     respond_with @card
-  end
-
-  def new_batch
-  end
-
-  def create_new_batch
-    params[:batch][:user_id] = current_user.id
-    AddCardsFromUrlJob.perform_later params[:batch]
-    redirect_to cards_path,
-                notice: "Cards adding task from "\
-                "#{params[:batch][:url]} was created"
   end
 
   private

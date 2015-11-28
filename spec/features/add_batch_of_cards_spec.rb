@@ -16,7 +16,7 @@ describe "Add batch of cards from provided url", js: true do
 
   before(:each) do
     login_with("test@test.com", "12345", "Войти")
-    visit new_batch_cards_path
+    visit new_batch_path
   end
 
   describe "user enters the page" do

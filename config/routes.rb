@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   end
 
   scope module: "dashboard" do
+    get 'batches/new', to: 'batches#new', as: 'new_batch'
+    post 'batches/', to: 'batches#create', as: 'batches'
     post "pusher/auth"
     get "pusher/load"
     resources :user_sessions, only: :destroy
@@ -25,12 +27,7 @@ Rails.application.routes.draw do
     get "/flickr_search/search",
       to: "flickr_search#search",
       as: :search
-    resources :cards do
-      collection do
-        get "new_batch"
-        post "create_new_batch"
-      end
-    end
+    resources :cards
     resources :blocks do
       member do
         put "set_as_current"
