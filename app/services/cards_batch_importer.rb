@@ -5,8 +5,18 @@ require "open-uri"
 class CardsBatchImporter
   attr_reader :params, :result, :originals, :translations
 
-  def initialize(params)
-    @params = params
+  def initialize(url:,
+                 original_selector:,
+                 translated_selector:,
+                 user_id:,
+                 block_id:)
+    @params = {
+      url: url,
+      original_selector: original_selector,
+      translated_selector: translated_selector,
+      user_id: user_id,
+      block_id: block_id
+    }
     @result = {
       cards_count: 0
     }
@@ -14,10 +24,10 @@ class CardsBatchImporter
 
   def start
     doc = Nokogiri::HTML(open(params[:url]))
-    @originals = doc.search("#{params[:original_selector]}")
-    @translations = doc.search("#{params[:translated_selector]}")
-    if selectors_incorrect?
-      finish("error", "Wrong selectors")
+    @originals = doc.search(params[:original_selector])
+    @translations = doc.search(params[:translated_selector])
+    if no_cards_for_provided_selectors?
+      finish("error", "No cards were found for these selectors")
     else
       create_cards
     end
@@ -30,7 +40,7 @@ class CardsBatchImporter
 
   private
 
-  def selectors_incorrect?
+  def no_cards_for_provided_selectors?
     originals.empty? || translations.empty?
   end
 
@@ -53,8 +63,9 @@ class CardsBatchImporter
         break
       end
     end
-    finish("success",
-           "#{result[:cards_count]} cards were imported") unless result[:error]
+    unless result[:error]
+      finish("success", "#{result[:cards_count]} cards were imported")
+    end
   end
 
   def prepare_notification_data

@@ -77,7 +77,7 @@ describe CardsBatchImporter do
       end
 
       it "sets an result message about wrong selectors" do
-        expect(importer.result[:message]).to eq("Wrong selectors")
+        expect(importer.result[:message]).to eq("No cards were found for these selectors")
       end
     end
 
@@ -87,7 +87,7 @@ describe CardsBatchImporter do
           to receive(:trigger).with("bg-job-notifier-#{user.id}",
                                     "job_finished",
                                     type: "danger",
-                                    message: "Wrong selectors",
+                                    message: "No cards were found for these selectors",
                                     url: url,
                                     cards_count: 0,
                                     block_id: block.id)
