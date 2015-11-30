@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   end
 
   scope module: "dashboard" do
-    get 'batches/new', to: 'batches#new', as: 'new_batch'
-    post 'batches/', to: 'batches#create', as: 'batches'
+    get "batches/new", to: "batches#new", as: "new_batch"
+    post "batches/", to: "batches#create", as: "batches"
     post "pusher/auth"
     resources :user_sessions, only: :destroy
     resources :users, only: :destroy

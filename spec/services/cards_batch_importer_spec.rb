@@ -91,20 +91,22 @@ describe CardsBatchImporter do
       it_behaves_like "not creates the cards and returns error"
 
       it "sets an result message about wrong selectors" do
-        expect(importer.result[:message]).to eq("No cards were found for these selectors")
+        expect(importer.result[:message]).
+          to eq("No cards were found for these selectors")
       end
     end
 
     describe "#notify method" do
       it "creates correct notification about error" do
         expect(Pusher).
-          to receive(:trigger).with("bg-job-notifier-#{user.id}",
-                                    "job_finished",
-                                    type: "error",
-                                    message: "No cards were found for these selectors",
-                                    url: url,
-                                    cards_count: 0,
-                                    block_id: block.id)
+          to receive(:trigger).
+            with("bg-job-notifier-#{user.id}",
+                 "job_finished",
+                 type: "error",
+                 message: "No cards were found for these selectors",
+                 url: url,
+                 cards_count: 0,
+                 block_id: block.id)
         importer.notify
       end
     end
