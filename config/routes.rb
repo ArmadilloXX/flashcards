@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     get 'batches/new', to: 'batches#new', as: 'new_batch'
     post 'batches/', to: 'batches#create', as: 'batches'
     post "pusher/auth"
-    get "pusher/load"
     resources :user_sessions, only: :destroy
     resources :users, only: :destroy
     post "logout" => "user_sessions#destroy", :as => :logout

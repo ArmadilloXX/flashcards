@@ -8,3 +8,4 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( swagger_engine/reset.css )
 Rails.application.config.assets.precompile += %w( swagger_engine/print.css )
+Rails.application.config.assets.precompile += %w( dashboard/pusher/pusher.js )
