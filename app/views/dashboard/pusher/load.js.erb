@@ -4,16 +4,18 @@ $(function() {
 
   notify = function(data) {
     if (data.type == "success") {
+      var type = "success";
       var message = data.message + " from <i>" +
                     data.url + "</i>. Check them " +
                     "<strong><a href='/blocks/" +
                     data.block_id + "'>here</a></strong>";
     } else{
+      var type = "danger";
       var message = "Sorry, we got error for cards adding task: " +
                     data.message;
     };
     var html = '<div class="col-sm-12"><div class="alert alert-dismissible' +
-               ' alert-' + data.type + '" ' + 'role="alert">' +
+               ' alert-' + type + '" ' + 'role="alert">' +
                '<button type="button" class="close" data-dismiss="alert"' +
                ' aria-label="Close"><span aria-hidden="true">&times;</span>' +
                '</button><p id="alert">' + message + '</p></div></div>'

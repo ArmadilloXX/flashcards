@@ -23,6 +23,21 @@ class CardsBatchImporter
   end
 
   def start
+    if selectors_valid?
+      parse
+    else
+      finish("error", "CSS selectors are not valid")
+    end
+  end
+
+  def notify
+    data = prepare_notification_data
+    Pusher.trigger("bg-job-notifier-#{params[:user_id]}", "job_finished", data)
+  end
+
+  private
+
+  def parse
     doc = Nokogiri::HTML(open(params[:url]))
     @originals = doc.search(params[:original_selector])
     @translations = doc.search(params[:translated_selector])
@@ -33,12 +48,16 @@ class CardsBatchImporter
     end
   end
 
-  def notify
-    data = prepare_notification_data
-    Pusher.trigger("bg-job-notifier-#{params[:user_id]}", "job_finished", data)
+  def check_selector(selector)
+    Nokogiri::CSS.parse(selector)
+  rescue Nokogiri::CSS::SyntaxError
+    false
   end
 
-  private
+  def selectors_valid?
+    check_selector(params[:original_selector]) &&
+    check_selector(params[:translated_selector])
+  end
 
   def no_cards_for_provided_selectors?
     originals.empty? || translations.empty?
@@ -69,9 +88,8 @@ class CardsBatchImporter
   end
 
   def prepare_notification_data
-    alert_type = result[:status] == "success" ? "success" : "danger"
     {
-      type: alert_type,
+      type: result[:status],
       message: result[:message],
       url: params[:url],
       cards_count: result[:cards_count],
