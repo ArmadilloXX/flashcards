@@ -77,7 +77,6 @@ describe CardsBatchImporter do
     it "sets an error result status" do
       expect(importer.result[:status]).to eq("error")
     end
-
   end
 
   context "when params are incorrect" do
@@ -100,13 +99,13 @@ describe CardsBatchImporter do
       it "creates correct notification about error" do
         expect(Pusher).
           to receive(:trigger).
-            with("bg-job-notifier-#{user.id}",
-                 "job_finished",
-                 type: "error",
-                 message: "No cards were found for these selectors",
-                 url: url,
-                 cards_count: 0,
-                 block_id: block.id)
+          with("bg-job-notifier-#{user.id}",
+               "job_finished",
+               type: "error",
+               message: "No cards were found for these selectors",
+               url: url,
+               cards_count: 0,
+               block_id: block.id)
         importer.notify
       end
     end

@@ -56,7 +56,7 @@ class CardsBatchImporter
 
   def selectors_valid?
     check_selector(params[:original_selector]) &&
-    check_selector(params[:translated_selector])
+      check_selector(params[:translated_selector])
   end
 
   def no_cards_for_provided_selectors?
