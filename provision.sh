@@ -7,7 +7,7 @@ sudo apt-get install -y build-essential ruby-dev git zlib1g zlib1g-dev \
                         libpq-dev postgresql nodejs g++ flex bison \
                         gperf ruby perl libsqlite3-dev libfontconfig1-dev \
                         libicu-dev libfreetype6 libssl-dev libpng-dev \
-                        libjpeg-dev python libx11-dev libxext-dev
+                        libjpeg-dev python libx11-dev libxext-dev tcl8.5
 sudo apt-get clean
 
 if ! [ -d ~/.rbenv ]; then
@@ -50,7 +50,18 @@ echo 'Installing application'
 cd ~/flashcards
 bundle install
 
+echo 'Installing Redis'
+cd /etc
+wget http://download.redis.io/releases/redis-3.0.5.tar.gz
+tar xzf redis-3.0.5.tar.gz
+cd redis-3.0.5
+make
+make install
+cd utils
+./install_server.sh -y
+
 echo 'Preparing database connection'
+cd ~/flashcards
 sudo -u postgres createuser --superuser vagrant
 cp -R config/sample_db.yml config/database.yml
 
