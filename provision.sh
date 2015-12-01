@@ -41,24 +41,29 @@ if ! [ -d ~/.rbenv/versions/2.2.3 ]; then
   rbenv global 2.2.3
 fi
 
+if ! [ -d ~/redis-3.0.5 ]; then
+  echo 'Installing Redis'
+  cd ~
+  wget http://download.redis.io/releases/redis-3.0.5.tar.gz
+  sudo tar xzf redis-3.0.5.tar.gz
+  cd redis-3.0.5
+  sudo make
+  sudo make install
+  cd utils
+  sudo ./install_server.sh -y
+fi
+
 echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
 
 echo 'Installing Bundler'
 gem install bundler
 
+echo 'Installing Foreman'
+gem install foreman
+
 echo 'Installing application'
 cd ~/flashcards
 bundle install
-
-echo 'Installing Redis'
-cd /etc
-wget http://download.redis.io/releases/redis-3.0.5.tar.gz
-tar xzf redis-3.0.5.tar.gz
-cd redis-3.0.5
-make
-make install
-cd utils
-./install_server.sh -y
 
 echo 'Preparing database connection'
 cd ~/flashcards
@@ -73,4 +78,5 @@ echo 'Seeding the database'
 rake db:seed
 
 echo 'Starting application server'
-unicorn --listen 3000
+export PORT=3000
+foreman start
