@@ -1,7 +1,9 @@
 $(function() {
-  var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>");
+  var pusherKey = $("#user").data("pusher-key");
+  var pusher = new Pusher(pusherKey);
+  var env = $("#user").data("environment");
   var userId = $("#user").data("user-id");
-  var channel = pusher.subscribe("bg-job-notifier-" + userId);
+  var channel = pusher.subscribe("bg-job-" + env + "-notifier-" + userId);
 
   notify = function(data) {
     if (data.type == "success") {

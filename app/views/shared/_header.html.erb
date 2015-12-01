@@ -35,8 +35,12 @@
           <% end %>
           <p class="navbar-text navbar-right">
             <% if current_user %>
-              <%= link_to t(:user_profile_label), edit_profile_path(current_user),
-                          class: 'navbar-link', id: 'user', data: { user_id: current_user.id } %> |
+              <%= link_to t(:user_profile_label),
+                          edit_profile_path(current_user),
+                          class: 'navbar-link', id: 'user',
+                          data: { user_id: current_user.id,
+                                  pusher_key: ENV["PUSHER_KEY"],
+                                  environment: ENV["RAILS_ENV"] } %> |
               <%= link_to t(:delete_user_label), user_path(current_user),
                           method: :delete, class: 'navbar-link',
                           data: { confirm: 'Удалить пользователя?' } %> |

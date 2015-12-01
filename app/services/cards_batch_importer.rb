@@ -32,7 +32,7 @@ class CardsBatchImporter
 
   def notify
     data = prepare_notification_data
-    Pusher.trigger("bg-job-notifier-#{params[:user_id]}", "job_finished", data)
+    Pusher.trigger("bg-job-#{ENV["RAILS_ENV"]}-notifier-#{params[:user_id]}", "job_finished", data)
   end
 
   private
@@ -41,10 +41,10 @@ class CardsBatchImporter
     doc = Nokogiri::HTML(open(params[:url]))
     @originals = doc.search(params[:original_selector])
     @translations = doc.search(params[:translated_selector])
-    if no_cards_for_provided_selectors?
-      finish("error", "No cards were found for these selectors")
-    else
+    if has_cards_for_selectors?
       create_cards
+    else
+      finish("error", "No cards were found for these selectors")
     end
   end
 
@@ -59,8 +59,8 @@ class CardsBatchImporter
       check_selector(params[:translated_selector])
   end
 
-  def no_cards_for_provided_selectors?
-    originals.empty? || translations.empty?
+  def has_cards_for_selectors?
+    !(originals.empty?) && !(translations.empty?)
   end
 
   def finish(status, message)

@@ -57,13 +57,14 @@ describe CardsBatchImporter do
     describe "#notify method" do
       it "creates correct notification about success" do
         expect(Pusher).
-          to receive(:trigger).with("bg-job-notifier-#{user.id}",
-                                    "job_finished",
-                                    type: "success",
-                                    message: "70 cards were imported",
-                                    url: url,
-                                    cards_count: 70,
-                                    block_id: block.id)
+          to receive(:trigger).
+          with("bg-job-#{ENV["RAILS_ENV"]}-notifier-#{user.id}",
+               "job_finished",
+               type: "success",
+               message: "70 cards were imported",
+               url: url,
+               cards_count: 70,
+               block_id: block.id)
         importer.notify
       end
     end
@@ -99,7 +100,7 @@ describe CardsBatchImporter do
       it "creates correct notification about error" do
         expect(Pusher).
           to receive(:trigger).
-          with("bg-job-notifier-#{user.id}",
+          with("bg-job-#{ENV["RAILS_ENV"]}-notifier-#{user.id}",
                "job_finished",
                type: "error",
                message: "No cards were found for these selectors",
@@ -129,13 +130,14 @@ describe CardsBatchImporter do
     describe "#notify method" do
       it "creates correct notification about error" do
         expect(Pusher).
-          to receive(:trigger).with("bg-job-notifier-#{user.id}",
-                                    "job_finished",
-                                    type: "error",
-                                    message: "CSS selectors are not valid",
-                                    url: url,
-                                    cards_count: 0,
-                                    block_id: block.id)
+          to receive(:trigger).
+          with("bg-job-#{ENV["RAILS_ENV"]}-notifier-#{user.id}",
+               "job_finished",
+               type: "error",
+               message: "CSS selectors are not valid",
+               url: url,
+               cards_count: 0,
+               block_id: block.id)
         importer.notify
       end
     end
