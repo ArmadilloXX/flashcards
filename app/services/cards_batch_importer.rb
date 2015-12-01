@@ -32,7 +32,9 @@ class CardsBatchImporter
 
   def notify
     data = prepare_notification_data
-    Pusher.trigger("bg-job-#{ENV["RAILS_ENV"]}-notifier-#{params[:user_id]}", "job_finished", data)
+    Pusher.trigger("bg-job-#{ENV['RAILS_ENV']}-notifier-#{params[:user_id]}",
+                   "job_finished",
+                   data)
   end
 
   private

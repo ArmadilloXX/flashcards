@@ -58,7 +58,7 @@ describe CardsBatchImporter do
       it "creates correct notification about success" do
         expect(Pusher).
           to receive(:trigger).
-          with("bg-job-#{ENV["RAILS_ENV"]}-notifier-#{user.id}",
+          with("bg-job-#{ENV['RAILS_ENV']}-notifier-#{user.id}",
                "job_finished",
                type: "success",
                message: "70 cards were imported",
@@ -100,7 +100,7 @@ describe CardsBatchImporter do
       it "creates correct notification about error" do
         expect(Pusher).
           to receive(:trigger).
-          with("bg-job-#{ENV["RAILS_ENV"]}-notifier-#{user.id}",
+          with("bg-job-#{ENV['RAILS_ENV']}-notifier-#{user.id}",
                "job_finished",
                type: "error",
                message: "No cards were found for these selectors",
@@ -131,7 +131,7 @@ describe CardsBatchImporter do
       it "creates correct notification about error" do
         expect(Pusher).
           to receive(:trigger).
-          with("bg-job-#{ENV["RAILS_ENV"]}-notifier-#{user.id}",
+          with("bg-job-#{ENV['RAILS_ENV']}-notifier-#{user.id}",
                "job_finished",
                type: "error",
                message: "CSS selectors are not valid",
