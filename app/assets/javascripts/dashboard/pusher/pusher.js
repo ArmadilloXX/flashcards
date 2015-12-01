@@ -14,7 +14,7 @@ $(function() {
       message = data.message + " from <i>" +
                     data.url + "</i>. Check them " +
                     "<strong><a href=\"/blocks/" +
-                    data.block_id + "\">here</a></strong>";
+                    data.block + "\">here</a></strong>";
     } else{
       type = "danger";
       message = "Sorry, we got error for cards adding task: " +

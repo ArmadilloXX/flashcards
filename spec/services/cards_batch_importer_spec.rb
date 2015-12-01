@@ -64,7 +64,7 @@ describe CardsBatchImporter do
                message: "70 cards were imported",
                url: url,
                cards_count: 70,
-               block_id: block.id)
+               block: block.id)
         importer.notify
       end
     end
@@ -106,7 +106,7 @@ describe CardsBatchImporter do
                message: "No cards were found for these selectors",
                url: url,
                cards_count: 0,
-               block_id: block.id)
+               block: block.id)
         importer.notify
       end
     end
@@ -137,7 +137,7 @@ describe CardsBatchImporter do
                message: "CSS selectors are not valid",
                url: url,
                cards_count: 0,
-               block_id: block.id)
+               block: block.id)
         importer.notify
       end
     end

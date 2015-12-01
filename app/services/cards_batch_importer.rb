@@ -95,7 +95,7 @@ class CardsBatchImporter
       message: result[:message],
       url: params[:url],
       cards_count: result[:cards_count],
-      block_id: params[:block_id]
+      block: params[:block_id]
     }
   end
 end
