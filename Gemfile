@@ -6,15 +6,17 @@ gem 'rails', '4.2.4'
 gem 'responders', '~> 2.0'
 gem 'pg'
 gem 'unicorn'
-gem 'api_flashcards', git: 'git://github.com/ArmadilloXX/api_flashcards.git', branch: 'sixth_task'
-# gem 'api_flashcards', path: '/Users/Ilya/Coding/RoR/mkdev/api_flashcards'
+gem 'api_flashcards', github: 'ArmadilloXX/api_flashcards'
 gem 'swagger_engine'
+gem 'sidekiq'
+gem 'pusher'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
 gem 'pundit'
 
 gem 'sass-rails', '~> 4.0.3'
+gem 'bootstrap-sass', '~> 3.3.5'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
@@ -22,7 +24,7 @@ gem "flickr-objects"
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rake'
 gem 'simple_form'
@@ -54,6 +56,5 @@ end
 group :test do
   gem 'shoulda-matchers'
   gem 'poltergeist', '~> 1.7.0'
-  # gem 'selenium-webdriver'
   gem 'webmock'
 end

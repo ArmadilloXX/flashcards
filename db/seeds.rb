@@ -27,4 +27,3 @@ doc.search("//table/tbody/tr").each do |row|
               translated_text: translated,
               user_id: default_admin.id)
 end
-

@@ -2,11 +2,7 @@ require "webmock/rspec"
 require "capybara/rspec"
 require "factory_girl_rails"
 
-WebMock.disable_net_connect!(allow_localhost: true)
-
-# The `.rspec` file also contains a few flags that are not defaults but that
-# users commonly want.
-# See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+WebMock.disable_net_connect!(allow: [/pusher/], allow_localhost: true)
 
 Capybara.ignore_hidden_elements = false
 Capybara.javascript_driver = :poltergeist
