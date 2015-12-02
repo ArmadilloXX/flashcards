@@ -13,6 +13,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   # Enable caching
   config.action_controller.perform_caching = true
+  config.cache_store = :redis_store, "redis://127.0.0.1:6379/0/flashcards", { expires_in: 1.day }
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
