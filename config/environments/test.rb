@@ -19,7 +19,9 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
-  config.cache_store = :redis_store, "redis://127.0.0.1:6379/0/flashcards_test", { expires_in: 1.day }
+  config.cache_store = :redis_store,
+                       "redis://127.0.0.1:6379/0/flashcards_test",
+                       { expires_in: 1.day }
 
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
