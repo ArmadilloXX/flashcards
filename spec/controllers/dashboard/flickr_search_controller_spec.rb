@@ -27,12 +27,14 @@ describe Dashboard::FlickrSearchController do
 
   describe "provides caching for Flickr requests" do
     it "does not have a cache key before request" do
-      expect(Rails.cache.exist?("flashcards_test:flickr_search_coffee")).to eq(false)
+      expect(Rails.cache.exist?("flashcards_test:flickr_search_coffee")).
+        to eq(false)
     end
 
     it "creates cache key for request when user provides search params" do
       xhr :get, :search, search: "coffee", format: "js"
-      expect(Rails.cache.exist?("flashcards_test:flickr_search_coffee")).to eq(true)
+      expect(Rails.cache.exist?("flashcards_test:flickr_search_coffee")).
+        to eq(true)
     end
 
     it "uses cache for same requests after cache key was created" do
