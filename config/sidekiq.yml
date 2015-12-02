@@ -1,7 +1,7 @@
 ---
 :concurrency: 5
 production:
-  :concurrency: 7
+  :concurrency: 6
 :queues:
   - default
   - adding_cards

@@ -7,7 +7,7 @@ sudo apt-get install -y build-essential ruby-dev git zlib1g zlib1g-dev \
                         libpq-dev postgresql nodejs g++ flex bison tcl8.5\
                         gperf ruby perl libsqlite3-dev libfontconfig1-dev \
                         libicu-dev libfreetype6 libssl-dev libpng-dev \
-                        libjpeg-dev python libx11-dev libxext-dev memcached
+                        libjpeg-dev python libx11-dev libxext-dev
 sudo apt-get clean
 
 if ! [ -d ~/.rbenv ]; then
