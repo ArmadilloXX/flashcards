@@ -17,6 +17,7 @@
 .idea/*
 .env
 .env.test
+dump.rdb
 config/database.yml
 config/secrets.yml
 config/application.yml

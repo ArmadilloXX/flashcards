@@ -10,6 +10,7 @@ gem 'api_flashcards', github: 'ArmadilloXX/api_flashcards'
 gem 'swagger_engine'
 gem 'sidekiq'
 gem 'pusher'
+gem 'redis-rails'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
