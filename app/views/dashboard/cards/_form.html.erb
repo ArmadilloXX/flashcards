@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col-lg-6 col-lg-offset-3">
             <div class="input-group">
-              <%= text_field_tag "search", nil, placeholder: "What do you want to find?", class: "form-control" %>
+              <%= text_field_tag "search", nil, maxlength: 100, placeholder: "What do you want to find? (100 characters max)", class: "form-control" %>
               <span class="input-group-btn">
                 <input type="button" name="поле" value="GO" id="search-button" class="btn btn-default" data-url="<%= search_path %>" />
               </span>
