@@ -14,7 +14,7 @@ Rails.application.configure do
   # Enable caching
   config.action_controller.perform_caching = true
   config.cache_store = :redis_store,
-                       "redis://127.0.0.1:6379/0/flashcards",
+                       "#{ENV['REDIS_HOST']}/0/flashcards",
                        { expires_in: 1.day }
 
   # Don't care if the mailer can't send.
