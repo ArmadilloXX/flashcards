@@ -1,5 +1,6 @@
 class Dashboard::BaseController < ApplicationController
   before_action :require_login
+  layout "dashboard"
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   private

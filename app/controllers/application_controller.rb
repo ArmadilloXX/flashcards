@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   include Pundit
   self.responder = ApplicationResponder
   respond_to :html
-  layout :choose_layout
   protect_from_forgery with: :exception
   before_action :set_locale
 
@@ -17,10 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def choose_layout
-    current_user ? "dashboard" : "application"
-  end
 
   def set_locale
     locale = if current_user
