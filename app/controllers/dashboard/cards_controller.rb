@@ -3,6 +3,9 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def index
     @cards = current_user.cards.all.order("review_date")
+    Rails.logger.debug "==========================="
+    Rails.logger.debug current_visit
+    Rails.logger.debug "==========================="
   end
 
   def new
