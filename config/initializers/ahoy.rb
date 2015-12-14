@@ -28,12 +28,9 @@ class Ahoy::Store < Ahoy::Stores::BaseStore
     log_event(data)
   end
 
-  def current_visit
-    {
-      id: ahoy.visit_id,
-      visitor_id: ahoy.visitor_id
-    }.merge(visit_properties.to_hash)
-  end
+  # def current_visit
+  #   "Test Visit"
+  # end
 
   protected
 
