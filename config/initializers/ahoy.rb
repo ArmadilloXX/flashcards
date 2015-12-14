@@ -1,5 +1,12 @@
 require "aws-sdk"
 class Ahoy::Store < Ahoy::Stores::LogStore
+  attr_reader :firehose
+
+  def initialize(options)
+    super
+    #TODO Switch to env variables
+    @firehose ||= Aws::Firehose::Client.new(region: 'us-west-2')
+  end
 
   def visit
     user_id = user.id if user
@@ -11,10 +18,6 @@ class Ahoy::Store < Ahoy::Stores::LogStore
   end
 
   protected
-
-  def firehose
-    @firehose ||= Aws::Firehose::Client.new(region: 'us-west-2')
-  end
 
   def log_visit(data)
     firehose.put_record({
