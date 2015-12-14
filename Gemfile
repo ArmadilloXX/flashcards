@@ -11,6 +11,8 @@ gem 'swagger_engine'
 gem 'sidekiq'
 gem 'pusher'
 gem 'redis-rails'
+gem 'ahoy_matey'
+gem 'aws-sdk', '~> 2.2'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
