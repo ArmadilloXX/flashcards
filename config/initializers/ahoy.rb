@@ -31,7 +31,7 @@ class Ahoy::Store < Ahoy::Stores::LogStore
     firehose.put_record({
       delivery_stream_name: stream_name,
       record: {
-        data: data.to_json
+        data: data.values.to_csv
       }
     }) 
   end
