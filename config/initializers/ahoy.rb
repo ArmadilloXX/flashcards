@@ -1,4 +1,5 @@
 require "aws-sdk"
+require "active_support/core_ext/date_time/conversions"
 class Ahoy::Store < Ahoy::Stores::LogStore
   attr_reader :firehose
 
@@ -20,6 +21,8 @@ class Ahoy::Store < Ahoy::Stores::LogStore
   protected
 
   def log_visit(data)
+    db_timestamp = convert_to_db_timestamp(data[:started_at])
+    data[:started_at] = db_timestamp
     send_to_stream(visit_stream, data)
   end
 
@@ -31,9 +34,13 @@ class Ahoy::Store < Ahoy::Stores::LogStore
     firehose.put_record({
       delivery_stream_name: stream_name,
       record: {
-        data: data.values.to_csv
+        data: data.to_json
       }
     }) 
+  end
+
+  def convert_to_db_timestamp(datetime)
+    datetime.to_formatted_s(:db)
   end
 
   def visit_stream
