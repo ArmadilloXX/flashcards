@@ -20,23 +20,27 @@ class Ahoy::Store < Ahoy::Stores::LogStore
   protected
 
   def log_visit(data)
+    send_to_stream(visit_stream, data)
+  end
+
+  def log_event(data)
+    send_to_stream(event_stream, data) 
+  end
+
+  def send_to_stream(stream_name, data)
     firehose.put_record({
-      delivery_stream_name: visit_stream,
+      delivery_stream_name: stream_name,
       record: {
         data: data.to_json
       }
     }) 
   end
 
-  # def log_event(data)
-  #   event_logger.info data.to_json
-  # end
-
   def visit_stream
-    'test-stream'
+    "visits"
   end
 
   def event_stream
-
+    "events"
   end
 end
