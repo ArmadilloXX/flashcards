@@ -1,9 +1,10 @@
 require "pusher"
 require "nokogiri"
 require "open-uri"
+require "ahoy"
 
 class CardsBatchImporter
-  attr_reader :params, :result, :originals, :translations
+  attr_reader :params, :result, :originals, :translations, :ahoy, :current_user
 
   def initialize(url:,
                  original_selector:,
@@ -20,6 +21,8 @@ class CardsBatchImporter
     @result = {
       cards_count: 0
     }
+    @ahoy ||= Ahoy::Tracker.new(controller: self)
+    @current_user ||= User.where(id: params[:user_id]).first
   end
 
   def start
@@ -78,8 +81,12 @@ class CardsBatchImporter
                           block_id: params[:block_id],
                           user_id: params[:user_id])
       if new_card.save
+        ahoy.track "Card added",
+                   method: "batch",
+                   card_id: new_card.id
         result[:cards_count] += 1
       else
+        ahoy.track("Batch failure")
         finish("error", "One or more cards couldn't be saved")
         break
       end

@@ -3,7 +3,7 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def index
     @cards = current_user.cards.all.order("review_date")
-    ahoy.track "Cards index opened"
+    ahoy.track("Cards index opened")
   end
 
   def new
@@ -17,7 +17,7 @@ class Dashboard::CardsController < Dashboard::BaseController
     @card = current_user.cards.build(card_params)
     if @card.save
       track_flick_photo unless card_params[:remote_image_url].blank?
-      ahoy.track "Card added", method: "individual", result: "success"
+      ahoy.track("Card added", method: "individual", result: "success")
       redirect_to cards_path
     else
       respond_with @card
@@ -35,14 +35,14 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def destroy
     @card.destroy
-    ahoy.track "Card deleted"
+    ahoy.track("Card deleted")
     respond_with @card
   end
 
   private
 
   def track_flick_photo
-    ahoy.track "Add Flickr photo"
+    ahoy.track("Add Flickr photo")
   end
 
   def set_card
