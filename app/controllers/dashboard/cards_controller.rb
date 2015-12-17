@@ -3,7 +3,7 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def index
     @cards = current_user.cards.all.order("review_date")
-    ahoy.track("Cards index page opened", status: "OK", message: "My message")
+    ahoy.track "Cards index opened"
   end
 
   def new
@@ -16,6 +16,7 @@ class Dashboard::CardsController < Dashboard::BaseController
   def create
     @card = current_user.cards.build(card_params)
     if @card.save
+      ahoy.track "Card added", method: "individual", result: "success"
       redirect_to cards_path
     else
       respond_with @card
@@ -32,6 +33,7 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def destroy
     @card.destroy
+    ahoy.track "Card deleted"
     respond_with @card
   end
 

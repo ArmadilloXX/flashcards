@@ -15,6 +15,7 @@ class Dashboard::TrainerController < Dashboard::BaseController
       prepare_flash_message(check_result[:distance])
       redirect_to trainer_path
     else
+      ahoy.track("Card reviewed", result: "Failure")
       flash[:alert] = t(:incorrect_translation_alert)
       redirect_to trainer_path(id: @card.id)
     end
@@ -28,8 +29,10 @@ class Dashboard::TrainerController < Dashboard::BaseController
 
   def prepare_flash_message(distance)
     if distance == 0
+      ahoy.track("Card reviewed", result: "Success")
       flash[:notice] = t(:correct_translation_notice)
     else
+      ahoy.track("Card reviewed", result: "Typo/Missprint")
       flash[:alert] = t "translation_from_misprint_alert",
                         user_translation: trainer_params[:user_translation],
                         original_text: @card.original_text,

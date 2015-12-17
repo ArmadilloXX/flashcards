@@ -27,11 +27,18 @@ class Ahoy::Store < Ahoy::Stores::LogStore
   end
 
   def log_event(data)
-    Rails.logger.debug "============EVENT================"
-    Rails.logger.debug data
-    Rails.logger.debug "================================="
+    db_timestamp = convert_to_db_timestamp(data[:time])
+    data[:time] = db_timestamp
+    log_event_properties(data) unless data[:properties].empty?
+    send_to_stream(event_stream, data.reject { |k| k == :properties })
+  end
+
+  def log_event_properties(data)
     event_properties = prepare_event_properties(data[:id], data[:properties])
-    # send_to_stream(event_stream, data) 
+    event_properties.each do |property|
+      property[:id] = "#{data[:id]}-#{event_properties.index(property)}"
+      send_to_stream(event_properties_stream, property)
+    end
   end
 
   def send_to_stream(stream_name, data)
@@ -68,6 +75,6 @@ class Ahoy::Store < Ahoy::Stores::LogStore
   end
 
   def event_properties_stream
-    "event_properties"
+    "event-properties"
   end
 end
