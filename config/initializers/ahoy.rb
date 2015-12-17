@@ -40,7 +40,7 @@ class Ahoy::Store < Ahoy::Stores::LogStore
   end
 
   def convert_to_db_timestamp(datetime)
-    datetime.to_formatted_s(:db)
+    datetime.utc.to_formatted_s(:db)
   end
 
   def visit_stream
