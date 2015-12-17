@@ -6,7 +6,7 @@ class Ahoy::Store < Ahoy::Stores::LogStore
   def initialize(options)
     super
     #TODO Switch to env variables
-    @firehose ||= Aws::Firehose::Client.new(region: 'us-west-2')
+    @firehose ||= Aws::Firehose::Client.new(region: "us-west-2")
   end
 
   def visit

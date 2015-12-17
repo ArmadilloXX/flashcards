@@ -16,6 +16,7 @@ class Dashboard::CardsController < Dashboard::BaseController
   def create
     @card = current_user.cards.build(card_params)
     if @card.save
+      track_flick_photo unless card_params[:remote_image_url].blank?
       ahoy.track "Card added", method: "individual", result: "success"
       redirect_to cards_path
     else
@@ -25,6 +26,7 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def update
     if @card.update(card_params)
+      track_flick_photo unless card_params[:remote_image_url].blank?
       redirect_to cards_path
     else
       respond_with @card
@@ -38,6 +40,10 @@ class Dashboard::CardsController < Dashboard::BaseController
   end
 
   private
+
+  def track_flick_photo
+    ahoy.track "Add Flickr photo"
+  end
 
   def set_card
     @card = current_user.cards.find(params[:id])

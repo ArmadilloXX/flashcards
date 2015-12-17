@@ -11,6 +11,7 @@ class Home::UsersController < Home::BaseController
   def create
     @user = User.new(user_params)
     if @user.save
+      ahoy.track("User registration", method: "internal", user_id: @user_id)
       auto_login(@user)
       redirect_to root_path, notice: t(:user_created_successfully_notice)
     else
