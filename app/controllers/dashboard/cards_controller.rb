@@ -3,6 +3,7 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def index
     @cards = current_user.cards.all.order("review_date")
+    ahoy.track("Cards index page opened", status: "OK", message: "My message")
   end
 
   def new
