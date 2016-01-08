@@ -6,11 +6,11 @@ VAGRANTFILE_API_VERSION = '2'
 Vagrant.require_version '>= 1.5.0'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  if Vagrant.has_plugin?("vagrant-omnibus")
-    web.omnibus.chef_version = 'latest'
-  end
 
   config.vm.define "web" do |web|
+    if Vagrant.has_plugin?("vagrant-omnibus")
+      web.omnibus.chef_version = 'latest'
+    end
     web.vm.provision "shell", inline: "echo ==== INSTALL WEB VM ===="
     web.vm.hostname = "webapp"
     web.berkshelf.enabled = true
@@ -45,8 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           }
         },
         redisio: {
-          version: "3.0.6",
-          safe_install: false
+          version: "3.0.6"
         }
         # java: {
         #   jdk_version: 8
