@@ -60,24 +60,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # config.vm.define "elastic" do |elastic|
-  #   elastic.vm.provision "shell", inline: "echo ==== INSTALL ELASTIC VM ===="
-  #   elastic.vm.box = "ubuntu/trusty64"
-  #   web.berkshelf.enabled = true
-  #   elastic.vm.provider "virtualbox" do |vb|
-  #     vb.memory = "1024"
-  #   end
-      # elastic.vm.provision :chef_solo do |chef|
-      #   chef.json = {
-      #     # java: {
-      #     #   jdk_version: 8
-      #     # }
-      #   }
-      #   chef.run_list = [
-      #     "recipe[flashcards-cookbook::elastic]"
-      #   ]
-      # end
-  # end
+  config.vm.define "elastic" do |elastic|
+    elastic.vm.provision "shell", inline: "echo ==== INSTALL ELASTIC VM ===="
+    elastic.vm.box = "ubuntu/trusty64"
+    elastic.berkshelf.enabled = true
+    elastic.vm.network "forwarded_port", guest: 9200, host: 9200
+    elastic.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+    elastic.vm.provision :chef_solo do |chef|
+      chef.json = {
+        java: {
+          jdk_version: 8
+        }
+      }
+      chef.run_list = [
+        "recipe[flashcards-cookbook::elastic]"
+      ]
+    end
+  end
 
   # config.vm.define "kibana" do |kibana|
   #   kibana.vm.provision "shell", inline: "echo ==== INSTALL KIBANA VM ===="
