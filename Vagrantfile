@@ -19,8 +19,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.network :private_network, ip: "192.168.50.101"
     # web.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
     # web.vm.network "forwarded_port", guest: 5435, host: 5432, auto_correct: true
-    web.vm.network "forwarded_port", guest: 3000, host: 3000
-    web.vm.network "forwarded_port", guest: 5432, host: 5432
+    web.vm.network :forwarded_port, guest: 3000, host: 3000
+    web.vm.network :forwarded_port, guest: 5432, host: 5432
+    web.vm.network :forwarded_port, guest: 22, host: 10122, id: "ssh"
     web.vm.synced_folder ".", WEBAPP_DIR
     web.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -63,8 +64,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "elastic" do |elastic|
     elastic.vm.provision "shell", inline: "echo ==== INSTALL ELASTIC VM ===="
     elastic.vm.box = "ubuntu/trusty64"
+    elastic.vm.network :private_network, ip: "192.168.50.102"
     elastic.berkshelf.enabled = true
     elastic.vm.network "forwarded_port", guest: 9200, host: 9200
+    elastic.vm.network :forwarded_port, guest: 22, host: 10222, id: "ssh"
     elastic.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
@@ -80,11 +83,26 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # config.vm.define "kibana" do |kibana|
-  #   kibana.vm.provision "shell", inline: "echo ==== INSTALL KIBANA VM ===="
-  #   kibana.vm.box = "ubuntu/trusty64"
-  #   kibana.vm.provider "virtualbox" do |vb|
-  #     vb.memory = "1024"
-  #   end
-  # end
+  config.vm.define "kibana" do |kibana|
+    kibana.vm.provision "shell", inline: "echo ==== INSTALL KIBANA VM ===="
+    kibana.vm.box = "ubuntu/trusty64"
+    kibana.vm.network :private_network, ip: "192.168.50.103"
+    kibana.berkshelf.enabled = true
+    kibana.vm.network "forwarded_port", guest: 80, host: 5601
+    kibana.vm.network :forwarded_port, guest: 22, host: 10322, id: "ssh"
+    kibana.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+    kibana.vm.provision :chef_solo do |chef|
+      chef.json = {
+        kibana: {
+          es_server: '192.168.50.102',
+          webserver_listen: '0.0.0.0'
+        }
+      }
+      chef.run_list = [
+        "recipe[flashcards-cookbook::kibana]"
+      ]
+    end
+  end
 end
