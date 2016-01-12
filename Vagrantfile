@@ -96,8 +96,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     kibana.vm.provision :chef_solo do |chef|
       chef.json = {
         kibana: {
-          es_server: '192.168.50.102',
-          webserver_listen: '0.0.0.0'
+          config: {
+            elasticsearch_url: 'http://192.168.50.102:9200'
+          }
         }
       }
       chef.run_list = [
