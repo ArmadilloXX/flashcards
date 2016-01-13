@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 
 VAGRANTFILE_API_VERSION = "2"
+VM_BOX = "boxcutter/centos71"
 
 Vagrant.require_version ">= 1.5.0"
 
@@ -15,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provision "shell", inline: "echo ==== INSTALL WEB VM ===="
     web.vm.hostname = "webapp"
     web.berkshelf.enabled = true
-    web.vm.box = "ubuntu/trusty64"
+    web.vm.box = VM_BOX
     web.vm.network :private_network, ip: "192.168.50.101"
     # web.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
     # web.vm.network "forwarded_port", guest: 5435, host: 5432, auto_correct: true
@@ -63,7 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "elastic" do |elastic|
     elastic.vm.provision "shell", inline: "echo ==== INSTALL ELASTIC VM ===="
-    elastic.vm.box = "ubuntu/trusty64"
+    elastic.vm.box = VM_BOX
     elastic.vm.network :private_network, ip: "192.168.50.102"
     elastic.berkshelf.enabled = true
     elastic.vm.network "forwarded_port", guest: 9200, host: 9200
@@ -85,10 +86,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "kibana" do |kibana|
     kibana.vm.provision "shell", inline: "echo ==== INSTALL KIBANA VM ===="
-    kibana.vm.box = "ubuntu/trusty64"
+    kibana.vm.box = VM_BOX
     kibana.vm.network :private_network, ip: "192.168.50.103"
     kibana.berkshelf.enabled = true
-    kibana.vm.network "forwarded_port", guest: 80, host: 5601
+    kibana.vm.network "forwarded_port", guest: 5601, host: 5601
     kibana.vm.network :forwarded_port, guest: 22, host: 10322, id: "ssh"
     kibana.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -96,13 +97,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     kibana.vm.provision :chef_solo do |chef|
       chef.json = {
         kibana: {
+          download_url: 'https://download.elastic.co/kibana/kibana/kibana-4.2.0-linux-x64.tar.gz',
+          checksum: '67d586e43a35652adeb6780eaa785d3d785ce60cc74fbf3b6a9a53b753c8f985',
+          version: '4.2.0',
+          service: {
+            source: 'upstart.conf.erb'
+          },
           config: {
+            base_dir: '/opt/kibana',
             elasticsearch_url: 'http://192.168.50.102:9200'
           }
         }
       }
       chef.run_list = [
         "recipe[flashcards-cookbook::kibana]"
+        # "recipe[flashcards-cookbook::kibana_service]"
       ]
     end
   end
