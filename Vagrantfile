@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 VAGRANTFILE_API_VERSION = "2"
-VM_BOX = "boxcutter/centos71"
+VM_BOX = "bento/centos-7.1"
 
 Vagrant.require_version ">= 1.5.0"
 
@@ -18,8 +18,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.berkshelf.enabled = true
     web.vm.box = VM_BOX
     web.vm.network :private_network, ip: "192.168.50.101"
-    # web.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
-    # web.vm.network "forwarded_port", guest: 5435, host: 5432, auto_correct: true
     web.vm.network :forwarded_port, guest: 3000, host: 3000
     web.vm.network :forwarded_port, guest: 5432, host: 5432
     web.vm.network :forwarded_port, guest: 22, host: 10122, id: "ssh"
@@ -31,48 +29,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provision :chef_solo do |chef|
       chef.json = {
         webapp: {
-          ruby_version: "2.2.3",
-          gems_to_install: [
-            "bundler",
-            "rbenv-rehash",
-            "foreman"
-          ],
-        username: "vagrant",
-        directory: WEBAPP_DIR
+          username: "vagrant",
+          directory: WEBAPP_DIR
         },
         rbenv: {
           user: 'vagrant'
         },
-        postgresql: {
-          setup_script: 'postgresql94-setup',
-          client: {
-            packages: [
-              "postgresql94-devel"
-            ]
-          },
-          contrib: {
-            packages: [
-              "postgresql94-contrib"
-            ]
-          },
-          server: {
-            init_package: 'systemd',
-            packages: [
-              "postgresql94-server"
-            ]
-          },
-          enable_pgdg_yum: true,
-          version: "9.4",
-          password: {
-            postgres: "testpass"
-          },
-          config: {
-            port: 5432
-          }
-        },
-        redisio: {
-          version: "3.0.6"
-        }
       }
       chef.run_list = [
         "recipe[flashcards-cookbook::default]"
