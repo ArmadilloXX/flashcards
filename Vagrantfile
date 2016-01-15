@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         },
         rbenv: {
           user: 'vagrant'
-        },
+        }
       }
       chef.run_list = [
         "recipe[flashcards-cookbook::default]"
@@ -53,11 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.memory = "1024"
     end
     elastic.vm.provision :chef_solo do |chef|
-      chef.json = {
-        java: {
-          jdk_version: 8
-        }
-      }
+      chef.json = {}
       chef.run_list = [
         "recipe[flashcards-cookbook::elastic]"
       ]
@@ -77,14 +73,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     kibana.vm.provision :chef_solo do |chef|
       chef.json = {
         kibana: {
-          download_url: 'https://download.elastic.co/kibana/kibana/kibana-4.2.0-linux-x64.tar.gz',
-          checksum: '67d586e43a35652adeb6780eaa785d3d785ce60cc74fbf3b6a9a53b753c8f985',
-          version: '4.2.0',
-          service: {
-            source: 'upstart.conf.erb'
-          },
           config: {
-            base_dir: '/opt/kibana',
             elasticsearch_url: 'http://192.168.50.102:9200'
           }
         }
