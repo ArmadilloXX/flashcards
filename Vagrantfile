@@ -44,6 +44,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           user: 'vagrant'
         },
         postgresql: {
+          setup_script: 'postgresql94-setup',
+          client: {
+            packages: [
+              "postgresql94-devel"
+            ]
+          },
+          contrib: {
+            packages: [
+              "postgresql94-contrib"
+            ]
+          },
+          server: {
+            init_package: 'systemd',
+            packages: [
+              "postgresql94-server"
+            ]
+          },
+          enable_pgdg_yum: true,
           version: "9.4",
           password: {
             postgres: "testpass"
