@@ -79,8 +79,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         }
       }
       chef.run_list = [
-        "recipe[flashcards-cookbook::kibana]"
-        # "recipe[flashcards-cookbook::kibana_service]"
+        "recipe[flashcards-cookbook::kibana]",
+        "recipe[flashcards-cookbook::kibana_service]"
       ]
     end
   end
