@@ -45,6 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "elastic" do |elastic|
     elastic.vm.provision "shell", inline: "echo ==== INSTALL ELASTIC VM ===="
     elastic.vm.box = VM_BOX
+    elastic.vm.hostname = "elasticsearch"
     elastic.vm.network :private_network, ip: "192.168.50.102"
     elastic.berkshelf.enabled = true
     elastic.vm.network "forwarded_port", guest: 9200, host: 9200
@@ -63,6 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "kibana" do |kibana|
     kibana.vm.provision "shell", inline: "echo ==== INSTALL KIBANA VM ===="
     kibana.vm.box = VM_BOX
+    kibana.vm.hostname = "kibana"
     kibana.vm.network :private_network, ip: "192.168.50.103"
     kibana.berkshelf.enabled = true
     kibana.vm.network "forwarded_port", guest: 82, host: 5601
