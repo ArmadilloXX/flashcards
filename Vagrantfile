@@ -65,7 +65,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     kibana.vm.box = VM_BOX
     kibana.vm.network :private_network, ip: "192.168.50.103"
     kibana.berkshelf.enabled = true
-    kibana.vm.network "forwarded_port", guest: 5601, host: 5601
+    kibana.vm.network "forwarded_port", guest: 82, host: 5601
     kibana.vm.network :forwarded_port, guest: 22, host: 10322, id: "ssh"
     kibana.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -79,8 +79,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         }
       }
       chef.run_list = [
-        "recipe[flashcards-cookbook::kibana]",
-        "recipe[flashcards-cookbook::kibana_service]"
+        "recipe[flashcards-cookbook::kibana]"
       ]
     end
   end
