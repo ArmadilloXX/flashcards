@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 VAGRANTFILE_API_VERSION = "2"
-VM_BOX = "bento/centos-7.1"
+# VM_BOX = "bento/centos-7.1"
+VM_BOX = "enemy-of-the-state/centos-7.1_kernel-devel-fixed"
 
 Vagrant.require_version ">= 1.5.0"
 
