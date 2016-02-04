@@ -4,7 +4,7 @@ class Elastic
   
   def initialize
     @client ||= Elasticsearch::Client.new(
-      host: '192.168.50.102:9200', # TODO Switch to env variables
+      host: "#{ENV['ELASTICSEARCH_HOST']}:#{ENV['ELASTICSEARCH_PORT']}",
       log: true
     )
   end
