@@ -128,6 +128,14 @@ GEM
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
       railties (~> 4.0)
+    elasticsearch (1.0.15)
+      elasticsearch-api (= 1.0.15)
+      elasticsearch-transport (= 1.0.15)
+    elasticsearch-api (1.0.15)
+      multi_json
+    elasticsearch-transport (1.0.15)
+      faraday
+      multi_json
     errbase (0.0.3)
     erubis (2.7.0)
     excon (0.45.4)
@@ -413,6 +421,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   dotenv-rails
+  elasticsearch
   factory_girl_rails
   faraday
   figaro

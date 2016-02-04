@@ -13,6 +13,7 @@ gem 'pusher'
 gem 'redis-rails'
 gem 'ahoy_matey'
 gem 'aws-sdk', '~> 2.2'
+gem 'elasticsearch'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'

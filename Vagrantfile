@@ -37,7 +37,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         }
       }
       chef.run_list = [
-        "recipe[flashcards-cookbook::default]"
+        "recipe[flashcards-cookbook::default]",
+        "recipe[flashcards-cookbook::database]"
       ]
     end
   end
