@@ -1,7 +1,6 @@
 require "elasticsearch"
 
 class Elastic
-  
   def initialize
     @client ||= Elasticsearch::Client.new(
       host: "#{ENV['ELASTICSEARCH_HOST']}:#{ENV['ELASTICSEARCH_PORT']}",
