@@ -17,6 +17,11 @@ default_admin = User.create(email: "test_admin@test.com",
                             locale: "ru")
 default_admin.add_role :admin
 
+default_user = User.create(email: "test@test.com",
+                           password: "testpass",
+                           password_confirmation: "testpass",
+                           locale: "ru")
+
 doc = Nokogiri::HTML(open(
                       "http://www.learnathome.ru/blog/100-beautiful-words"))
 
@@ -25,5 +30,5 @@ doc.search("//table/tbody/tr").each do |row|
   translated = row.search("td[1]/p")[0].content.downcase
   Card.create(original_text: original,
               translated_text: translated,
-              user_id: default_admin.id)
+              user_id: default_user.id)
 end
