@@ -11,7 +11,7 @@ gem 'swagger_engine'
 gem 'sidekiq'
 gem 'pusher'
 gem 'redis-rails'
-gem 'ahoy_matey'
+gem 'ahoy_matey', github: "ankane/ahoy", branch: "master"
 gem 'aws-sdk', '~> 2.2'
 gem 'elasticsearch'
 
@@ -55,7 +55,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
-  
+
 end
 
 group :test do
