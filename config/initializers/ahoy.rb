@@ -1,25 +1,21 @@
-class Ahoy::Store < Ahoy::Stores::KinesisFirehoseStore
-  def credentials
-    {
-      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
-      region: ENV["AWS_REGION"]
-    }
-  end
+class Ahoy::Store < Ahoy::Stores::LogStore
+  attr_reader :firehose, :elastic
 
-  def visits_stream
-    "ahoy_visits"
-  end
+  # def initialize(options)
+  #   super
+  #   @firehose = FirehoseLogger.new
+  #   @elastic = ElasticLogger.new
+  # end
 
-  def events_stream
-    "ahoy_events"
-  end
+  protected
 
   def log_visit(data)
-    LogVisitJob.perform_later(data)
+    LogVisitToFirehoseJob.perform_later(data.to_json)
+    LogVisitToElasticJob.perform_later(data.to_json)
   end
 
   def log_event(data)
-    LogEventJob.perform_later(data)
+    LogEventToFirehoseJob.perform_later(data.to_json)
+    LogEventToElasticJob.perform_later(data.to_json)
   end
 end
