@@ -45,7 +45,7 @@ gem 'levenshtein'
 gem 'whenever', require: false
 gem 'http_accept_language'
 gem 'routing-filter'
-gem 'rollbar'
+gem 'rollbar', '~> 2.8.0'
 gem 'newrelic_rpm'
 gem 'therubyracer'
 
@@ -55,7 +55,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
-
 end
 
 group :test do
