@@ -21,6 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.network :private_network, ip: "192.168.50.101"
     web.vm.network :forwarded_port, guest: 3000, host: 3000
     web.vm.network :forwarded_port, guest: 5432, host: 5432
+    web.vm.network :forwarded_port, guest: 6379, host: 6379
     web.vm.network :forwarded_port, guest: 22, host: 10122, id: "ssh"
     web.vm.synced_folder ".", WEBAPP_DIR
     web.vm.provider "virtualbox" do |vb|
