@@ -5,4 +5,6 @@ production:
 :queues:
   - default
   - adding_cards
+  - elastic_logging
+  - firehose_logging
   - mailers
