@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     web.vm.provision :chef_solo do |chef|
       chef.json = {
-        webapp: {
+        application: {
           username: "vagrant",
           directory: WEBAPP_DIR
         },
