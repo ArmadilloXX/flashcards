@@ -1,6 +1,9 @@
 DEPENDENCIES
   flashcards-cookbook
     path: ../flashcards-cookbook
+  redisio
+    git: git://github.com/brianbianco/redisio.git
+    revision: 85e562d65b294ad98ef281719fd8ecb078f22cd3
 
 GRAPH
   apt (2.9.2)
@@ -35,7 +38,7 @@ GRAPH
     phantomjs (>= 0.0.0)
     postgresql (~> 4.0.0)
     rbenv (~> 1.7.1)
-    redisio (~> 2.3.0)
+    redisio (>= 0.0.0)
     simple-kibana (~> 0.4.3)
   git (4.3.7)
     build-essential (>= 0.0.0)
@@ -73,7 +76,7 @@ GRAPH
     build-essential (>= 0.0.0)
     git (>= 0.0.0)
     ohai (>= 1.1)
-  redisio (2.3.0)
+  redisio (2.4.0)
     build-essential (>= 0.0.0)
     ulimit (>= 0.1.2)
   rsyslog (4.0.0)
