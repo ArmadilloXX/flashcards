@@ -13,6 +13,11 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+!/tmp/**/.keep
+/tmp/cache/**
+/tmp/pids/**
+/tmp/sessions/**
+/tmp/sockets/**
 .idea/*
 .env
 .env.test
