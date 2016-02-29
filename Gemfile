@@ -48,9 +48,9 @@ gem 'routing-filter'
 gem 'rollbar', '~> 2.8.0'
 gem 'newrelic_rpm'
 gem 'therubyracer'
+gem 'dotenv-rails'
 
 group :development, :test do
-  gem 'dotenv-rails'
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'capybara'
