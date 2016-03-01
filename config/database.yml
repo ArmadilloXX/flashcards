@@ -4,19 +4,24 @@ default: &default
 
 development:
   <<: *default
-  hostname: <%= ENV["DATABASE_HOSTNAME"] %>
+  host: <%= ENV["DATABASE_HOSTNAME"] %>
   database: <%= ENV["DATABASE_NAME"] %>
   port: <%= ENV["DATABASE_PORT"].present? ? ENV["DATABASE_PORT"].to_i : 5432 %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
   pool: 5
 
 test:
   <<: *default
+  host: <%= ENV["DATABASE_HOSTNAME"] %>
   database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
   pool: 5
 
 production:
   <<: *default
-  hostname: <%= ENV["DATABASE_HOSTNAME"] %>
+  host: <%= ENV["DATABASE_HOSTNAME"] %>
   port: <%= ENV["DATABASE_PORT"].present? ? ENV["DATABASE_PORT"].to_i : 5432 %>
   database: <%= ENV["DATABASE_NAME"] %>
   username: <%= ENV["DATABASE_USERNAME"] %>

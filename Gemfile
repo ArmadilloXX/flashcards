@@ -11,7 +11,7 @@ gem 'swagger_engine'
 gem 'sidekiq'
 gem 'pusher'
 gem 'redis-rails'
-gem 'ahoy_matey'
+gem 'ahoy_matey', github: "ankane/ahoy", branch: "master"
 gem 'aws-sdk', '~> 2.2'
 gem 'elasticsearch'
 
@@ -45,17 +45,16 @@ gem 'levenshtein'
 gem 'whenever', require: false
 gem 'http_accept_language'
 gem 'routing-filter'
-gem 'rollbar'
+gem 'rollbar', '~> 2.8.0'
 gem 'newrelic_rpm'
 gem 'therubyracer'
+gem 'dotenv-rails'
 
 group :development, :test do
-  gem 'dotenv-rails'
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
-  
 end
 
 group :test do
