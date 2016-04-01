@@ -25,7 +25,7 @@ unless User.find_by(email: "test@test.com")
                              locale: "ru")
   default_block = Block.create(title: "TestBlock",user_id: default_user.id)
   doc = Nokogiri::HTML(open(
-                      "http://www.learnathome.ru/blog/100-beautiful-words"))
+                      "https://www.learnathome.ru/blog/100-beautiful-words"))
 
   doc.search("//table/tbody/tr").each do |row|
     original = row.search("td[2]/p")[0].content.downcase
