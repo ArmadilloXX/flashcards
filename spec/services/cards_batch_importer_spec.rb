@@ -5,7 +5,7 @@ describe CardsBatchImporter do
   WebMock.allow_net_connect!
   let!(:user) { create(:user, locale: "ru") }
   let!(:block) { create(:block, title: "TestBlock", user: user) }
-  let(:url) { "http://www.learnathome.ru/blog/100-beautiful-words" }
+  let(:url) { "https://www.learnathome.ru/blog/100-beautiful-words" }
   let(:correct_params) do
     {
       url: url, # Contains 70 pairs of words
