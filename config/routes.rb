@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   mount SwaggerEngine::Engine, at: "/api/v1/docs"
   root "main#welcome"
 
+  get "/analytics" => redirect("https://192.168.50.103:5601")
+
   scope module: "home" do
     resources :user_sessions, only: [:new, :create]
     resources :users, only: [:new, :create]
